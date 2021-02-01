@@ -26,14 +26,17 @@ const App = () => {
           <button onClick={() => ButtonClick()}>{TextValues.langButton(lang)}</button>
         <Header/>             
           <Switch>
-              <Route path="/tilaus">
+              <Route exact path="/tilaus">
                   <Order lang={lang}/>
               </Route>
-              <Route path="/about">
+              <Route exact path="/about">
                   <AboutUs lang={lang}/>
               </Route>
-              <Route path="/">
+              <Route exact path="/">
                   <Home lang={lang}/>
+              </Route>
+              <Route>
+                  <NotFound lang={lang}/>
               </Route>
           </Switch>
         <Footer lang={lang}/>
