@@ -1,17 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import Header from './Components/Header';
+import Home from './Components/Home';
+import AboutUs from './Components/AboutUs';
+import Footer from './Components/Footer';
+import Order from './Components/Order';
+import NotFound from './Components/NotFound';
+import TextValues from './tools/TextValues';
+ 
+const App = () => {
+    const [lang, setLang] = useState("fi")
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+    const ButtonClick = () => {
+        if(lang === "fi"){
+            setLang("eng")
+        } else {
+            setLang("fi")
+        }
+    }
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+    return(
+      <div>
+          <button onClick={() => ButtonClick()}>{TextValues.langButton(lang)}</button>
+        <Header/>             
+          <Switch>
+              <Route path="/tilaus">
+                  <Order lang={lang}/>
+              </Route>
+              <Route path="/about">
+                  <AboutUs lang={lang}/>
+              </Route>
+              <Route path="/">
+                  <Home lang={lang}/>
+              </Route>
+          </Switch>
+        <Footer lang={lang}/>
+      </div>
+    );
+  }
+
+ ReactDOM.render(<Router> <App /> </Router>, document.getElementById('root'))
