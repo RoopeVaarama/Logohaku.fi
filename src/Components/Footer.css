@@ -1,7 +1,6 @@
 .Footer {
     position: fixed;
     bottom: 0;
-    max-height: 70px;
     width: 100vw;
 
     display: grid;

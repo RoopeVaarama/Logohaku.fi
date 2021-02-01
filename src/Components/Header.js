@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Link } from 'react-router-dom';
 import TextValues from '../tools/TextValues';
 import "./Header.css";
 import { CSSTransition } from "react-transition-group";
-import logo from "../assets/logo.png";
+import logo from "../assets/paisto.png";
 
 
 

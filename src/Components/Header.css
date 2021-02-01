@@ -5,7 +5,7 @@
     width: 100vw;
   
     display: grid;
-    grid-template-areas: "logo nav";
+    grid-template-areas: "logo nav nav nav nav";
   
     /* Cosmetics */
     background-color: #282c34;
@@ -15,7 +15,6 @@
   .Logo {
     grid-area: logo;
     height: 70px;
-    width: 70px;
   }
   
   .Nav {
