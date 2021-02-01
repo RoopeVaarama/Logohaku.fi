@@ -51,9 +51,9 @@ const TextValues = {
     langButton: function(langcode){
         switch (langcode) {
             case "fi":
-                return "fi";
+                return "Fin";
             default:
-                return "eng";
+                return "Eng";
         }
     },
 }

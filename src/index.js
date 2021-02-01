@@ -9,39 +9,32 @@ import Footer from './Components/Footer';
 import Order from './Components/Order';
 import NotFound from './Components/NotFound';
 import TextValues from './tools/TextValues';
- 
+
 const App = () => {
-    const [lang, setLang] = useState("fi")
+    let lang = localStorage.getItem("lang")
 
-    const ButtonClick = () => {
-        if(lang === "fi"){
-            setLang("eng")
-        } else {
-            setLang("fi")
-        }
-    }
-
-    return(
-      <div>
-          <button onClick={() => ButtonClick()}>{TextValues.langButton(lang)}</button>
-        <Header/>             
-          <Switch>
-              <Route exact path="/tilaus">
-                  <Order lang={lang}/>
-              </Route>
-              <Route exact path="/about">
-                  <AboutUs lang={lang}/>
-              </Route>
-              <Route exact path="/">
-                  <Home lang={lang}/>
-              </Route>
-              <Route>
-                  <NotFound lang={lang}/>
-              </Route>
-          </Switch>
-        <Footer lang={lang}/>
-      </div>
+    return (
+        <div className="App">
+            <Header />
+            <div className="Content">
+                <Switch>
+                    <Route exact path="/tilaus">
+                        <Order lang={lang} />
+                    </Route>
+                    <Route exact path="/about">
+                        <AboutUs lang={lang} />
+                    </Route>
+                    <Route exact path="/">
+                        <Home lang={lang} />
+                    </Route>
+                    <Route>
+                        <NotFound lang={lang} />
+                    </Route>
+                </Switch>
+                <Footer lang={lang} />
+            </div>
+        </div>
     );
-  }
+}
 
- ReactDOM.render(<Router> <App /> </Router>, document.getElementById('root'))
+ReactDOM.render(<Router> <App /> </Router>, document.getElementById('root'))
