@@ -8,6 +8,14 @@ const TextValues = {
                 return "Home";
         }
     },
+    results: function(langcode){
+        switch (langcode) {
+            case "fi":
+                return "Tulokset";
+            default:
+                return "Results";
+        }
+    },
     header: function(langcode){
         switch (langcode) {
             case "fi":

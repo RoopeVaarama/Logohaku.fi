@@ -9,6 +9,7 @@ import Footer from './Components/Footer';
 import Order from './Components/Order';
 import NotFound from './Components/NotFound';
 import TextValues from './tools/TextValues';
+import Results from './Components/Results';
 
 const App = () => {
     let lang = localStorage.getItem("lang")
@@ -26,6 +27,9 @@ const App = () => {
                     </Route>
                     <Route exact path="/">
                         <Home lang={lang} />
+                    </Route>
+                    <Route exact path="/results">
+                        <Results lang={lang} />
                     </Route>
                     <Route>
                         <NotFound lang={lang} />
