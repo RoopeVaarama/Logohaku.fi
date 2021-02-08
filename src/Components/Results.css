@@ -1,0 +1,9 @@
+.CanvasHolder {
+    width: 65vw;
+    height: 65vh;
+    margin: auto;
+}
+Canvas {
+    width: inherit;
+    height: inherit;
+}

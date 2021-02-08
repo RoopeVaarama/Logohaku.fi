@@ -1,5 +1,6 @@
 import React from 'react';
 import TextValues from '../tools/TextValues';
+import "./Results.css";
 import { FreeCamera, Vector3, HemisphericLight, MeshBuilder } from '@babylonjs/core';
 import SceneComponent from './SceneComponent';
 
@@ -13,6 +14,7 @@ let box;
 const onSceneReady = scene => {
   // This creates and positions a free camera (non-mesh)
   var camera = new FreeCamera("camera1", new Vector3(0, 5, -10), scene);
+  
   // This targets the camera to scene origin
   camera.setTarget(Vector3.Zero());
   const canvas = scene.getEngine().getRenderingCanvas();
@@ -45,7 +47,9 @@ const Results = ({lang}) => {
     return (
         <div>
             <h1>{TextValues.results(lang)}</h1>
-            <SceneComponent antialias onSceneReady={onSceneReady} onRender={onRender} id='my-canvas'></SceneComponent>
+            <div className="CanvasHolder">
+              <SceneComponent antialias onSceneReady={onSceneReady} onRender={onRender} id='Canvas'></SceneComponent>
+            </div>
         </div>
     )
 }
