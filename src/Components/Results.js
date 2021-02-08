@@ -5,6 +5,12 @@ import { FreeCamera, Vector3, HemisphericLight, MeshBuilder } from '@babylonjs/c
 import SceneComponent from './SceneComponent';
 import button from 'react-bootstrap/Button'
 
+/**
+ * Contains the Babylon.js code for rendering the 3D preview window on the results page.
+ * 
+ * @author Topias Peiponen
+ * @since 03.02.2021
+ */
 
 let box;
 
@@ -62,6 +68,9 @@ const Results = ({lang}) => {
                   </svg>
                   <text className="PresetsText">Presets</text>
                 </button>
+              </div>
+              <div className="Products">
+
               </div>
               <div className="CanvasHolder">
                 <SceneComponent antialias onSceneReady={onSceneReady} onRender={onRender} id='Canvas'></SceneComponent>
