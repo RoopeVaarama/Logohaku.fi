@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import TextValues from '../tools/TextValues';
 import "./Results.css";
-import { FreeCamera, Vector3, HemisphericLight, MeshBuilder, SceneLoader } from '@babylonjs/core';
 import SceneComponent from './SceneComponent';
 import ProductsList from './ProductsList';
 import PresetsList from './PresetsList';
