@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './Components/Header';
 import Home from './Components/Home';
 import AboutUs from './Components/AboutUs';
@@ -37,6 +38,8 @@ const App = () => {
                 </Switch>
                 <Footer lang={lang} />
             </div>
+           
+
         </div>
     );
 }

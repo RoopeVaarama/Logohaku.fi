@@ -34,6 +34,7 @@
   .Nav a:hover {
     transform: scale(1.2);
   }
+  
   .Nav button {
     padding: 10px;
     outline: none;

@@ -4,7 +4,7 @@ import TextValues from '../tools/TextValues';
 import "./Header.css";
 import { CSSTransition } from "react-transition-group";
 import logo from "../assets/paisto.png";
-
+import Button from "react-bootstrap/Button";
 
 
 const Header = () => {
@@ -58,7 +58,7 @@ const Header = () => {
                 <Link to="/">Home</Link>
                 <Link to="/tilaus">Tilaus</Link>
                 <Link to="/about">About</Link>
-                <button onClick={() => ButtonClick()}>{TextValues.langButton(localStorage.getItem("lang"))}</button>
+                <Button onClick={() => ButtonClick()}>{TextValues.langButton(localStorage.getItem("lang"))}</Button>
                 </nav>
             </CSSTransition>
             <button onClick={toggleNav} className="Burger">
