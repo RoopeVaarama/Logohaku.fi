@@ -11,7 +11,7 @@ import './ProductsList.css';
 const array = ["Mask", "T-shirt", "Hoodie", "Pen", "Bag"]
 const renderProductButtons = () => {
     return array.map((product) => (
-        <button className="ProductCard">{product}</button>
+        <button key={product}>{product}</button>
     ))
 }
 

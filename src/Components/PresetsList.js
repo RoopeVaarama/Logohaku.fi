@@ -11,7 +11,7 @@ import './PresetsList.css';
 const array = ["Crimson", "Azure", "Magenta"]
 const renderPresetButtons = () => {
     return array.map((preset) => (
-        <button className="PresetCard">{preset}</button>
+        <button key={preset}>{preset}</button>
     ))
 }
 

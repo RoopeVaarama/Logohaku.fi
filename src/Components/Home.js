@@ -30,7 +30,7 @@ const Home = ({ lang }) => {
                     </Col>
                     <Col sm={2}>
                         <Button style={{width:"100%"}} variant="outline-dark">
-                            <Link to="/tilaus">Search</Link>
+                            <Link to="/results">Search</Link>
                         </Button>
                     </Col>
                 </Row>
