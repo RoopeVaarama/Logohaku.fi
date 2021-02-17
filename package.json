@@ -5,11 +5,10 @@
   "dependencies": {
     "@babylonjs/core": "^4.2.0",
     "@babylonjs/gui": "^4.2.0",
+    "@babylonjs/loaders": "^4.2.0",
     "@testing-library/jest-dom": "^5.11.8",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.0",
-    "babylon": "^6.18.0",
-    "babylonjs-loaders": "^4.2.0",
     "bootstrap": "^4.6.0",
     "react": "^17.0.1",
     "react-babylonjs": "^3.0.8",

@@ -56,9 +56,7 @@ const Results = ({lang}) => {
                 <PresetsList></PresetsList>
               </div>
               <div className="CanvasHolder">
-                <Suspense fallback={<div>Loading...</div>}>
                 <SceneComponent/>
-                </Suspense>
               </div>
             </div>
         </div>
