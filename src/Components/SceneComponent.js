@@ -11,6 +11,7 @@ import '@babylonjs/loaders/glTF';
  * 
  */
 
+ const baseUrl = "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Avocado/glTF/"
 const SceneComponent = (props) => {
     return (
             <Engine antialias adaptToDeviceRatio canvasId="asdf">
@@ -20,8 +21,8 @@ const SceneComponent = (props) => {
                     <Suspense fallback={<box></box>}>
                         <Model 
                         position={new Vector3(0,0,0)}
-                        rootUrl={'../assets/'}
-                        sceneFilename='scene.gltf'
+                        rootUrl={''}
+                        sceneFilename={''}
                         pluginExtension='.gltf'
                         ></Model>
                     </Suspense>
