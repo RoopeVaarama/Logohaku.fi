@@ -1,6 +1,6 @@
-import {Engine, Model, Scene} from 'react-babylonjs';
+import {DynamicTexture, Engine, Ground, Model, Scene, StandardMaterial} from 'react-babylonjs';
 import {Vector3} from '@babylonjs/core';
-import React, { Suspense, useEffect, useRef } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 
 /**
  * React component for utilizing Babylon.js
@@ -10,19 +10,38 @@ import React, { Suspense, useEffect, useRef } from 'react';
  * 
  */
 
-const baseUrl = "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Avocado/glTF/"
+ const onSceneMount = (e, setScene) => {
+    const {canvas, scene} = e;
+
+    setScene(scene);
+    console.log(scene);
+}
+
+
 const SceneComponent = (props) => {
+    const [scene, setScene] = useState(null);
+    const makeMaterial = () => {
+        const textureGround = new DynamicTexture("dynamic texture", 512, this.props.SceneProps);  
+        const textureContext = textureGround.getContext();
+
+        const matGround = new StandardMaterial("mat", scene);
+        matGround.diffuseTexture = textureGround;
+        
+    }
+    console.log(Scene);
     return (
             <Engine antialias adaptToDeviceRatio canvasId="asdf">
-                <Scene>
+                <Scene
+                onSceneMount={onSceneMount, setScene}>
                     <arcRotateCamera name="camera1" target={Vector3.Zero()} alpha={Math.PI / 2} beta={Math.PI / 4} radius={8} />
                     <hemisphericLight name='light1' intensity={0.7} direction={Vector3.Up()} />
                     <Suspense fallback={<box position={new Vector3(0,0,0)}></box>}>
                         <Model 
                         position={new Vector3(0,0,0)}
                         rootUrl={'./Models/'}
-                        sceneFilename={'Duck.gltf'}
+                        sceneFilename={'tshirt.gltf'}
                         pluginExtension='.gltf'
+                        scaling={new Vector3(10, 10, 10)}
                         ></Model>
                     </Suspense>
                 </Scene>
