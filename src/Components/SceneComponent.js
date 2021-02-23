@@ -27,6 +27,16 @@ const SceneComponent = (props) => {
         const matGround = new StandardMaterial("mat", scene);
         matGround.diffuseTexture = textureGround;
         
+        const img = new Image();
+        img.src = '/logo192';
+        img.onload = function() {
+            textureContext.drawImage(this, 0, 0);
+            textureGround.update();
+
+            textureContext.drawImage(this, 10, 490, 10, 12, 156, 136, 200, 220)
+		    textureGround.update();	
+        }
+        return matGround;
     }
     console.log(Scene);
     return (
@@ -42,6 +52,7 @@ const SceneComponent = (props) => {
                         sceneFilename={'tshirt.gltf'}
                         pluginExtension='.gltf'
                         scaling={new Vector3(10, 10, 10)}
+                        material={makeMaterial}
                         ></Model>
                     </Suspense>
                 </Scene>
