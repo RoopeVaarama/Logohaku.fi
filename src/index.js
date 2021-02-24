@@ -19,6 +19,7 @@ const App = () => {
     let lang = localStorage.getItem("lang")
 
     return (
+        
         <div className="App">
             <Header />
             <div className="Content">
@@ -39,10 +40,8 @@ const App = () => {
                         <NotFound lang={lang} />
                     </Route>
                 </Switch>
-                <Footer lang={lang} />
             </div>
-           
-
+            <Footer lang={lang} />
         </div>
     );
 }
