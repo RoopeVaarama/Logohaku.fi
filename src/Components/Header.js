@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Link } from 'react-router-dom';
 import TextValues from '../tools/TextValues';
 import "./Header.css";
 import { CSSTransition } from "react-transition-group";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import logo from "../assets/paisto.png";
-import Button from "react-bootstrap/Button";
+import { Button } from "react-bootstrap";
 
 
 const Header = () => {
@@ -45,8 +46,9 @@ const Header = () => {
     };
     return (
         <header className="Header">
+
             <Link to="/">
-            <img src={logo} className="Logo" alt="logo"/>
+                <img src={logo} className="Logo" alt="logo" />
             </Link>
             <CSSTransition
                 in={!isSmallScreen || isNavVisible}
@@ -54,15 +56,16 @@ const Header = () => {
                 classNames="NavAnimation"
                 unmountOnExit
             >
-            <nav className="Nav">
-                <Link to="/">Home</Link>
-                <Link to="/tilaus">Tilaus</Link>
-                <Link to="/about">About</Link>
-                <Button onClick={() => ButtonClick()}>{TextValues.langButton(localStorage.getItem("lang"))}</Button>
+                <nav className="Nav">
+                    <Link to="/">Home</Link>
+                    <Link to="/about">About</Link>
+                    <Link to="/tilaus"><FontAwesomeIcon size="2x" icon={"shopping-cart"}/></Link>
+                    <Button onClick={() => ButtonClick()}>{TextValues.langButton(localStorage.getItem("lang"))}</Button>
+                    
                 </nav>
             </CSSTransition>
             <button onClick={toggleNav} className="Burger">
-            burger menu
+                burger menu
           </button>
         </header >
     )

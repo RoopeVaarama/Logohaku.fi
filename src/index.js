@@ -12,6 +12,8 @@ import Order from './Components/Order';
 import NotFound from './Components/NotFound';
 import TextValues from './tools/TextValues';
 import Results from './Components/Results';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 const App = () => {
     let lang = localStorage.getItem("lang")
