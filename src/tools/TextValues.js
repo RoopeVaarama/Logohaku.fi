@@ -64,5 +64,37 @@ const TextValues = {
                 return "Eng";
         }
     },
+    tshirt: function(langcode){
+        switch (langcode) {
+            case "fi":
+                return "T-paita";
+            default:
+                return "T-shirt";
+        }
+    },
+    mask: function(langcode){
+        switch (langcode) {
+            case "fi":
+                return "Maski";
+            default:
+                return "Mask";
+        }
+    },
+    pen: function(langcode){
+        switch (langcode) {
+            case "fi":
+                return "Kynä";
+            default:
+                return "Pen";
+        }
+    },
+    bag: function(langcode){
+        switch (langcode) {
+            case "fi":
+                return "Kassi";
+            default:
+                return "Bag";
+        }
+    },
 }
 export default TextValues;

@@ -59,46 +59,52 @@ import { InputManager } from "@babylonjs/core/Inputs/scene.inputManager";
     );
 };*/
 
-const SceneComponent = (props) => {
+const SceneComponent = ({logo, model, selectModel}) => {
   const [scene1, setScene1] = useState(null);
-  const [canvas1, setCanvas1] = useState(null);
-  const [modelLoaded, setModelLoaded] = useState(false);
+  const [decal, setDecal] = useState(null)
+  const modelSize = new Vector3(model.SIZE, model.SIZE, model.SIZE);
+  console.log('asd ', model.POSITION.Y)
+  const modelPosition = new Vector3(model.POSITION.X, model.POSITION.Y, model.POSITION.Z)
+
 
   function onSceneMount(e) {
     const { canvas, scene } = e;
     setScene1(scene);
-    setCanvas1(canvas);
     console.log("onscenemount " + { scene1 });
   }
   const onModelLoaded = (model) => {
-    const mesh1 = model.meshes[1];
+    selectModel(model, decal)
+  };
 
+  const onPointerPick = (e, pickInfo) => {
     const decalMaterial = new StandardMaterial("decalMat", scene1);
-    decalMaterial.diffuseTexture = new Texture("/Models/DuckCM.png", scene1);
+    decalMaterial.diffuseTexture = new Texture("/Models/" + logo, scene1);
     decalMaterial.diffuseTexture.hasAlpha = true;
     decalMaterial.zOffset = -2;
 
-    console.log('onmodelloaded ' + {scene1});
-    scene1.onPointerPick = (e, pickInfo) => {
-      if (pickInfo.hit) {
-        const mesh = pickInfo.pickedMesh;
-        if (mesh.name == 'product') {
-          const decalSize = new Vector3(10, 10, 10);
-
-            /**************************CREATE DECAL*************************************************/
-            const decal = MeshBuilder.CreateDecal("decal", mesh1, {
-              position: pickInfo.pickedPoint,
-              normal: pickInfo.getNormal(true),
-              size: decalSize,
-            });
-            decal.material = decalMaterial;
-        }
-      }
+    if (decal != null && pickInfo.name != 'decal') {
+      decal.dispose();
     }
-  };
+
+    if (pickInfo.hit) {
+      const mesh = pickInfo.pickedMesh;
+      console.log('PickInfo ' + pickInfo.pickedPoint + 'mesh ' + mesh);
+        const decalSize = new Vector3(1, 1, 1);
+
+          /**************************CREATE DECAL*************************************************/
+          const decal = MeshBuilder.CreateDecal("decal", mesh, {
+            position: pickInfo.pickedPoint,
+            normal: pickInfo.getNormal(true),
+            size: decalSize,
+          });
+          decal.material = decalMaterial;
+          setDecal(decal);
+    }
+  }
+
   return (
     <Engine antialias adaptToDeviceRatio canvasId="asdf">
-      <Scene onSceneMount={onSceneMount}>
+      <Scene onSceneMount={onSceneMount} onPointerPick={onPointerPick}>
         <arcRotateCamera
           name="camera1"
           target={Vector3.Zero()}
@@ -113,12 +119,12 @@ const SceneComponent = (props) => {
         />
         <Suspense fallback={<box position={new Vector3(0, 0, 0)}></box>}>
           <Model
-            name='product'
-            position={new Vector3(0, 0, 0)}
+            name='asdf'
+            position={modelPosition}
             rootUrl={"./Models/"}
-            sceneFilename={"tshirt.gltf"}
+            sceneFilename={model.URL}
             pluginExtension=".gltf"
-            scaling={new Vector3(10, 10, 10)}
+            scaling={modelSize}
             onModelLoaded={onModelLoaded}
           ></Model>
         </Suspense>
@@ -126,14 +132,5 @@ const SceneComponent = (props) => {
     </Engine>
   );
 };
-/**
- * <Model 
-                        position={new Vector3(0,0,0)}
-                        rootUrl={'./Models/'}
-                        sceneFilename={'tshirt.gltf'}
-                        pluginExtension='.gltf'
-                        scaling={new Vector3(10, 10, 10)}
-                        ></Model>
- */
 
 export default SceneComponent;
