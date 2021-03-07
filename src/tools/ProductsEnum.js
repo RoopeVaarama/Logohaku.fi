@@ -16,10 +16,10 @@ const ProductsObjects = ({lang}) => {
         },
         MASK: {
             URL: "mask.gltf",
-            SIZE: 1,
+            SIZE: 0.005,
             POSITION: {
                 X: 0,
-                Y: 0,
+                Y: 100,
                 Z: 0
             },
             NAME: textValues.mask(lang),
@@ -29,9 +29,9 @@ const ProductsObjects = ({lang}) => {
             URL: "pen.gltf",
             SIZE: 10,
             POSITION: {
-                X: 0,
-                Y: -200,
-                Z: 0
+                X: 10,
+                Y: 10,
+                Z: 10
             },
             NAME: textValues.pen(lang),
             THUMB: "placeholder thumbnail"

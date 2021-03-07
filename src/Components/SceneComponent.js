@@ -63,8 +63,8 @@ const SceneComponent = ({logo, model, selectModel}) => {
   const [scene1, setScene1] = useState(null);
   const [decal, setDecal] = useState(null)
   const modelSize = new Vector3(model.SIZE, model.SIZE, model.SIZE);
-  console.log('asd ', model.POSITION.Y)
   const modelPosition = new Vector3(model.POSITION.X, model.POSITION.Y, model.POSITION.Z)
+  console.log('asd ', modelPosition)
 
 
   function onSceneMount(e) {
@@ -73,7 +73,7 @@ const SceneComponent = ({logo, model, selectModel}) => {
     console.log("onscenemount " + { scene1 });
   }
   const onModelLoaded = (model) => {
-    selectModel(model, decal)
+    selectModel(model, decal, modelPosition)
   };
 
   const onPointerPick = (e, pickInfo) => {
@@ -120,7 +120,7 @@ const SceneComponent = ({logo, model, selectModel}) => {
         <Suspense fallback={<box position={new Vector3(0, 0, 0)}></box>}>
           <Model
             name='asdf'
-            position={modelPosition}
+            position={new Vector3(10, 10, 10)}
             rootUrl={"./Models/"}
             sceneFilename={model.URL}
             pluginExtension=".gltf"
@@ -128,6 +128,7 @@ const SceneComponent = ({logo, model, selectModel}) => {
             onModelLoaded={onModelLoaded}
           ></Model>
         </Suspense>
+        
       </Scene>
     </Engine>
   );

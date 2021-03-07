@@ -6,6 +6,9 @@ import ProductsList from './ProductsList';
 import PresetsList from './PresetsList';
 import Button from 'react-bootstrap/Button'
 import ProductsObjects from '../tools/ProductsEnum';
+import {
+  Vector3
+} from "@babylonjs/core";
 
 /**
  * Contains the Babylon.js code for rendering the 3D preview window on the results page.
@@ -23,9 +26,13 @@ const Results = ({lang}) => {
     const [selectedProduct, setSelectedProduct] = useState(null)
     const [model, setModel] = useState(null)
 
-    const selectModel = (selectedModel, decal) => {
+    const selectModel = (selectedModel, decal, modelPosition) => {
       if (model != null) {
-        model.dispose();
+        console.log('Model position: ', selectedModel.meshes[0].position)
+        const model1Pos = model.meshes[0].position
+        const distance = Vector3.Distance(model1Pos, selectedModel.meshes[0].absolutePosition)
+        console.log('Distance is: ', distance)
+
       }
       if (decal != null) {
         decal.dispose();
