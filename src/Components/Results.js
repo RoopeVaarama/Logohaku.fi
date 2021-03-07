@@ -6,6 +6,9 @@ import ProductsList from './ProductsList';
 import PresetsList from './PresetsList';
 import Button from 'react-bootstrap/Button'
 import ProductsObjects from '../tools/ProductsEnum';
+import {
+  Vector3
+} from "@babylonjs/core";
 
 /**
  * Contains the Babylon.js code for rendering the 3D preview window on the results page.
@@ -26,6 +29,10 @@ const Results = ({lang}) => {
     const selectModel = (selectedModel, decal) => {
       if (model != null) {
         model.dispose();
+        console.log('rootmesh ', selectedModel)
+        for (var i=0; i <selectedModel.meshes.length; i++) {
+          console.log('looping ', selectedModel.meshes[i].scaling)
+        }
       }
       if (decal != null) {
         decal.dispose();
@@ -79,7 +86,7 @@ const Results = ({lang}) => {
               <div className="CanvasHolder">
                 <SceneComponent 
                 logo={'DuckCM.png'} 
-                model={selectedProduct ? (Object.values(selectedProduct))[0] : productsObjects.TSHIRT} 
+                model={selectedProduct ? (Object.values(selectedProduct))[0] : productsObjects.MASK} 
                 selectModel={selectModel}/>
               </div>
             </div>

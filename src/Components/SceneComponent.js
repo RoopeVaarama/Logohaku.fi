@@ -63,8 +63,11 @@ const SceneComponent = ({logo, model, selectModel}) => {
   const [scene1, setScene1] = useState(null);
   const [decal, setDecal] = useState(null)
   const modelSize = new Vector3(model.SIZE, model.SIZE, model.SIZE);
-  console.log('asd ', model.POSITION.Y)
+  modelSize._isDirty = false
+  console.log('initial size ', modelSize)
   const modelPosition = new Vector3(model.POSITION.X, model.POSITION.Y, model.POSITION.Z)
+  modelPosition._isDirty = false
+  console.log('initial pos  ', modelPosition)
 
 
   function onSceneMount(e) {
@@ -73,6 +76,7 @@ const SceneComponent = ({logo, model, selectModel}) => {
     console.log("onscenemount " + { scene1 });
   }
   const onModelLoaded = (model) => {
+    console.log('Model loaded: ', model)
     selectModel(model, decal)
   };
 
@@ -102,6 +106,7 @@ const SceneComponent = ({logo, model, selectModel}) => {
     }
   }
 
+  console.log('Rendering Scenecomponent')
   return (
     <Engine antialias adaptToDeviceRatio canvasId="asdf">
       <Scene onSceneMount={onSceneMount} onPointerPick={onPointerPick}>
@@ -119,7 +124,8 @@ const SceneComponent = ({logo, model, selectModel}) => {
         />
         <Suspense fallback={<box position={new Vector3(0, 0, 0)}></box>}>
           <Model
-            name='asdf'
+            name={model.NAME}
+            key={model.NAME}
             position={modelPosition}
             rootUrl={"./Models/"}
             sceneFilename={model.URL}

@@ -41,7 +41,6 @@ const App = () => {
                     </Route>
                 </Switch>
             </div>
-            <Footer lang={lang} />
         </div>
     );
 }
