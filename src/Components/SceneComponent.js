@@ -114,7 +114,7 @@ const SceneComponent = ({logo, model, selectModel}) => {
           name="camera1"
           target={Vector3.Zero()}
           alpha={Math.PI / 2}
-          beta={Math.PI / 4}
+          beta={Math.PI / 40}
           radius={8}
         />
         <hemisphericLight

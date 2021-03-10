@@ -86,7 +86,7 @@ const Results = ({lang}) => {
               <div className="CanvasHolder">
                 <SceneComponent 
                 logo={'DuckCM.png'} 
-                model={selectedProduct ? (Object.values(selectedProduct))[0] : productsObjects.MASK} 
+                model={selectedProduct ? (Object.values(selectedProduct))[0] : productsObjects.TSHIRT} 
                 selectModel={selectModel}/>
               </div>
             </div>
