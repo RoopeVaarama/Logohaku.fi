@@ -1,10 +1,14 @@
-import React, {Suspense, useState} from 'react';
+import React, {Suspense, useState, useEffect} from 'react';
 import TextValues from '../tools/TextValues';
 import "./Results.css";
 import SceneComponent from './SceneComponent';
 import ProductsList from './ProductsList';
 import PresetsList from './PresetsList';
 import Button from 'react-bootstrap/Button'
+import ProductsObjects from '../tools/ProductsEnum';
+import {
+  Vector3
+} from "@babylonjs/core";
 
 /**
  * Contains the Babylon.js code for rendering the 3D preview window on the results page.
@@ -16,6 +20,30 @@ import Button from 'react-bootstrap/Button'
 const Results = ({lang}) => {
     const [productsList, setProductsList] = useState(true)
     const [presetsList, setPresetsList] = useState(true)
+
+    // Create the products object and use default model (T-shirt)
+    const productsObjects = ProductsObjects({lang})
+    const [selectedProduct, setSelectedProduct] = useState(null)
+    const [model, setModel] = useState(null)
+
+    const selectModel = (selectedModel, decal) => {
+      if (model != null) {
+        model.dispose();
+        console.log('rootmesh ', selectedModel)
+        for (var i=0; i <selectedModel.meshes.length; i++) {
+          console.log('looping ', selectedModel.meshes[i].scaling)
+        }
+      }
+      if (decal != null) {
+        decal.dispose();
+      }
+      setModel(selectedModel)
+    }
+
+    const selectProduct = (product) => {
+      console.log('Setting product', (Object.values(product))[0].URL)
+      setSelectedProduct(product)
+    }
 
     const toggleProductsList = () => {
       setProductsList(!productsList);
@@ -50,13 +78,16 @@ const Results = ({lang}) => {
                 </Button>
               </div>
               <div className="Products" hidden={productsList}>
-                <ProductsList></ProductsList>
+                <ProductsList productsObjects={productsObjects} selectProduct={selectProduct}></ProductsList>
               </div>
               <div className="Presets" hidden={presetsList}>
                 <PresetsList></PresetsList>
               </div>
               <div className="CanvasHolder">
-                <SceneComponent/>
+                <SceneComponent 
+                logo={'DuckCM.png'} 
+                model={selectedProduct ? (Object.values(selectedProduct))[0] : productsObjects.TSHIRT} 
+                selectModel={selectModel}/>
               </div>
             </div>
         </div>

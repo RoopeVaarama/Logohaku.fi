@@ -8,18 +8,23 @@ import './ProductsList.css';
  * @since 08.02.2021
  */
 
-const array = ["Mask", "T-shirt", "Hoodie", "Pen", "Bag"]
-const renderProductButtons = () => {
-    return array.map((product) => (
-        <button key={product}>{product}</button>
+const renderProductButtons = (productEntries, selectProduct) => {
+    // Receives an array with each object as an array. Array index [0] is the product entry and [1] is the product values.
+    return productEntries.map((product) => (
+        <button key={product[1].NAME} onClick={() => onClick(product, selectProduct)}> {product[1].NAME} </button>
     ))
 }
 
+const onClick = (product, selectProduct) => {
+    const selectedProduct = Object.fromEntries([product])
+    selectProduct(selectedProduct)
+}
 
-const ProductsList = ({lang}) => {
-    const [products, setProducts] = useState(renderProductButtons);
+
+const ProductsList = ({productsObjects, selectProduct}) => {
+    const productEntries = Object.entries(productsObjects)
+    const [products, setProducts] = useState(renderProductButtons(productEntries, selectProduct));
     
-
     return (
         <div className="ProductsList">
             {products}
