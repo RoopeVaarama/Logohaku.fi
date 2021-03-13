@@ -1,12 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import TextValues from '../tools/TextValues';
-import { Link } from 'react-router-dom';
-import { Button, Col, Row, Container, InputGroup, FormControl } from 'react-bootstrap';
+import { Link, useHistory } from 'react-router-dom';
+import { Button, Col, Row, Container, InputGroup, FormControl, Form } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './Home.css';
 
 const Home = ({ lang }) => {
+    const history = useHistory();
+    console.log('Language: ', lang);
+    const [value, setValue] = useState(""),
+        onInput = ({target:{value}}) => setValue(value),
+        submitForm = e => {
+          if (value !== "") {
+          console.log("value ", value)
+          setValue()
+            history.push('/results/' + value);
+          } else {
+              e.preventDefault();
+          }
+        }
+
     return (
         <div className="Home">
             <Container className="Search" /*style={{ border: "1px solid black" }}*/>
@@ -15,19 +29,23 @@ const Home = ({ lang }) => {
                 <p>Räätälöitynä yrityksellesi</p>
                 <Row noGutters={true} className="Input">
                     <Col sm={10}>
-                        <InputGroup className="mb-3">
+                        <Form onSubmit={submitForm}>
+                        <InputGroup className="mb-3">  
                             <FormControl
-                                style={{ width: "100%" }}
+                                id="name"
+                                style={{ width: "80%" }}
                                 placeholder="Company Name"
                                 aria-label="Company Name"
                                 aria-describedby="basic-addon1"
+                                onChange={onInput} 
+                                value={value}
                             />
+                            <InputGroup.Append>
+                            <Button variant="outline-dark" type="submit">
+                            </Button>
+                            </InputGroup.Append>
                         </InputGroup>
-                    </Col>
-                    <Col sm={2}>
-                        <Button style={{ width: "100%" }} variant="outline-dark">
-                            <Link to="/results">Search</Link>
-                        </Button>
+                        </Form>
                     </Col>
                 </Row>
             </Container>

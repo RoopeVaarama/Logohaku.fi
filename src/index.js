@@ -33,8 +33,9 @@ const App = () => {
                     <Route exact path="/">
                         <Home lang={lang} />
                     </Route>
-                    <Route exact path="/results">
-                        <Results lang={lang} />
+                    <Route 
+                    exact path="/results/:id" 
+                    children={<Results lang={lang}/>}>
                     </Route>
                     <Route>
                         <NotFound lang={lang} />

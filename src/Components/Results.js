@@ -1,5 +1,12 @@
 import React, {Suspense, useState, useEffect} from 'react';
 import TextValues from '../tools/TextValues';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom";
 import "./Results.css";
 import SceneComponent from './SceneComponent';
 import ProductsList from './ProductsList';
@@ -18,6 +25,9 @@ import {
  */
 
 const Results = ({lang}) => {
+    const { id } = useParams();
+    console.log('Params: ', id);
+    console.log('Language: ', {lang})
     const [productsList, setProductsList] = useState(true)
     const [presetsList, setPresetsList] = useState(true)
 

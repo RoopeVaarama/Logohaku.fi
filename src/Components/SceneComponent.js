@@ -35,36 +35,12 @@ import { InputManager } from "@babylonjs/core/Inputs/scene.inputManager";
  *
  */
 
-/*const loadLogo = ({scene}) => {
-    console.log('LoadLogo ' + scene)
-    const material = new StandardMaterial("Mat", scene);
-    const texture = new DynamicTexture("dynTexture", 512, scene);
-
-    const textureContext = texture.getContext();
-    material.diffuseTexture = texture;
-
-    const img = new Image();
-    img.src = '/logo192.png';
-    img.onload = function() {
-        textureContext.drawImage(this, 0, 0);
-        texture.update();
-    }
-
-    return (
-        <material>
-            <texture>
-                
-            </texture>
-        </material>
-    );
-};*/
-
 const SceneComponent = ({logo, model, selectModel}) => {
   const [scene1, setScene1] = useState(null);
   const [decal, setDecal] = useState(null)
   const modelSize = new Vector3(model.SIZE, model.SIZE, model.SIZE);
   modelSize._isDirty = false
-  console.log('initial size ', modelSize)
+  console.log('initial name ', model.URL)
   const modelPosition = new Vector3(model.POSITION.X, model.POSITION.Y, model.POSITION.Z)
   modelPosition._isDirty = false
   console.log('initial pos  ', modelPosition)
@@ -86,46 +62,7 @@ const SceneComponent = ({logo, model, selectModel}) => {
     decalMaterial.diffuseTexture.hasAlpha = true;
     decalMaterial.zOffset = -2;
 
-<<<<<<< HEAD
-        const matGround = new StandardMaterial("mat", scene);
-        matGround.diffuseTexture = textureGround;
-        
-        const img = new Image();
-        img.src = '/logo192';
-        img.onload = function() {
-            textureContext.drawImage(this, 0, 0);
-            textureGround.update();
-
-            textureContext.drawImage(this, 10, 490, 10, 12, 156, 136, 200, 220)
-		    textureGround.update();	
-        }
-        return matGround;
-    }
-    console.log(Scene);
-    return (
-            <Engine antialias adaptToDeviceRatio canvasId="asdf">
-                <Scene
-                onSceneMount={onSceneMount, setScene}>
-                    <arcRotateCamera name="camera1" target={Vector3.Zero()} alpha={Math.PI / 2} beta={Math.PI / 4} radius={8} />
-                    <hemisphericLight name='light1' intensity={0.7} direction={Vector3.Up()} />
-                    <Suspense fallback={<box position={new Vector3(0,0,0)}></box>}>
-                        <Model 
-                        position={new Vector3(0,0,0)}
-                        rootUrl={'./Models/'}
-                        sceneFilename={'tshirt.gltf'}
-                        pluginExtension='.gltf'
-                        scaling={new Vector3(10, 10, 10)}
-                        material={makeMaterial}
-                        ></Model>
-                    </Suspense>
-                </Scene>
-            </Engine>
-    )
-}
-
-export default SceneComponent;
-=======
-    if (decal != null && pickInfo.name != 'decal') {
+    if (decal != null && pickInfo.name !== 'decal') {
       decal.dispose();
     }
 
@@ -145,7 +82,6 @@ export default SceneComponent;
     }
   }
 
-  console.log('Rendering Scenecomponent')
   return (
     <Engine antialias adaptToDeviceRatio canvasId="asdf">
       <Scene onSceneMount={onSceneMount} onPointerPick={onPointerPick}>
@@ -166,7 +102,7 @@ export default SceneComponent;
             name={model.NAME}
             key={model.NAME}
             position={modelPosition}
-            rootUrl={"./Models/"}
+            rootUrl={"../Models/"}
             sceneFilename={model.URL}
             pluginExtension=".gltf"
             scaling={modelSize}
@@ -179,4 +115,3 @@ export default SceneComponent;
 };
 
 export default SceneComponent;
->>>>>>> a66c0c62ce3edc75cb5ca4f0a272482ad3067311
