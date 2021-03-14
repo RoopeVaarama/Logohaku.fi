@@ -24,12 +24,45 @@ import {
  * @since 03.02.2021
  */
 
+// API return is 404 because only Vanno Oy domains are allowed as of now
+const postCompany = async (url = "", searchTerm = "") => {
+  const response = await fetch(url, {
+    method: 'POST',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: {
+      'authority': 'api.logohaku.fi',
+      'method': 'POST',
+      'path': '/get',
+      'scheme': 'https'
+      
+    },
+    redirect: 'follow',
+    referrerPolicy: 'strict-origin-when-cross-origin', 
+    formData: {
+      'company': searchTerm,
+      'type': 'input'
+    }
+  })
+  return response.json
+}
+
 const Results = ({lang}) => {
     const { id } = useParams();
     console.log('Params: ', id);
     console.log('Language: ', {lang})
+    const [loading, setLoading] = useState(true);
     const [productsList, setProductsList] = useState(true)
     const [presetsList, setPresetsList] = useState(true)
+
+    useEffect(() => {
+      postCompany('https://api.logohaku.fi/get', id)
+      .then(data => {
+        console.log('Fetch request data: ', data);
+      })
+    })
+
 
     // Create the products object and use default model (T-shirt)
     const productsObjects = ProductsObjects({lang})
