@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import TextValues from '../tools/TextValues';
 import { Link, useHistory } from 'react-router-dom';
 import { Button, Col, Row, Container, InputGroup, FormControl, Form } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './Home.css';
 
@@ -15,7 +14,7 @@ const Home = ({ lang }) => {
           if (value !== "") {
           console.log("value ", value)
           setValue()
-            history.push('/results/' + value);
+            history.push('/tulokset/' + value);
           } else {
               e.preventDefault();
           }

@@ -12,47 +12,29 @@ import Order from './Components/Order';
 import NotFound from './Components/NotFound';
 import TextValues from './tools/TextValues';
 import Results from './Components/Results';
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import {
-  faCheckSquare, faCoffee, faIndustry, faCog, faCogs, faTasks,
-  faStream, faDraftingCompass, faShip, faProjectDiagram, faBook,
-  faChessBoard, faCheck, faBarcode, faAngleRight, faAngleDown,
-  faLink, faArrowDown, faArrowUp, faExpandAlt, faDownload, faLaptopMedical,
-  faEnvelope, faExclamation, faVideo, faLock, faPrint, faInfo, faComments,
-  faFileContract, faUpload, faCloudUploadAlt, faTools, faTrashAlt, faFirstAid,
-  faThumbtack, faExclamationTriangle, faFileImport, faFilter, faStopwatch, faSearch,
-  faBell, faBellSlash, faShoppingCart
-} from '@fortawesome/free-solid-svg-icons'
-library.add(faCheckSquare, faCoffee, faIndustry, faCog, faCogs, faTasks,
-    faStream, faDraftingCompass, faShip, faProjectDiagram, faBook,
-    faChessBoard, faCheck, faBarcode, faAngleRight, faAngleDown,
-    faLink, faArrowDown, faArrowUp, faExpandAlt, faDownload, faLaptopMedical,
-    faEnvelope, faExclamation, faVideo, faLock, faPrint, faInfo, faComments,
-    faFileContract, faUpload, faCloudUploadAlt, faTools, faTrashAlt, faFirstAid,
-    faThumbtack, faExclamationTriangle, faFileImport, faFilter, faStopwatch,
-    faBell, faBellSlash, faSearch, faShoppingCart)
+
 
 const App = () => {
     let lang = localStorage.getItem("lang")
+    let items = 6;
 
     return (
         
         <div className="App">
-            <Header />
+            <Header lang={lang} items={items}/>
             <div className="Content">
                 <Switch>
-                    <Route exact path="/tilaus">
-                        <Order lang={lang} />
+                    <Route exact path="/ostoskori">
+                        <Order lang={lang}/>
                     </Route>
-                    <Route exact path="/about">
+                    <Route exact path="/tietoja">
                         <AboutUs lang={lang} />
                     </Route>
                     <Route exact path="/">
                         <Home lang={lang} />
                     </Route>
                     <Route 
-                    exact path="/results/:id" 
+                    exact path="/tulokset/:id" 
                     children={<Results lang={lang}/>}>
                     </Route>
                     <Route>
