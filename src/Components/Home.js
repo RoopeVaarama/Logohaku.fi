@@ -41,7 +41,7 @@ const Home = ({ lang }) => {
                                 value={value}
                             />
                             <InputGroup.Append>
-                            <Button variant="outline-dark" type="submit">
+                            <Button variant="outline-dark" type="submit"> Search
                             </Button>
                             </InputGroup.Append>
                         </InputGroup>
