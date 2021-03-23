@@ -17,6 +17,7 @@ import {
   Texture,
   StandardMaterial,
   ExecuteCodeAction,
+  VertexBuffer,
 } from "@babylonjs/core";
 import React, {
   Suspense,
@@ -35,9 +36,12 @@ import { InputManager } from "@babylonjs/core/Inputs/scene.inputManager";
  *
  */
 
-const SceneComponent = ({logo, model, selectModel}) => {
+
+
+const SceneComponent = ({logo, color, model, selectModel}) => {
   const [scene1, setScene1] = useState(null);
-  const [decal, setDecal] = useState(null)
+  const [decal, setDecal] = useState(null);
+  const [currentModel, setCurrentModel] = useState(null);
   const modelSize = new Vector3(model.SIZE, model.SIZE, model.SIZE);
   modelSize._isDirty = false
   console.log('initial name ', model.URL)
@@ -45,20 +49,80 @@ const SceneComponent = ({logo, model, selectModel}) => {
   modelPosition._isDirty = false
   console.log('initial pos  ', modelPosition)
 
+  useEffect(() => {
+    //const RGBColor = hexToRGB(color[1]);
+    if (currentModel !== null && color !== null) {
+      const meshes = currentModel._scene.meshes
+      console.log('current model ', meshes, color[1])
+      const RGBColor = hexToRGB(color[1])
+      console.log('rgbcolor', RGBColor);
+      for (var i in meshes) {
+        if (meshes[i].metadata !== null) {
+          const newMat = new StandardMaterial("material"+i+i, scene1);
+          newMat.diffuseColor = new Color3(RGBColor[0], RGBColor[1], RGBColor[2]);
+          meshes[i].material = newMat;
+        }
+      }
+    }
+    /*for (var i in model.meshes) {
+      if (model.meshes[i].metadata !== null) {
+        const newMat = new StandardMaterial("material"+1, scene1);
+        newMat.diffuseColor = new Color3(RGBColor[0], RGBColor[1], RGBColor[2]);
+        model.meshes[i].material = newMat;
+      }
+    }*/
+  }, [color])
+
 
   function onSceneMount(e) {
     const { canvas, scene } = e;
     setScene1(scene);
     console.log("onscenemount " + { scene1 });
   }
+  const hexToRGB = (hex) => {
+    var aRgbHex = hex.match(/.{1,2}/g);
+    var aRgb = [
+        parseInt(aRgbHex[0], 16),
+        parseInt(aRgbHex[1], 16),
+        parseInt(aRgbHex[2], 16)
+    ];
+    return aRgb;
+  }
+
   const onModelLoaded = (model) => {
-    console.log('Model loaded: ', model)
+    console.log('Model loaded: ', model.meshes.length)
+    const RGBColor = hexToRGB(color[1]);
+    for (var i in model.meshes) {
+      if (model.meshes[i].metadata !== null) {
+        const newMat = new StandardMaterial("material"+1, scene1);
+        newMat.diffuseColor = new Color3(RGBColor[0], RGBColor[1], RGBColor[2]);
+        model.meshes[i].material = newMat;
+      }
+    }
     selectModel(model, decal)
   };
 
+  const onModelCreated = (rootMesh) => {
+    setCurrentModel(rootMesh);
+    console.log('Created model: ', rootMesh);
+    const meshes = rootMesh._scene.meshes
+    console.log('current model ', meshes, color[1])
+    const RGBColor = hexToRGB(color[1])
+      for (var i in meshes) {
+        if (meshes[i].metadata !== null) {
+          const newMat = new StandardMaterial("material"+1, scene1);
+          newMat.diffuseColor = new Color3(RGBColor[0], RGBColor[1], RGBColor[2]);
+          meshes[i].material = newMat;
+        }
+      }
+    }
+  
+
   const onPointerPick = (e, pickInfo) => {
+    console.log("Decal material: /", logo);
     const decalMaterial = new StandardMaterial("decalMat", scene1);
-    decalMaterial.diffuseTexture = new Texture("/Models/" + logo, scene1);
+    decalMaterial.diffuseTexture = new Texture("/" + logo[1], scene1);
+    console.log('Decal image is: /', logo[1]);
     decalMaterial.diffuseTexture.hasAlpha = true;
     decalMaterial.zOffset = -2;
 
@@ -107,6 +171,7 @@ const SceneComponent = ({logo, model, selectModel}) => {
             pluginExtension=".gltf"
             scaling={modelSize}
             onModelLoaded={onModelLoaded}
+            onCreated={onModelCreated}
           ></Model>
         </Suspense>
       </Scene>
