@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import TextValues from '../tools/TextValues';
+import React, { useState } from 'react';
+import TextValues from '../../tools/TextValues';
 import { Link, useHistory } from 'react-router-dom';
 import { Button, Col, Row, Container, InputGroup, FormControl, Form } from 'react-bootstrap';
 
@@ -8,16 +8,18 @@ import './Home.css';
 const Home = ({ lang }) => {
     const history = useHistory();
     console.log('Language: ', lang);
+
+
     const [value, setValue] = useState(""),
-        onInput = ({target:{value}}) => setValue(value),
+        onInput = ({ target: { value } }) => setValue(value),
         submitForm = e => {
-          if (value !== "") {
-          console.log("value ", value)
-          setValue()
-            history.push('/tulokset/' + value);
-          } else {
-              e.preventDefault();
-          }
+            if (value !== "") {
+                console.log("value ", value)
+                setValue()
+                history.push('/tulokset/' + value);
+            } else {
+                e.preventDefault();
+            }
         }
 
     return (
@@ -29,21 +31,21 @@ const Home = ({ lang }) => {
                 <Row noGutters={true} className="Input">
                     <Col sm={10}>
                         <Form onSubmit={submitForm}>
-                        <InputGroup className="mb-3">  
-                            <FormControl
-                                id="name"
-                                style={{ width: "80%" }}
-                                placeholder="Company Name"
-                                aria-label="Company Name"
-                                aria-describedby="basic-addon1"
-                                onChange={onInput} 
-                                value={value}
-                            />
-                            <InputGroup.Append>
-                            <Button variant="outline-dark" type="submit"> Search
+                            <InputGroup className="mb-3">
+                                <FormControl
+                                    id="name"
+                                    style={{ width: "80%" }}
+                                    placeholder="Company Name"
+                                    aria-label="Company Name"
+                                    aria-describedby="basic-addon1"
+                                    onChange={onInput}
+                                    value={value}
+                                />
+                                <InputGroup.Append>
+                                    <Button variant="outline-dark" type="submit"> Search
                             </Button>
-                            </InputGroup.Append>
-                        </InputGroup>
+                                </InputGroup.Append>
+                            </InputGroup>
                         </Form>
                     </Col>
                 </Row>

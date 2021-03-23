@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
-import TextValues from '../tools/TextValues';
+import TextValues from '../../tools/TextValues';
 import "./Header.css";
 import { CSSTransition } from "react-transition-group";
-import logo from "../assets/paisto.png";
+import logo from "../../assets/paisto.png";
 import { Button } from "react-bootstrap";
 import  MenuIcon from '@material-ui/icons/Menu';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 
-const Header = ({ lang, items }) => {
-    console.log(items)
+const Header = ({ lang, cartItems, openCart }) => {
 
     const ButtonClick = () => {
         let lang = localStorage.getItem("lang")
@@ -60,7 +59,7 @@ const Header = ({ lang, items }) => {
             >
                 <nav className="Nav">
                     <Button onClick={() => ButtonClick()}>{TextValues.langButton(localStorage.getItem("lang"))}</Button>
-                    <Link to="/ostoskori"><AddShoppingCartIcon />{items}</Link>
+                    <Button onClick={openCart}><AddShoppingCartIcon />{cartItems.length === 0 ? null : cartItems.length}</Button>
 
                 </nav>
             </CSSTransition>
