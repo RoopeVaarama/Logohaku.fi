@@ -48,7 +48,7 @@ const postCompany = async (url = "", searchTerm = "") => {
   return response.json
 }
 
-const Results = ({lang}) => {
+const Results = ({lang, handleAddToCart}) => {
     const { id } = useParams();
     console.log('Params: ', id);
     console.log('Language: ', {lang})
@@ -102,6 +102,10 @@ const Results = ({lang}) => {
       };
     };
 
+    const addToCart = () => {
+      handleAddToCart(1, "tstis", 2)
+    }
+
     return (
         <div>
             <h1>{TextValues.results(lang)}</h1>
@@ -133,6 +137,9 @@ const Results = ({lang}) => {
                 selectModel={selectModel}/>
               </div>
             </div>
+            <button onClick={() => addToCart()}>
+              asd
+            </button>
         </div>
     )
 }

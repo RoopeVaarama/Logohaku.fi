@@ -18,13 +18,14 @@ import Cart from './Components/Cart/Cart';
 const App = () => {
     let lang = localStorage.getItem("lang")
     const [cartOpen, setCartOpen] = useState(false);
-    const [cartItems, setCartItems] = useState([1]);
+    const [cartItems, setCartItems] = useState([]);
 
-    const handleAddToCart = () => {
+    const handleAddToCart = (id, name, logoPosition) => {
+        console.log(id,name,logoPosition)
         return null
     }
 
-    const handleRemoveFromCart = () => {
+    const handleRemoveFromCart = (id) => {
         return null
     }
 
@@ -33,8 +34,8 @@ const App = () => {
             <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
                 <Cart
                     cartItems={cartItems}
-                    addToCart={handleAddToCart}
-                    removeFromCart={handleRemoveFromCart}
+                    //addToCart={handleAddToCart}
+                    removeFromCart={() => handleRemoveFromCart()}
                 >
 
                 </Cart>
@@ -54,7 +55,7 @@ const App = () => {
                     </Route>
                     <Route
                         exact path="/tulokset/:id"
-                        children={<Results lang={lang} />}>
+                        children={<Results lang={lang} handleAddToCart={(id, name, logoPosition) => handleAddToCart(id, name, logoPosition)} />}>
                     </Route>
                     <Route>
                         <NotFound lang={lang} />

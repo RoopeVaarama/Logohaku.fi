@@ -1,16 +1,16 @@
 import React from 'react';
 import { Wrapper } from './CartItem.styles';
 import Button from '@material-ui/core/Button';
+import logo from "../../assets/paisto.png";
 
 
 const CartItem = ({ item, addToCart, removeFromCart }) => {
     return (
         <Wrapper>
             <div>
-                <h3>Title</h3>
+                <h4>{item.title}</h4>
                 <div className="information">
-                    <p>Amount</p>
-                    <p>Price</p>
+                    <p>logo position{item.position}</p>
                 </div>
                 <div className='buttons'>
                     <Button
@@ -21,7 +21,7 @@ const CartItem = ({ item, addToCart, removeFromCart }) => {
                     >
                         -
                 </Button>
-                    <p>0</p>
+                    <p>{item.amount}</p>
                     <Button
                         size="small"
                         disableElevation
@@ -33,7 +33,7 @@ const CartItem = ({ item, addToCart, removeFromCart }) => {
 
                 </div>
             </div>
-            <img src={item.image} alt={item.title} />
+            <img src={logo} alt={logo} />
         </Wrapper>
     );
 }

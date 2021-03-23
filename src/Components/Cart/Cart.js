@@ -6,7 +6,7 @@ const Cart = ({ cartItems, addToCart, removeFromCart }) => {
     console.log(cartItems)
     return (
         <Wrapper>
-            <h2>Your Shopping Cart</h2>
+            <h1>Your Shopping Cart</h1>
             {cartItems.length === 0 ? <p>No items in cart.</p> : null}
             {cartItems.map(item => (
                 <CartItem
