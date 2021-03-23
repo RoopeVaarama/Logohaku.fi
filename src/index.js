@@ -21,8 +21,11 @@ const App = () => {
     const [cartItems, setCartItems] = useState([]);
 
     const handleAddToCart = (id, name, logoPosition) => {
-        console.log(id,name,logoPosition)
-        return null
+        //if(!(cartItems.id.includes(id))){
+        setCartItems(cartItems => [...cartItems, { id, name, logoPosition }])
+
+        console.log(cartItems)
+        console.log(id, name, logoPosition)
     }
 
     const handleRemoveFromCart = (id) => {

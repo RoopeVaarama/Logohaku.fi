@@ -8,9 +8,9 @@ const CartItem = ({ item, addToCart, removeFromCart }) => {
     return (
         <Wrapper>
             <div>
-                <h4>{item.title}</h4>
+                <h4>{item.name}</h4>
                 <div className="information">
-                    <p>logo position{item.position}</p>
+                    <p>logo position{item.logoPosition}</p>
                 </div>
                 <div className='buttons'>
                     <Button

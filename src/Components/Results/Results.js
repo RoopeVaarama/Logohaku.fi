@@ -111,6 +111,7 @@ const Results = ({ lang, handleAddToCart }) => {
 
   const [selectedLogo, setSelectedLogo] = useState(null)
   const [selectedColor, setSelectedColor] = useState(null)
+  const [presetPosition, setPresetPosition] = useState(1);
   const testLogos = {
     "logo1": "0b.png",
     "logo2": "0b.png",
@@ -178,10 +179,6 @@ const Results = ({ lang, handleAddToCart }) => {
     };
   };
 
-  const addToCart = () => {
-    handleAddToCart(1, "tstis", 2)
-  }
-  
   const print = (img) => {
     console.log(img)
     setSelectedLogo(img);
@@ -217,6 +214,11 @@ const Results = ({ lang, handleAddToCart }) => {
         </Button>
       </td>
     ))
+  }
+console.log(selectedProduct)
+  const addToCart = () => {
+    console.log(selectedProduct.PEN)
+    handleAddToCart(selectedProduct.PEN.ID, selectedProduct.PEN.NAME, presetPosition)
   }
 
   return (
