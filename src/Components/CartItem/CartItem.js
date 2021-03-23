@@ -17,7 +17,7 @@ const CartItem = ({ item, addToCart, removeFromCart }) => {
                         size="small"
                         disableElevation
                         variant="contained"
-                        onClick={() => console.log("-")}
+                        onClick={() => removeFromCart(item.id, item.logoPosition)}
                     >
                         -
                 </Button>
@@ -26,7 +26,7 @@ const CartItem = ({ item, addToCart, removeFromCart }) => {
                         size="small"
                         disableElevation
                         variant="contained"
-                        onClick={() => console.log("+")}
+                        onClick={() => addToCart(item.id, item.name, item.logoPosition)}
                     >
                         +
                 </Button>

@@ -276,10 +276,10 @@ console.log(selectedProduct)
             model={selectedProduct ? (Object.values(selectedProduct))[0] : productsObjects.TSHIRT}
             selectModel={selectModel} />
         </div>
-      </div>
-      <button onClick={() => addToCart()}>
-        asd
+        <button onClick={() => addToCart()}>
+        Add to cart
             </button>
+      </div>
     </div>
   )
 }

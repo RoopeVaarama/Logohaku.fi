@@ -21,24 +21,47 @@ const App = () => {
     const [cartItems, setCartItems] = useState([]);
 
     const handleAddToCart = (id, name, logoPosition) => {
-        //if(!(cartItems.id.includes(id))){
-        setCartItems(cartItems => [...cartItems, { id, name, logoPosition }])
+        setCartItems(prev => {
 
-        console.log(cartItems)
-        console.log(id, name, logoPosition)
+            //Is item in cart already and does the position match
+            const isItemInCart = prev.find(item => item.id === id);
+            const isItemPosition = prev.find(item => item.logoPosition === logoPosition);
+            console.log(isItemInCart)
+
+            if (isItemInCart && isItemPosition) {
+                return prev.map(item =>
+                    item.id === id
+                        ? { ...item, amount: item.amount + 1 }
+                        : item.id
+                );
+            }
+            //First time adding the item
+            return [...prev, { id, name, logoPosition, amount: 1 }];
+        });
+        //console.log("cartItems", cartItems)
+        //console.log("info", id, name, logoPosition)
     }
 
-    const handleRemoveFromCart = (id) => {
-        return null
-    }
+    const handleRemoveFromCart = (id, logoPosition) => {
+        setCartItems(prev =>
+            prev.reduce((ack, item) => {
+                if (item.id === id && item.logoPosition === logoPosition) {
+                    if (item.amount === 1) return ack;
+                    return [...ack, { ...item, amount: item.amount - 1 }];
+                } else {
+                    return [...ack, item];
+                }
+            }, [])
+        );
+    };
 
     return (
         <div className="App">
             <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
                 <Cart
                     cartItems={cartItems}
-                    //addToCart={handleAddToCart}
-                    removeFromCart={() => handleRemoveFromCart()}
+                    addToCart={(id, name, logoPosition) => handleAddToCart(id, name, logoPosition)}
+                    removeFromCart={(id, logoPosition) => handleRemoveFromCart(id, logoPosition)}
                 >
 
                 </Cart>
