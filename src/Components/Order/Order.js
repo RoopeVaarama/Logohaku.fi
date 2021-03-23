@@ -1,5 +1,5 @@
 import React from 'react';
-import TextValues from '../tools/TextValues';
+import TextValues from '../../tools/TextValues';
 import './Order.css';
 import { Container, Row, Col } from 'react-bootstrap';
 

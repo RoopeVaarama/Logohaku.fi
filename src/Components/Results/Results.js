@@ -1,5 +1,5 @@
 import React, {Suspense, useState, useEffect} from 'react';
-import TextValues from '../tools/TextValues';
+import TextValues from '../../tools/TextValues';
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,11 +8,11 @@ import {
   useParams
 } from "react-router-dom";
 import "./Results.css";
-import SceneComponent from './SceneComponent';
-import ProductsList from './ProductsList';
-import PresetsList from './PresetsList';
+import SceneComponent from '../SceneComponent';
+import ProductsList from '../ProductsList/ProductsList';
+import PresetsList from '../PresetsList/PresetsList';
 import Button from 'react-bootstrap/Button'
-import ProductsObjects from '../tools/ProductsEnum';
+import ProductsObjects from '../../tools/ProductsEnum';
 import {
   Vector3
 } from "@babylonjs/core";

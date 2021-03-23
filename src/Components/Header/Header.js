@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
-import TextValues from '../tools/TextValues';
+import TextValues from '../../tools/TextValues';
 import "./Header.css";
 import { CSSTransition } from "react-transition-group";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import logo from "../assets/paisto.png";
+import logo from "../../assets/paisto.png";
 import { Button } from "react-bootstrap";
+import  MenuIcon from '@material-ui/icons/Menu';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 
-const Header = () => {
+const Header = ({ lang, cartItems, openCart }) => {
 
     const ButtonClick = () => {
         let lang = localStorage.getItem("lang")
@@ -57,18 +58,17 @@ const Header = () => {
                 unmountOnExit
             >
                 <nav className="Nav">
-                    <Link to="/">Home</Link>
-                    <Link to="/about">About</Link>
-                    <Link to="/tilaus"><FontAwesomeIcon size="2x" icon={"shopping-cart"}/></Link>
                     <Button onClick={() => ButtonClick()}>{TextValues.langButton(localStorage.getItem("lang"))}</Button>
-                    
+                    <Button onClick={openCart}><AddShoppingCartIcon />{cartItems.length === 0 ? null : cartItems.length}</Button>
+
                 </nav>
             </CSSTransition>
             <button onClick={toggleNav} className="Burger">
-                burger menu
-          </button>
+                <MenuIcon />
+            </button>
         </header >
     )
 }
-
+//<Link to="/">{TextValues.home(lang)}</Link>
+//<Link to="/tietoja">{TextValues.aboutUs(lang)}</Link>
 export default Header;

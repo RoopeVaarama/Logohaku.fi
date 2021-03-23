@@ -1,5 +1,5 @@
 import React from 'react';
-import TextValues from '../tools/TextValues';
+import TextValues from '../../tools/TextValues';
 import { Col, Row, Container } from 'react-bootstrap';
 import "./AboutUs.css";
 
