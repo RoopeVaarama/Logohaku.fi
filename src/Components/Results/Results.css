@@ -1,9 +1,57 @@
+/* Picker styling */
+.LogoPicker {
+    width: 45vw;
+    height: 20vh;
+    max-width: 45vw;
+    max-height: 20vh;
+    margin: auto;
+    margin-top: 5vh;
+    table-layout: fixed;
+}
+.LogoPickerLogo {
+    height: inherit;
+}
+.LogoContainer:hover {
+    background-color: rgba(128, 128, 128, 0);
+}
+.LogoPickerImgBtn {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.LogoPickerButton {
+}
+.ColorPicker {
+    width: 45vw;
+    height: 20vh;
+    max-width: 45vw;
+    max-height: 20vh;
+    margin: auto;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    table-layout: fixed;
+}
+.ColorPickerItem {
+    height: inherit;
+    padding: 12px;
+}
+.ColorContainer:hover {
+    background-color: gray;
+}
+.LogoPickerTable {
+}
+.LogoPickerAdd {
+}
+
+
+
 .PreviewerWindow {
     display: flex;
     flex-flow: row nowrap;
     width: 65vw;
     height: 65vh;
     margin: auto;
+    margin-bottom: 150px;
 }
 
 /* 3D canvas styling */
