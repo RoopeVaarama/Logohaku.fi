@@ -18,23 +18,51 @@ import Cart from './Components/Cart/Cart';
 const App = () => {
     let lang = localStorage.getItem("lang")
     const [cartOpen, setCartOpen] = useState(false);
-    const [cartItems, setCartItems] = useState([1]);
+    const [cartItems, setCartItems] = useState([]);
 
-    const handleAddToCart = () => {
-        return null
+    const handleAddToCart = (id, name, logoPosition) => {
+        setCartItems(prev => {
+
+            //Is item in cart already and does the position match
+            const isItemInCart = prev.find(item => item.id === id);
+            const isItemPosition = prev.find(item => item.logoPosition === logoPosition);
+            console.log(isItemInCart)
+
+            if (isItemInCart && isItemPosition) {
+                return prev.map(item =>
+                    item.id === id
+                        ? { ...item, amount: item.amount + 1 }
+                        : item.id
+                );
+            }
+            //First time adding the item
+            return [...prev, { id, name, logoPosition, amount: 1 }];
+        });
+        //console.log("cartItems", cartItems)
+        //console.log("info", id, name, logoPosition)
     }
 
-    const handleRemoveFromCart = () => {
-        return null
-    }
+    const handleRemoveFromCart = (id, logoPosition) => {
+        setCartItems(prev =>
+            prev.reduce((ack, item) => {
+                if (item.id === id && item.logoPosition === logoPosition) {
+                    if (item.amount === 1) return ack;
+                    return [...ack, { ...item, amount: item.amount - 1 }];
+                } else {
+                    return [...ack, item];
+                }
+            }, [])
+        );
+    };
 
     return (
         <div className="App">
             <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
                 <Cart
                     cartItems={cartItems}
-                    addToCart={handleAddToCart}
-                    removeFromCart={handleRemoveFromCart}
+                    addToCart={(id, name, logoPosition) => handleAddToCart(id, name, logoPosition)}
+                    removeFromCart={(id, logoPosition) => handleRemoveFromCart(id, logoPosition)}
+                    closeCart={() => setCartOpen(false)}
                 >
 
                 </Cart>
@@ -54,7 +82,7 @@ const App = () => {
                     </Route>
                     <Route
                         exact path="/tulokset/:id"
-                        children={<Results lang={lang} />}>
+                        children={<Results lang={lang} handleAddToCart={(id, name, logoPosition) => handleAddToCart(id, name, logoPosition)} />}>
                     </Route>
                     <Route>
                         <NotFound lang={lang} />

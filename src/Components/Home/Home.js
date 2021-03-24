@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import TextValues from '../../tools/TextValues';
 import { Link, useHistory } from 'react-router-dom';
-import { Button, Col, Row, Container, InputGroup, FormControl, Form } from 'react-bootstrap';
+import { Col, Row, Container, InputGroup, FormControl, Form } from 'react-bootstrap';
+import Button from '@material-ui/core/Button';
 
 import './Home.css';
 

@@ -4,7 +4,7 @@ import TextValues from '../../tools/TextValues';
 import "./Header.css";
 import { CSSTransition } from "react-transition-group";
 import logo from "../../assets/paisto.png";
-import { Button } from "react-bootstrap";
+import Button from '@material-ui/core/Button';
 import  MenuIcon from '@material-ui/icons/Menu';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
