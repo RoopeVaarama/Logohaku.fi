@@ -62,6 +62,7 @@ const App = () => {
                     cartItems={cartItems}
                     addToCart={(id, name, logoPosition) => handleAddToCart(id, name, logoPosition)}
                     removeFromCart={(id, logoPosition) => handleRemoveFromCart(id, logoPosition)}
+                    closeCart={() => setCartOpen(false)}
                 >
 
                 </Cart>

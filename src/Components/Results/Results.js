@@ -11,7 +11,7 @@ import "./Results.css";
 import SceneComponent from '../SceneComponent';
 import ProductsList from '../ProductsList/ProductsList';
 import PresetsList from '../PresetsList/PresetsList';
-import Button from 'react-bootstrap/Button'
+import Button from '@material-ui/core/Button';
 import ProductsObjects from '../../tools/ProductsEnum';
 import {
   Vector3

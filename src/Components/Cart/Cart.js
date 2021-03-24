@@ -1,8 +1,11 @@
 import React from 'react';
 import TextValues from '../../tools/TextValues';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { Wrapper } from './Cart.styles';
 import CartItem from '../CartItem/CartItem';
-const Cart = ({ cartItems, addToCart, removeFromCart }) => {
+import Button from '@material-ui/core/Button';
+
+const Cart = ({ cartItems, addToCart, removeFromCart, closeCart }) => {
     console.log(cartItems)
     return (
         <Wrapper>
@@ -20,6 +23,14 @@ const Cart = ({ cartItems, addToCart, removeFromCart }) => {
             ))}
 
             <h2>Total</h2>
+            <Link to="/ostoskori">
+            <Button
+                size="large"
+                variant="contained"
+                onClick={closeCart}>
+                Proceed to order
+            </Button>
+            </Link>
         </Wrapper>
     )
 }
