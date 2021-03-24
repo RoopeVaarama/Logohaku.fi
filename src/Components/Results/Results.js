@@ -156,6 +156,7 @@ const Results = ({lang}) => {
       if (decal != null) {
         decal.dispose();
       }
+      console.log('selected model results: ', selectedModel)
       setModel(selectedModel)
     }
 

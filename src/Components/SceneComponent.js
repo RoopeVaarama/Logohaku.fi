@@ -44,7 +44,7 @@ const SceneComponent = ({logo, color, model, selectModel}) => {
   const [currentModel, setCurrentModel] = useState(null);
   const modelSize = new Vector3(model.SIZE, model.SIZE, model.SIZE);
   modelSize._isDirty = false
-  console.log('initial name ', model.URL)
+  console.log('initial name ', color)
   const modelPosition = new Vector3(model.POSITION.X, model.POSITION.Y, model.POSITION.Z)
   modelPosition._isDirty = false
   console.log('initial pos  ', modelPosition)
@@ -53,13 +53,11 @@ const SceneComponent = ({logo, color, model, selectModel}) => {
     //const RGBColor = hexToRGB(color[1]);
     if (currentModel !== null && color !== null) {
       const meshes = currentModel._scene.meshes
-      console.log('current model ', meshes, color[1])
-      const RGBColor = hexToRGB(color[1])
-      console.log('rgbcolor', RGBColor);
+      console.log('current model ', meshes, color)
       for (var i in meshes) {
         if (meshes[i].metadata !== null) {
           const newMat = new StandardMaterial("material"+i+i, scene1);
-          newMat.diffuseColor = new Color3(RGBColor[0], RGBColor[1], RGBColor[2]);
+          newMat.diffuseColor = new Color3.FromHexString(color[1])
           meshes[i].material = newMat;
         }
       }
@@ -79,26 +77,9 @@ const SceneComponent = ({logo, color, model, selectModel}) => {
     setScene1(scene);
     console.log("onscenemount " + { scene1 });
   }
-  const hexToRGB = (hex) => {
-    var aRgbHex = hex.match(/.{1,2}/g);
-    var aRgb = [
-        parseInt(aRgbHex[0], 16),
-        parseInt(aRgbHex[1], 16),
-        parseInt(aRgbHex[2], 16)
-    ];
-    return aRgb;
-  }
 
   const onModelLoaded = (model) => {
     console.log('Model loaded: ', model.meshes.length)
-    const RGBColor = hexToRGB(color[1]);
-    for (var i in model.meshes) {
-      if (model.meshes[i].metadata !== null) {
-        const newMat = new StandardMaterial("material"+1, scene1);
-        newMat.diffuseColor = new Color3(RGBColor[0], RGBColor[1], RGBColor[2]);
-        model.meshes[i].material = newMat;
-      }
-    }
     selectModel(model, decal)
   };
 
@@ -107,11 +88,10 @@ const SceneComponent = ({logo, color, model, selectModel}) => {
     console.log('Created model: ', rootMesh);
     const meshes = rootMesh._scene.meshes
     console.log('current model ', meshes, color[1])
-    const RGBColor = hexToRGB(color[1])
       for (var i in meshes) {
         if (meshes[i].metadata !== null) {
           const newMat = new StandardMaterial("material"+1, scene1);
-          newMat.diffuseColor = new Color3(RGBColor[0], RGBColor[1], RGBColor[2]);
+          newMat.diffuseColor = new Color3.FromHexString(color[1])
           meshes[i].material = newMat;
         }
       }
@@ -153,8 +133,9 @@ const SceneComponent = ({logo, color, model, selectModel}) => {
           name="camera1"
           target={Vector3.Zero()}
           alpha={Math.PI / 2}
-          beta={Math.PI / 40}
-          radius={8}
+          beta={Math.PI / 2}
+          radius={10}
+          wheelPrecision={[10]}
         />
         <hemisphericLight
           name="light1"
