@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import TextValues from '../../tools/TextValues';
 import { Link, useHistory } from 'react-router-dom';
-import { Col, Row, Container, InputGroup, FormControl, Form } from 'react-bootstrap';
+import { Col, Row, InputGroup, FormControl, Form } from 'react-bootstrap';
 import { Button, Grid, Card, CardContent } from '@material-ui/core';
-import { Wrapper } from './Home.styles';
-
-import './Home.css';
+import { Wrapper, HomeDiv } from './Home.styles';
 
 const Home = ({ lang }) => {
     const history = useHistory();
@@ -25,12 +23,12 @@ const Home = ({ lang }) => {
         }
 
     return (
-        <div className="Home">
-            <Container className="Search" /*style={{ border: "1px solid black" }}*/>
+        <HomeDiv>
+            <Wrapper>
                 <h1>Liikelahjakuvasto</h1>
                 <p>-----------------</p>
                 <p>Räätälöitynä yrityksellesi</p>
-                <Row noGutters={true} className="Input">
+                <Row noGutters={true} style={{padding: "2%"}}>
                     <Col sm={10}>
                         <Form onSubmit={submitForm}>
                             <InputGroup className="mb-3">
@@ -51,8 +49,8 @@ const Home = ({ lang }) => {
                         </Form>
                     </Col>
                 </Row>
-            </Container>
-            <Container className="Info">
+            </Wrapper>
+            <Wrapper>
                 <Grid
                     container
                     direction="row"
@@ -65,29 +63,27 @@ const Home = ({ lang }) => {
                     </Card>
 
                 </Grid>
-                </Container>
-                <Container className="Contact">
-                    <h1>Yhteystiedot</h1>
-                    <Row>
-                        <Col>1</Col>
-                        <Col>2</Col>
-                        <Col>3</Col>
-                        <Col>4</Col>
-                    </Row>
-                    <Row>
-                        <Col>1</Col>
-                        <Col>2</Col>
-                        <Col>3</Col>
-                        <Col>4</Col>
-                    </Row>
-                    <Row>
-                        <Col>1</Col>
-                        <Col>2</Col>
-                        <Col>3</Col>
-                        <Col>4</Col>
-                    </Row>
-                </Container>
-        </div>
+            </Wrapper>
+            <Wrapper
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            >
+                <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                >
+                    <Card style={{ width: "50%", alignContent: "center" }} variant="outlined" >
+                        <CardContent style={{ width: "50%" }}>12</CardContent>
+
+                    </Card>
+
+                </Grid>
+            </Wrapper>
+        </HomeDiv>
 
     )
 }
