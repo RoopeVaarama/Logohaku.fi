@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import TextValues from '../../tools/TextValues';
 import { Link, useHistory } from 'react-router-dom';
 import { Col, Row, Container, InputGroup, FormControl, Form } from 'react-bootstrap';
-import Button from '@material-ui/core/Button';
+import { Button, Grid, Card, CardContent } from '@material-ui/core';
+import { Wrapper } from './Home.styles';
 
 import './Home.css';
 
@@ -52,38 +53,52 @@ const Home = ({ lang }) => {
                 </Row>
             </Container>
             <Container className="Info">
-                <h1>Miten homma toimii?</h1>
-                <p>Tekstiä...</p>
-                <Row>
-                    <Col>1</Col>
-                    <Col>2</Col>
-                    <Col>3</Col>
-                </Row>
-            </Container>
-            <Container className="Contact">
-                <h1>Yhteystiedot</h1>
-                <Row>
-                    <Col>1</Col>
-                    <Col>2</Col>
-                    <Col>3</Col>
-                    <Col>4</Col>
-                </Row>
-                <Row>
-                    <Col>1</Col>
-                    <Col>2</Col>
-                    <Col>3</Col>
-                    <Col>4</Col>
-                </Row>
-                <Row>
-                    <Col>1</Col>
-                    <Col>2</Col>
-                    <Col>3</Col>
-                    <Col>4</Col>
-                </Row>
-            </Container>
+                <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                >
+                    <Card style={{ width: "50%", alignContent: "center" }} variant="outlined" >
+                        <CardContent style={{ width: "50%" }}>12</CardContent>
+
+                    </Card>
+
+                </Grid>
+                </Container>
+                <Container className="Contact">
+                    <h1>Yhteystiedot</h1>
+                    <Row>
+                        <Col>1</Col>
+                        <Col>2</Col>
+                        <Col>3</Col>
+                        <Col>4</Col>
+                    </Row>
+                    <Row>
+                        <Col>1</Col>
+                        <Col>2</Col>
+                        <Col>3</Col>
+                        <Col>4</Col>
+                    </Row>
+                    <Row>
+                        <Col>1</Col>
+                        <Col>2</Col>
+                        <Col>3</Col>
+                        <Col>4</Col>
+                    </Row>
+                </Container>
         </div>
 
     )
 }
 
 export default Home;
+
+/*<h1>Miten homma toimii?</h1>
+                <p>Tekstiä...</p>
+                <Row>
+                    <Col>1</Col>
+                    <Col>2</Col>
+                    <Col>3</Col>
+                </Row>
+            </Container>*/
