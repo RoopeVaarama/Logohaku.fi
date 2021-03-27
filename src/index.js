@@ -72,7 +72,7 @@ const App = () => {
             <div className="Content">
                 <Switch>
                     <Route exact path="/ostoskori">
-                        <Order lang={lang} />
+                        <Order lang={lang} cartItems={cartItems} />
                     </Route>
                     <Route exact path="/tietoja">
                         <AboutUs lang={lang} />

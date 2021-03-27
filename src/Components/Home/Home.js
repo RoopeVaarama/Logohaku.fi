@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import TextValues from '../../tools/TextValues';
 import { Link, useHistory } from 'react-router-dom';
-import { Col, Row, InputGroup, FormControl, Form } from 'react-bootstrap';
+import { Col, InputGroup, FormControl, Form } from 'react-bootstrap';
 import { Button, Grid, Card, CardContent } from '@material-ui/core';
-import { Wrapper, HomeDiv } from './Home.styles';
+import { Wrapper, HomeDiv, Title, Title2 } from './Home.styles';
 
 const Home = ({ lang }) => {
     const history = useHistory();
@@ -25,10 +25,16 @@ const Home = ({ lang }) => {
     return (
         <HomeDiv>
             <Wrapper>
-                <h1>Liikelahjakuvasto</h1>
+                <Title>Liikelahjakuvasto</Title>
                 <p>-----------------</p>
                 <p>Räätälöitynä yrityksellesi</p>
-                <Row noGutters={true} style={{padding: "2%"}}>
+                <Grid
+                        container
+                        direction="row"
+                        justify="space-between"
+                        alignItems="center"
+                        spacing={2}
+                    >
                     <Col sm={10}>
                         <Form onSubmit={submitForm}>
                             <InputGroup className="mb-3">
@@ -48,40 +54,44 @@ const Home = ({ lang }) => {
                             </InputGroup>
                         </Form>
                     </Col>
-                </Row>
+                </Grid>
             </Wrapper>
             <Wrapper>
-                <Grid
-                    container
-                    direction="row"
-                    justify="center"
-                    alignItems="center"
-                >
-                    <Card style={{ width: "50%", alignContent: "center" }} variant="outlined" >
-                        <CardContent style={{ width: "50%" }}>12</CardContent>
+                <CardContent>
+                    <Title2>Miten homma toimii?</Title2>
+                    <p>Selaa yrityksellenne räätälöityn kuvaston tuotteista sopivimmat vaihtoehdot ja kysy tarkempaa tarjousta! Kuvaston esimerkkihinnat ovat alv 0%, ja tyypillisesti 1-väripainatuksella tai lasermerkkauksella. Suosittelemme logollenne ja tuotteelle parhaita vaihtoehtoja varsinaisen tarjouksen yhteydessä vuosikymmenten kokemuksella..</p>
+                    <Grid
+                        container
+                        direction="row"
+                        justify="space-between"
+                        alignItems="center"
+                        spacing={2}
+                    >
+                        <Grid item>
+                            <Title2>aSA</Title2>
+                            <p>asd</p>
+                            <p>asd</p>
+                        </Grid>
+                        <Grid item>
+                            <Title2>aSA</Title2>
+                            <p>asd</p>
+                        </Grid>
+                        <Grid item>
+                            <Title2>aSA</Title2>
+                            <p>asd</p>
+                        </Grid>
 
-                    </Card>
+                    </Grid>
 
-                </Grid>
+                </CardContent>
             </Wrapper>
-            <Wrapper
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            >
-                <Grid
-                    container
-                    direction="row"
-                    justify="center"
-                    alignItems="center"
-                >
-                    <Card style={{ width: "50%", alignContent: "center" }} variant="outlined" >
-                        <CardContent style={{ width: "50%" }}>12</CardContent>
+            <Wrapper>
+                <CardContent>
+                    <Title2>Miten homma toimii?</Title2>
+                    <p>Tekstiä...</p>
 
-                    </Card>
 
-                </Grid>
+                </CardContent>
             </Wrapper>
         </HomeDiv>
 
@@ -89,12 +99,3 @@ const Home = ({ lang }) => {
 }
 
 export default Home;
-
-/*<h1>Miten homma toimii?</h1>
-                <p>Tekstiä...</p>
-                <Row>
-                    <Col>1</Col>
-                    <Col>2</Col>
-                    <Col>3</Col>
-                </Row>
-            </Container>*/
