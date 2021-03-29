@@ -72,7 +72,8 @@ const App = () => {
             <div className="Content">
                 <Switch>
                     <Route exact path="/ostoskori">
-                        <Order lang={lang} cartItems={cartItems} />
+                        <Order lang={lang} cartItems={cartItems} addToCart={(id, name, logoPosition) => handleAddToCart(id, name, logoPosition)}
+                            removeFromCart={(id, logoPosition) => handleRemoveFromCart(id, logoPosition)} />
                     </Route>
                     <Route exact path="/tietoja">
                         <AboutUs lang={lang} />
