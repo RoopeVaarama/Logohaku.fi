@@ -1,36 +1,32 @@
 import React from 'react';
 import TextValues from '../../tools/TextValues';
-import './Order.css';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Wrapper, Title } from './Order.style';
+import { Button, Grid, Card, CardContent } from '@material-ui/core';
+import CartItem from '../CartItem/CartItem';
 
-const Order = ({ lang }) => {
+const Order = ({ lang, cartItems, addToCart, removeFromCart }) => {
 
     return (
-        <div className="purchase-card">
-            <Container>
-                <Row>
-                    <Col xs={6}>Tuote1: </Col>
-                    <Col xs={6}>T-paita </Col>
-                </Row>
+        <Wrapper>
+            <CardContent>
+                <Title>Ostoskori</Title>
                 <br/>
-                <Row>
-                    <Col xs={6}>Tuote2: </Col>
-                    <Col xs={6}>Maski </Col>
-                </Row>
-                <br/>
-                <Row>
-                    <Col xs={6}>Tuotteet: </Col>
-                    <Col xs={6}>2 </Col>
+                {cartItems.length === 0 ? <p>No items in cart.</p> : null}
+                {cartItems.map(item => (
+                    <CartItem
+                        key={item.id}
+                        item={item}
+                        addToCart={addToCart}
+                        removeFromCart={removeFromCart}
+                    >
 
-                </Row>
-                <hr/>
-                <Row>
-                    <Col xs={6}>Hinta: </Col>
-                    <Col xs={6}>35€</Col>
-
-                </Row>
-            </Container>
-        </div>
+                    </CartItem>
+                ))}
+            </CardContent>
+            <Button variant="contained" disableElevation>
+                Order
+            </Button>
+        </Wrapper>
     )
 }
 
