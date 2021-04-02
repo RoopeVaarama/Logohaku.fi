@@ -129,7 +129,7 @@ const Results = ({ lang, handleAddToCart }) => {
   const [logos, setLogos] = useState(testLogos);
   const [colors, setColors] = useState(testColors);
   useEffect(() => {
-    setSelectedLogo(testLogos.logo1);
+    setSelectedLogo(Object.entries(testLogos)[0]);
     setSelectedColor(testColors.color1);
     setLogos(testLogos);
     setColors(colors);
@@ -180,7 +180,7 @@ const Results = ({ lang, handleAddToCart }) => {
   };
 
   const print = (img) => {
-    console.log(img)
+    console.log("Seleted logo here",img)
     setSelectedLogo(img);
   }
   const printC = (color) => {
@@ -271,16 +271,18 @@ console.log(selectedProduct)
         <div className="Presets" hidden={presetsList}>
           <PresetsList></PresetsList>
         </div>
-        <div className="CanvasHolder">
           <SceneComponent
+            lang={lang}
             logo={selectedLogo}
             color={selectedColor}
             model={selectedProduct ? (Object.values(selectedProduct))[0] : productsObjects.TSHIRT}
             selectModel={selectModel} />
-        </div>
         <button onClick={() => addToCart()}>
         Add to cart
             </button>
+      </div>
+      <div className="PlaceholderDiv">
+
       </div>
     </div>
   )
