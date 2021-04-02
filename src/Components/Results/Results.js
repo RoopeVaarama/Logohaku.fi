@@ -161,7 +161,7 @@ const Results = ({ lang, handleAddToCart }) => {
   }
 
   const selectProduct = (product) => {
-    console.log('Setting product', (Object.values(product))[0].URL)
+    console.log('Setting product', (Object.values(product))[0])
     setSelectedProduct(product)
   }
 
@@ -217,8 +217,10 @@ const Results = ({ lang, handleAddToCart }) => {
   }
 console.log(selectedProduct)
   const addToCart = () => {
-    console.log(selectedProduct.PEN)
-    handleAddToCart(selectedProduct.PEN.ID, selectedProduct.PEN.NAME, presetPosition)
+    console.log("selectedProduct",(Object.values(selectedProduct))[0].NAME)
+    let product = Object.values(selectedProduct)[0]
+    console.log(product)
+    handleAddToCart(product.ID, product.NAME, presetPosition)
   }
 
   return (
