@@ -52,12 +52,23 @@
     height: 65vh;
     margin: auto;
     margin-bottom: 150px;
+    
+}
+
+.Preview {
+    position: absolute;
+}
+
+.PlaceholderDiv {
+    height: 5vh;
+    width: 5vh;
 }
 
 /* 3D canvas styling */
 .CanvasHolder {
     display: flex;
     flex-basis: 80%;
+    
 }
 Canvas {
     width: 100%;
