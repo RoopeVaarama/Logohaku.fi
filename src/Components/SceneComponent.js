@@ -34,6 +34,7 @@ import FormLabel from "@material-ui/core/FormLabel";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
+import Switch from '@material-ui/core/Switch';
 import { InputManager } from "@babylonjs/core/Inputs/scene.inputManager";
 import TextValues from "../tools/TextValues";
 import "./SceneComponent.css";
@@ -54,6 +55,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel }) => {
   const [currentModelJson, setCurrentModelJson] = useState(null);
   const [logoPosition, setLogoPosition] = useState(null);
   const [logoPositionName, setLogoPositionName] = useState(null);
+  const [freePick, setFreePick] = useState(false);
   const modelSize = new Vector3(model.SIZE, model.SIZE, model.SIZE);
   modelSize._isDirty = false;
   console.log("initial name ", color);
@@ -167,37 +169,39 @@ const SceneComponent = ({ lang, logo, color, model, selectModel }) => {
   };
 
   const onPointerPick = (e, pickInfo) => {
-    console.log("Decal material: /", logo);
-    const decalMaterial = new StandardMaterial("decalMat", scene1);
-    decalMaterial.diffuseTexture = new Texture("/" + logo[1], scene1);
-    console.log("Decal image is: /", logo[1]);
-    decalMaterial.diffuseTexture.hasAlpha = true;
-    decalMaterial.zOffset = -2;
+    if (freePick) {
+      console.log("Decal material: /", logo);
+      const decalMaterial = new StandardMaterial("decalMat", scene1);
+      decalMaterial.diffuseTexture = new Texture("/" + logo[1], scene1);
+      console.log("Decal image is: /", logo[1]);
+      decalMaterial.diffuseTexture.hasAlpha = true;
+      decalMaterial.zOffset = -2;
 
-    if (decal != null && pickInfo.name !== "decal") {
-      decal.dispose();
-    }
-
-    if (pickInfo.hit && pickInfo.pickedMesh.name !== "decal") {
-      const mesh = pickInfo.pickedMesh;
-      console.log('PickInfo ', pickInfo.pickedPoint)
-      if (pickInfo.pickedPoint !== null) {
-        const meshObj = "POSITION_VECTOR: ["+pickInfo.pickedPoint.x+","+pickInfo.pickedPoint.y+","+pickInfo.pickedPoint.z+"],\n"+"NORMAL_VECTOR: ["+pickInfo.getNormal(true).x+","+pickInfo.getNormal(true).y+","+pickInfo.getNormal(true).z+"],"
-        console.log(meshObj);
+      if (decal != null && pickInfo.name !== "decal") {
+        decal.dispose();
       }
-      console.log("PickInfo " + pickInfo.pickedPoint + pickInfo.getNormal(true) +  "mesh " + mesh);
-      const decalSize = new Vector3(model.LOGO_SIZE, model.LOGO_SIZE, model.LOGO_SIZE);
-      const decalRotation = model.LOGO_ROTATION;
 
-      /**************************CREATE DECAL*************************************************/
-      const decal = MeshBuilder.CreateDecal("decal", mesh, {
-        position: pickInfo.pickedPoint,
-        normal: pickInfo.getNormal(true),
-        size: decalSize,
-        angle: decalRotation
-      });
-      decal.material = decalMaterial;
-      setDecal(decal);
+      if (pickInfo.hit && pickInfo.pickedMesh.name !== "decal") {
+        const mesh = pickInfo.pickedMesh;
+        console.log('PickInfo ', pickInfo.pickedPoint)
+        if (pickInfo.pickedPoint !== null) {
+          const meshObj = "POSITION_VECTOR: ["+pickInfo.pickedPoint.x+","+pickInfo.pickedPoint.y+","+pickInfo.pickedPoint.z+"],\n"+"NORMAL_VECTOR: ["+pickInfo.getNormal(true).x+","+pickInfo.getNormal(true).y+","+pickInfo.getNormal(true).z+"],"
+          console.log(meshObj);
+        }
+        console.log("PickInfo " + pickInfo.pickedPoint + pickInfo.getNormal(true) +  "mesh " + mesh);
+        const decalSize = new Vector3(model.LOGO_SIZE, model.LOGO_SIZE, model.LOGO_SIZE);
+        const decalRotation = model.LOGO_ROTATION;
+
+        /**************************CREATE DECAL*************************************************/
+        const decal = MeshBuilder.CreateDecal("decal", mesh, {
+          position: pickInfo.pickedPoint,
+          normal: pickInfo.getNormal(true),
+          size: decalSize,
+          angle: decalRotation
+        });
+        decal.material = decalMaterial;
+        setDecal(decal);
+      }
     }
   };
 
@@ -205,7 +209,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel }) => {
     const logoPositionsArray = Object.entries(model.LOGO_POSITIONS);
     console.log(logoPositionsArray);
     return logoPositionsArray.map((position) => (
-      <FormControlLabel className="RadioButton" value={JSON.stringify(position[1])} control={<Radio/>} label={position[1].NAME}></FormControlLabel>
+      <FormControlLabel className="RadioButton" disabled={freePick} value={JSON.stringify(position[1])} control={<Radio/>} label={position[1].NAME}></FormControlLabel>
     )) 
   }
 
@@ -213,11 +217,22 @@ const SceneComponent = ({ lang, logo, color, model, selectModel }) => {
     console.log('event ', event.target.value)
     setLogoPosition(event.target.value)
   }
+  const handleSwitchChange = (event) => {
+    console.log('Handle switch change ', event.target.checked)
+    setFreePick(event.target.checked);
+  }
 
   return (
     <>
       <FormControl component="fieldset">
         <FormLabel component="legend">Logo position</FormLabel>
+        <FormControlLabel
+          value={freePick}
+          control={<Switch color="primary"/>}
+          label="Free picking"
+          onChange={handleSwitchChange}
+          labelPlacement="end"> 
+        </FormControlLabel>
         <RadioGroup className="PositionRadio" aria-label="positionRadio" name="pos1" value={logoPosition} onChange={handleChange}>
           {createPositionsRadioButtons()}
         </RadioGroup>
