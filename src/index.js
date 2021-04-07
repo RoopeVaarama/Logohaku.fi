@@ -31,8 +31,7 @@ const App = () => {
             if (isItemInCart && isItemPosition) {
                 return prev.map(item =>
                     item.id === id
-                        ? { ...item, amount: item.amount + 1 }
-                        : item.id
+                        ? { ...item, amount: item.amount + 1 } : item
                 );
             }
             //First time adding the item

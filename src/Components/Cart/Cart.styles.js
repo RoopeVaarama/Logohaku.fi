@@ -4,3 +4,5 @@ export const Wrapper = styled.aside`
     width: 500px;
     padding: 20px;
 `;
+
+export const Form = styled.form` width: '100%', marginTop:'1px'`;

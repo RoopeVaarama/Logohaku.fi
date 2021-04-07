@@ -1,23 +1,26 @@
-import React, { useState  } from 'react';
+import React, { useState } from 'react';
 import TextValues from '../../tools/TextValues';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
-import { Wrapper } from './Cart.styles';
+import { Wrapper, Form } from './Cart.styles';
 import CartItem from '../CartItem/CartItem';
-import { Button, FormControl, Input, InputLabel, FormHelperText } from '@material-ui/core';
+import { Button, Input } from '@material-ui/core';
+import emailjs from 'emailjs-com';
 
 const Cart = ({ cartItems, addToCart, removeFromCart, closeCart }) => {
-    console.log(cartItems)
-    const [value, setValue] = useState(""),
-        onInput = ({ target: { value } }) => setValue(value),
-        submitForm = e => {
-            if (value !== "") {
-                console.log("value ", value)
-                setValue()
-                //history.push('/tulokset/' + value);
-            } else {
-                e.preventDefault();
-            }
-        }
+
+    const handleOrder = (e) => {
+        e.preventDefault();
+        console.log(e)
+        
+        console.log(cartItems, e.target, e.target.cartItems.value)
+        /*emailjs.sendForm('service_l6d267z', '123456789', e.target, 'user_i5c9QI8T9mTXPfuiGqjqM')
+            .then((result) => {
+                console.log(result.text);
+            }, (error) => {
+                console.log(error.text);
+            });
+*/
+    }
     return (
         <Wrapper>
             <h1>Your Shopping Cart</h1>
@@ -33,55 +36,30 @@ const Cart = ({ cartItems, addToCart, removeFromCart, closeCart }) => {
                 </CartItem>
             ))}
             {cartItems.length > 0 ?
-                <div>
-                    <FormControl>
-                        <InputLabel htmlFor="my-input">First Name</InputLabel>
-                        <Input id="my-input" aria-describedby="my-helper-text" />
-                        <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText>
-                    </FormControl>
-                    <FormControl>
-                        <InputLabel htmlFor="my-input">Last Name</InputLabel>
-                        <Input id="my-input" aria-describedby="my-helper-text" />
+                <div style={{width: '100%', alignItems: 'center', padding: '5px'}}>
+                    <Form style={{alignItems: 'center'}} onSubmit={handleOrder}>
+                        <Input style={{width: '100%', paddingTop: '10px'}} variant="outlined" type="text" placeholder="First Name" required name="first_name" />
 
-                    </FormControl>
-                    <FormControl>
-                        <InputLabel htmlFor="my-input">Email address</InputLabel>
-                        <Input id="my-input" aria-describedby="my-helper-text" />
+                        <Input variant="outlined" style={{width: '100%', paddingTop: '10px'}} type="text" placeholder="Last Name" name="last_name" />
 
-                    </FormControl>
-                    <FormControl>
-                        <InputLabel htmlFor="my-input">Company name</InputLabel>
-                        <Input id="my-input" aria-describedby="my-helper-text" />
+                        <Input style={{width: '100%', paddingTop: '10px'}} type="email" placeholder="Email Address" name="email_address" />
 
-                    </FormControl>
-                    <FormControl>
-                        <InputLabel htmlFor="my-input">Shipping adress</InputLabel>
-                        <Input id="my-input" aria-describedby="my-helper-text" />
+                        <Input style={{width: '100%', paddingTop: '10px'}} type="text" placeholder="Company Name" name="company_name" />
 
-                    </FormControl>
-                    <FormControl>
-                        <InputLabel htmlFor="my-input">Postcode</InputLabel>
-                        <Input id="my-input" aria-describedby="my-helper-text" />
+                        <Input style={{width: '100%', paddingTop: '10px'}} type="text" placeholder="Shipping Address" name="shipping_address" />
 
-                    </FormControl>
-                    <FormControl>
-                        <InputLabel htmlFor="my-input">Phone number</InputLabel>
-                        <Input id="my-input" aria-describedby="my-helper-text" />
+                        <Input style={{width: '100%', paddingTop: '10px'}} type="number" placeholder="Postcode" name="postcode" />
 
-                    </FormControl>
+                        <Input style={{width: '100%', paddingTop: '10px'}} type="text" placeholder="Phone Number" name="phone_number" />
 
-                    <FormControl>
-                        <InputLabel htmlFor="my-input">Additional information</InputLabel>
-                        <Input id="my-input" aria-describedby="my-helper-text" />
+                        <Input multiline rows={4}  style={{width: '100%', paddingTop: '10px'}} type="text" placeholder="Additional Information" name="additional_information" />
 
-                    </FormControl>
+                        <Button style={{width: '100%', padding: '10px'}} variant="contained" type="submit"> Order
+                        </Button>
+                    </Form>
+                    
 
-                    <Button
-                        size="large"
-                        variant="contained"
-                        onClick={closeCart}>
-                        Order
-            </Button>
+
                 </div> : null}
 
         </Wrapper >
