@@ -17,3 +17,5 @@ padding: 2%;
 export const Title = styled.h1``;
 
 export const Title2 = styled.h2``;
+
+export const Form = styled.form` width: '100%', marginTop:'1px'`;

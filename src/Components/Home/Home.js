@@ -1,29 +1,14 @@
 import React, { useState } from 'react';
 import TextValues from '../../tools/TextValues';
 import { Link, useHistory } from 'react-router-dom';
-import { Col, InputGroup, FormControl, Form } from 'react-bootstrap';
-import { Button, Grid, Card, CardContent, /*FormControl,*/ Input, InputLabel, FormHelperText } from '@material-ui/core';
-import { Wrapper, HomeDiv, Title, Title2 } from './Home.styles';
+import { Button, Grid, CardContent, Input } from '@material-ui/core';
+import { Wrapper, HomeDiv, Title, Title2, Form } from './Home.styles';
 
 
-/*<Grid
-                        item
-                        xs={10}>
-                        <FormControl>
-                            <InputLabel htmlFor="my-input">First Name</InputLabel>
-                            <Input id="my-input" aria-describedby="my-helper-text" />
-                            <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText>
-                        </FormControl>
-                    </Grid>
-                    <Grid
-                        item
-                        xs={2}>
-                        <Button variant="outline-dark" type="submit"> Search
-                            </Button>
-                    </Grid>*/
 const Home = ({ lang }) => {
     const history = useHistory();
     console.log('Language: ', lang);
+
 
 
     const [value, setValue] = useState(""),
@@ -44,34 +29,25 @@ const Home = ({ lang }) => {
                 <Title>Liikelahjakuvasto</Title>
                 <p>-----------------</p>
                 <p>Räätälöitynä yrityksellesi</p>
-                <Grid
-                    container
-                    direction="row"
-                    justify="space-between"
-                    alignItems="center"
-                    spacing={2}
-                >
-                    <Col sm={10}>
+                <Form style={{ alignItems: 'center' }} onSubmit={submitForm}>
+                    <Grid container
+                        direction="row"
+                    >
+                        <Grid item xs={10}>
+                            <Input style={{ width: '100%', paddingTop: '10px' }} variant="outlined" id="name"
+                                placeholder="Company Name"
+                                aria-label="Company Name"
+                                aria-describedby="basic-addon1"
+                                onChange={onInput}
+                                value={value} />
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Button style={{ width: '100%', padding: '10px' }} variant="contained" type="submit"> Search
+                        </Button>
+                        </Grid>
 
-                        <Form onSubmit={submitForm}>
-                            <InputGroup className="mb-3">
-                                <FormControl
-                                    id="name"
-                                    style={{ width: "80%" }}
-                                    placeholder="Company Name"
-                                    aria-label="Company Name"
-                                    aria-describedby="basic-addon1"
-                                    onChange={onInput}
-                                    value={value}
-                                />
-                                <InputGroup.Append>
-                                    <Button variant="outline-dark" type="submit"> Search
-                            </Button>
-                                </InputGroup.Append>
-                            </InputGroup>
-                        </Form>
-                    </Col>
-                </Grid>
+                    </Grid>
+                </Form>
             </Wrapper>
             <Wrapper>
                 <CardContent>
@@ -116,8 +92,6 @@ const Home = ({ lang }) => {
                 <CardContent>
                     <Title2>Yhteystiedot</Title2>
                     <p>Tekstiä...</p>
-
-
                 </CardContent>
             </Wrapper>
         </HomeDiv>
