@@ -30,9 +30,11 @@ const Home = ({ lang }) => {
         onInput = ({ target: { value } }) => setValue(value),
         submitForm = e => {
             if (value !== "") {
-                console.log("value ", value)
-                setValue()
-                history.push('/tulokset/' + value);
+                if (value == "metropolia" || value == "paisto" || value == "vanno") {
+                    console.log("value ", value)
+                    setValue()
+                    history.push('/tulokset/' + value);
+                }
             } else {
                 e.preventDefault();
             }
