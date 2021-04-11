@@ -42,7 +42,10 @@
 }
 .LogoPickerAdd {
 }
-
+.LogoEditIconBtn {
+    right: 0px;
+    bottom: 0px;
+}
 
 
 .PreviewerWindow {
@@ -70,6 +73,7 @@
     flex-basis: 80%;
     
 }
+
 Canvas {
     width: 100%;
     height: 100%;
