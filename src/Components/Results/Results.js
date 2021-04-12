@@ -23,6 +23,9 @@ import {
   metropoliaBaseResponse,
   vannoBaseResponse,
 } from "../../tools/ExampleResponses";
+import EditLogoDialog from '../PickerDialog/EditLogoDialog';
+import EditColorDialog from '../PickerDialog/EditColorDialog';
+import NewLogoDialog from '../PickerDialog/NewLogoDialog';
 
 /**
  * Contains the Babylon.js code for rendering the 3D preview window on the results page.
@@ -63,6 +66,7 @@ const Results = ({ lang, handleAddToCart }) => {
   // UI component states
   const [logoPickerDialogOpen, setLogoPickerDialogOpen] = useState(false);
   const [colorPickerDialogOpen, setColorPickerDialogOpen] = useState(false);
+  const [newLogoPickerDialogOpen, setNewLogoPickerDialogOpen] = useState(false);
   const [productsList, setProductsList] = useState(true);
   const [presetsList, setPresetsList] = useState(true);
   const [presetPosition, setPresetPosition] = useState(1);
@@ -267,6 +271,18 @@ const Results = ({ lang, handleAddToCart }) => {
     setLogos(newLogos);
     setLogoPickerDialogOpen(false);
   };
+
+  const handleCloseNewLogo = (value, index) => {
+    console.log('HandleCLoseNewLogo ', value, index);
+    const newLogos = logos;
+    newLogos.push({
+      image: value,
+      colors: []
+    })
+    setLogos(newLogos);
+    setNewLogoPickerDialogOpen(false);
+  }
+
   const handleCloseColors = (value) => {
     setColorPickerDialogOpen(false);
   };
@@ -278,15 +294,20 @@ const Results = ({ lang, handleAddToCart }) => {
         <tbody>
           <tr>
             {mapLogos()}
-            <PickerDialog
+            <EditLogoDialog
               selectedValue={selectedEditableLogo}
               open={logoPickerDialogOpen}
               onClose={handleCloseLogos}
               ytunnus={response.code}
-              mode='logo'
             />
             <td>
-              <Button className="LogoPickerButton">+</Button>
+              <Button className="LogoPickerButton" onClick={() => setNewLogoPickerDialogOpen(true)}>+</Button>
+              <NewLogoDialog
+              selectedValue={response.files}
+              open={newLogoPickerDialogOpen}
+              onClose={handleCloseNewLogo}
+              ytunnus={response.code}
+            />
             </td>
           </tr>
         </tbody>
@@ -295,12 +316,11 @@ const Results = ({ lang, handleAddToCart }) => {
         <tbody>
           <tr>
             {mapColors()}
-            <PickerDialog
+            <EditColorDialog
               selectedValue={selectedEditableColor}
               open={colorPickerDialogOpen}
               onClose={handleCloseColors}
               ytunnus={response.code}
-              mode='color'
             />
             <td>
               <Button className="LogoPickerItem">+</Button>

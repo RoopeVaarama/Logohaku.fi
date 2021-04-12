@@ -18,7 +18,7 @@ const baseUrl = "https://api.logohaku.fi/logoversion?version="
 
 const PickerDialog = (props) => {
     const { onClose, selectedValue, open, ytunnus, mode} = props;
-    console.log('SelectedValue ', selectedValue, ytunnus);
+    console.log('SelectedValue ', selectedValue, ytunnus, mode);
     const testLogos = {
       "logo1": "0b.png",
       "logo2": "0b.png",
@@ -66,6 +66,11 @@ const PickerDialog = (props) => {
       onClose(value, index);
     };
 
+    const handleListItemClickNew = (value, index) => {
+      console.log('New item received in pickedialog ', value, index);
+      onClose(value, index);
+    }
+
     const createGridItems = () => {
       if (mode === 'logo' && selectedValue !== null) {
         const urls = []
@@ -77,7 +82,7 @@ const PickerDialog = (props) => {
           urls.push(fullUrl);
         }
         return urls.map((item) => (
-          <Grid key={item[0]} item xs={3}>
+          <Grid key={item[0] + ytunnus + mode} item xs={3}>
             <Paper className={item[0]}>
               <Image src={item} className="img-fluid" onClick={() => handleListItemClick(item, selectedValue[1])}/>
             </Paper>
@@ -87,9 +92,23 @@ const PickerDialog = (props) => {
         const logoArray = Object.entries(testLogos)
         console.log(logoArray);
         return logoArray.map((item) => (
-          <Grid key={item[0]} item xs={3}>
+          <Grid key={item[0] + ytunnus + mode} item xs={3}>
             <Paper className={item[0]}>
               <Image src={"/" + item[1]} className="img-fluid" />
+            </Paper>
+          </Grid>
+        ))
+      } else if (mode === 'newLogo' && selectedValue !== null) {
+        const urls = [];
+        const baseUrl = "https://api.logohaku.fi/data/" + ytunnus + "/"
+        for (var x=0; x<selectedValue.length; x++) {
+          const fullUrl = baseUrl + selectedValue[i];
+          urls.push(fullUrl);
+        }
+        return urls.map((item, index) => (
+          <Grid key={item + ytunnus + mode} item xs={3}>
+            <Paper>
+              <Image src={item} className="img-fluid" onClick={() => handleListItemClickNew(item, index)}/>
             </Paper>
           </Grid>
         ))
@@ -97,7 +116,7 @@ const PickerDialog = (props) => {
     };
   
     return (
-      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} className="Dialog" fullwidth>
+      <Dialog onClose={handleClose} aria-labelledby={"customized-dialog-title" + mode} open={open} className="Dialog" fullwidth>
         <DialogTitle id="customized-dialog-title" className="DialogTitle" >Customize your logo</DialogTitle>
           <DialogContent dividers>
             <Grid container className="PickerGrid" spacing={2}>

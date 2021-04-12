@@ -20,7 +20,7 @@ export const paistoBaseResponse = {
   ],
   visible: [
     {
-      image: "https://api.logohaku.fi/data/2094551-1/0b.png",
+      image: "https://api.logohaku.fi/data/2811867-6/0b.png",
       colors: [
         {
           hex: "#00000",
@@ -29,7 +29,7 @@ export const paistoBaseResponse = {
       ]
     },
     {
-      image: "https://api.logohaku.fi/data/2094551-1/0c.svg",
+      image: "https://api.logohaku.fi/data/2811867-6/0c.svg",
       colors: [
         {
           hex: "#00000",
@@ -38,7 +38,7 @@ export const paistoBaseResponse = {
       ]
     },
     {
-      image: "https://api.logohaku.fi/data/2094551-1/4d.png",
+      image: "https://api.logohaku.fi/data/2811867-6/4d.png",
       colors: [
         {
           hex: "#00000",
@@ -145,7 +145,7 @@ export const vannoBaseResponse = {
   },
   visible: [
     {
-      image: "https://api.logohaku.fi/data/2094551-1/0ct.png",
+      image: "https://api.logohaku.fi/data/2567979-3/0ct.png",
       colors: [
         {
           hex: "#50c8f0",
@@ -162,7 +162,7 @@ export const vannoBaseResponse = {
       ]
     },
     {
-      image: "https://api.logohaku.fi/data/2094551-1/0ci.png",
+      image: "https://api.logohaku.fi/data/2567979-3/0ci.png",
       colors: [
         {
           hex: "#00000",
@@ -171,7 +171,7 @@ export const vannoBaseResponse = {
       ]
     },
     {
-      image: "https://api.logohaku.fi/data/2094551-1/1593084640.png",
+      image: "https://api.logohaku.fi/data/2567979-3/1593084640.png",
       colors: [
         {
           hex: "#f0f0f0",
