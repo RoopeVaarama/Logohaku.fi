@@ -18,17 +18,35 @@ export const paistoBaseResponse = {
     "1588104165.png",
     "1588104219.png",
   ],
-  visible: {
-    "0b.png": {
-      "#000000": "0",
+  visible: [
+    {
+      image: "https://api.logohaku.fi/data/2094551-1/0b.png",
+      colors: [
+        {
+          hex: "#00000",
+          amount: "0"
+        }
+      ]
     },
-    "0c.svg": {
-      "#000000": "0",
+    {
+      image: "https://api.logohaku.fi/data/2094551-1/0c.svg",
+      colors: [
+        {
+          hex: "#00000",
+          amount: "0"
+        }
+      ]
     },
-    "4d.png": {
-      "#000000": "0",
-    },
-  },
+    {
+      image: "https://api.logohaku.fi/data/2094551-1/4d.png",
+      colors: [
+        {
+          hex: "#00000",
+          amount: "0"
+        }
+      ]
+    }
+  ],
   thumb: true,
   colors: ["#E2602F", "#000000", "#50F028"],
   palette: [
@@ -52,11 +70,51 @@ export const metropoliaBaseResponse = {
   url: "metropolia.fi",
   original: "Metropolia Ammattikorkeakoulu Oy",
   files: ["0b.png", "0c.png", "1b.jpg", "2b.png", "3b.png", "3d.png", "4d.png"],
-  visible: {
-    "1615188404.png": { "#f00000": "13", "#f0f000": "3", "#f02800": "1" },
-    "3b.png": { "#000000": "0" },
-    "1617363718.png": { "#f00000": "14", "#f0f000": "3", "#f07800": "0" },
-  },
+  visible: [
+    {
+      image: "https://api.logohaku.fi/data/2094551-1/1615188404.png",
+      colors: [
+        {
+          hex: "#f00000",
+          amount: "13"
+        },
+        {
+          hex: "#f0f000",
+          amount: "3"
+        },
+        {
+          hex: "#f02800",
+          amount: "1"
+        }
+      ]
+    },
+    {
+      image: "https://api.logohaku.fi/data/2094551-1/3b.png",
+      colors: [
+        {
+          hex: "#00000",
+          amount: "0"
+        }
+      ]
+    },
+    {
+      image: "https://api.logohaku.fi/data/2094551-1/1617363718.png",
+      colors: [
+        {
+          hex: "#f00000",
+          amount: "14"
+        },
+        {
+          hex: "#f0f000",
+          amount: "3"
+        },
+        {
+          hex: "#f02800",
+          amount: "0"
+        }
+      ]
+    }
+  ],
   thumb: null,
   colors: ["#F07800", "#F0C800", "#F0A000"],
   palette: [
@@ -85,6 +143,43 @@ export const vannoBaseResponse = {
     "0ci.png": { "#000000": "44" },
     "1593084640.png": { "#f0f0f0": "44" },
   },
+  visible: [
+    {
+      image: "https://api.logohaku.fi/data/2094551-1/0ct.png",
+      colors: [
+        {
+          hex: "#50c8f0",
+          amount: "43"
+        },
+        {
+          hex: "#c8f0f0",
+          amount: "1"
+        },
+        {
+          hex: "#78c8f0",
+          amount: "0"
+        }
+      ]
+    },
+    {
+      image: "https://api.logohaku.fi/data/2094551-1/0ci.png",
+      colors: [
+        {
+          hex: "#00000",
+          amount: "44"
+        }
+      ]
+    },
+    {
+      image: "https://api.logohaku.fi/data/2094551-1/1593084640.png",
+      colors: [
+        {
+          hex: "#f0f0f0",
+          amount: "44"
+        }
+      ]
+    }
+  ],
   thumb: true,
   colors: ["#50c8f0", "#FFFFFF", "#252525"],
   palette: [

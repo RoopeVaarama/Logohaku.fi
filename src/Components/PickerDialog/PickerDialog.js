@@ -70,7 +70,9 @@ const PickerDialog = (props) => {
       if (mode === 'logo' && selectedValue !== null) {
         const urls = []
         for (var i=1; i<=9;i++) {
-          const fullUrl = baseUrl + i + "&code=" + ytunnus + "&file=" + selectedValue[0][0]
+          const splitValue = selectedValue[0].split("/").pop()
+          console.log('split value ', splitValue)
+          const fullUrl = baseUrl + i + "&code=" + ytunnus + "&file=" + splitValue
           console.log('Full url: ', fullUrl)
           urls.push(fullUrl);
         }

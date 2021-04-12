@@ -120,7 +120,7 @@ const Results = ({ lang, handleAddToCart }) => {
     const imageUrl = baseUrl + response.code + "/"
     console.log('Imageurl ',imageUrl);
     setImageURL(imageUrl);
-    setSelectedLogo(imageUrl + Object.keys(logos)[0]);
+    setSelectedLogo(logos[0].image);
     setSelectedColor(colors[0]);
     /*postCompany('https://api.logohaku.fi/get', id)
     .then(data => {
@@ -186,22 +186,22 @@ const Results = ({ lang, handleAddToCart }) => {
   }
 
   const mapLogos = () => {
-    const logoArray = Object.entries(logos);
+    const logoArray = logos
     console.log("Logo Arrays ", logoArray);
     console.log('Imageurl ', imageURL);
-    return logoArray.map((image, index) => (
+    return logoArray.map((item, index) => (
       <td className="LogoContainer">
         <Button
           className="LogoPickerImgBtn"
           variant="outline-light"
-          onClick={(e) => print(image, e)}
+          onClick={(e) => print(item.image, e)}
         >
-          <Image src={imageURL + image[0]} fluid className="LogoPickerLogo" />
+          <Image src={item.image} fluid className="LogoPickerLogo" />
           <IconButton
             className="LogoEditIconBtn"
             color="primary"
             aria-label="edit logo"
-            onClick={(e) => handleLogoEdit(image, index)}
+            onClick={(e) => handleLogoEdit(item.image, index)}
           >
             <EditIcon />
           </IconButton>
@@ -257,6 +257,15 @@ const Results = ({ lang, handleAddToCart }) => {
 
   const handleCloseLogos = (value, index) => {
     console.log('Handlecloselogos in results ', value, index)
+    
+    const newLogos = logos;
+    newLogos[index] = {
+      image: value,
+      colors: []
+    }
+    console.log('NEW LOGOS ', newLogos)
+    
+    setLogos(newLogos);
     setLogoPickerDialogOpen(false);
   };
   const handleCloseColors = (value) => {
