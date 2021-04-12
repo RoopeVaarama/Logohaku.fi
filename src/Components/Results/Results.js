@@ -165,9 +165,8 @@ const Results = ({ lang, handleAddToCart }) => {
   };
 
   const print = (img) => {
-    console.log("Seleted logo here", img[0]);
-    const logoWithURL = imageURL + img[0]
-    setSelectedLogo(logoWithURL);
+    console.log("Seleted logo here", img);
+    setSelectedLogo(img);
   };
   const printC = (color) => {
     console.log("SELECTED COLOR ", color);
