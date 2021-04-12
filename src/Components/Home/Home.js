@@ -10,6 +10,12 @@ const Home = ({ lang }) => {
     const history = useHistory();
     console.log('Language: ', lang);
     const { height, width } = useWindowDimensions();
+    let direction = "row"
+    if(width > 850){
+        direction = "row";
+    } else {
+        direction = "column";
+    }
 
 
 
@@ -52,80 +58,47 @@ const Home = ({ lang }) => {
                 <CardContent>
                     <Title2>Miten homma toimii?</Title2>
                     <p>Selaa yrityksellenne räätälöityn kuvaston tuotteista sopivimmat vaihtoehdot ja kysy tarkempaa tarjousta! Kuvaston esimerkkihinnat ovat alv 0%, ja tyypillisesti 1-väripainatuksella tai lasermerkkauksella. Suosittelemme logollenne ja tuotteelle parhaita vaihtoehtoja varsinaisen tarjouksen yhteydessä vuosikymmenten kokemuksella..</p>
-                    {width > 850 ?
+                    <Grid
+                        container
+                        direction={direction}
+                        justify="space-between"
+                        alignItems="center"
+                        spacing={2}>
+
                         <Grid
-                            container
-                            direction="row"
-                            justify="space-between"
-                            alignItems="center"
-                            spacing={2}
+                            item
+                            xs={4}
                         >
-                            <Grid
-                                item
-                                xs={4}
-                            >
 
-                                <Title2>Tarjouspyyntö</Title2>
-                                <p>Valitse kiinnostavat tuotteet sekä niille sopivat logot ja lähetä tarjouspyyntö meille.
+                            <Title2>Tarjouspyyntö</Title2>
+                            <p>Valitse kiinnostavat tuotteet sekä niille sopivat logot ja lähetä tarjouspyyntö meille.
                                 Palaamme soveltuvien merkkaustapojen ja tarjouksen kanssa tyypillisesti 2 arkipäivän sisällä.</p>
-                            </Grid>
-                            <Grid
-                                item
-                                xs={4}>
-                                <Title2>Vedos</Title2>
-                                <p>Lähetämme tehtaan sähköisen vedoksen hyväksyttäväksi tyypillisesti 2 arkipäivän sisällä.
-                                Kuvastossa esitettyjen tuotteiden ja painatusten värit voivat poiketa todellisesta.</p>
-                            </Grid>
-                            <Grid
-                                item
-                                xs={4}>
-                                <Title2>Toimitus</Title2>
-                                <p>Tyypillinen toimitusaika tuotteille on 2-3 viikkoa tuotteesta ja määrästä riippuen.
-                                Jos kaipaat nopeampaa toimitusta niin mainitse asiasta tarjouspyynnössä.</p>
-                            </Grid>
-
                         </Grid>
-                        : <Grid
-                            container
-                            direction="column"
-                            justify="space-between"
-                            alignItems="center"
-                            spacing={2}
-                        >
-                            <Grid
-                                item
-                                xs={4}
-                            >
+                        <Grid
+                            item
+                            xs={4}>
+                            <Title2>Vedos</Title2>
+                            <p>Lähetämme tehtaan sähköisen vedoksen hyväksyttäväksi tyypillisesti 2 arkipäivän sisällä.
+                                Kuvastossa esitettyjen tuotteiden ja painatusten värit voivat poiketa todellisesta.</p>
+                        </Grid>
+                        <Grid
+                            item
+                            xs={4}>
+                            <Title2>Toimitus</Title2>
+                            <p>Tyypillinen toimitusaika tuotteille on 2-3 viikkoa tuotteesta ja määrästä riippuen.
+                                Jos kaipaat nopeampaa toimitusta niin mainitse asiasta tarjouspyynnössä.</p>
+                        </Grid>
 
-                                <Title2>Tarjouspyyntö</Title2>
-                                <p>Valitse kiinnostavat tuotteet sekä niille sopivat logot ja lähetä tarjouspyyntö meille.
-                            Palaamme soveltuvien merkkaustapojen ja tarjouksen kanssa tyypillisesti 2 arkipäivän sisällä.</p>
-                            </Grid>
-                            <Grid
-                                item
-                                xs={4}>
-                                <Title2>Vedos</Title2>
-                                <p>Lähetämme tehtaan sähköisen vedoksen hyväksyttäväksi tyypillisesti 2 arkipäivän sisällä.
-                            Kuvastossa esitettyjen tuotteiden ja painatusten värit voivat poiketa todellisesta.</p>
-                            </Grid>
-                            <Grid
-                                item
-                                xs={4}>
-                                <Title2>Toimitus</Title2>
-                                <p>Tyypillinen toimitusaika tuotteille on 2-3 viikkoa tuotteesta ja määrästä riippuen.
-                            Jos kaipaat nopeampaa toimitusta niin mainitse asiasta tarjouspyynnössä.</p>
-                            </Grid>
-
-                        </Grid>}
+                    </Grid>
                 </CardContent>
-            </Wrapper>
+            </Wrapper >
             <Wrapper>
                 <CardContent>
                     <Title2>Yhteystiedot</Title2>
                     <p>Tekstiä...</p>
                 </CardContent>
             </Wrapper>
-        </HomeDiv>
+        </HomeDiv >
 
     )
 }
