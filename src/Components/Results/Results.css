@@ -14,13 +14,15 @@
 .LogoContainer:hover {
     background-color: rgba(128, 128, 128, 0);
 }
+.LogoContainer {
+    position: relative;
+}
+
 .LogoPickerImgBtn {
     background-color: transparent;
     border-color: transparent;
 }
 
-.LogoPickerButton {
-}
 .ColorPicker {
     width: 45vw;
     height: 20vh;
@@ -38,13 +40,22 @@
 .ColorContainer:hover {
     background-color: gray;
 }
-.LogoPickerTable {
+
+.EditItemBtn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
-.LogoPickerAdd {
+.DeleteItemBtn {
+    position: absolute;
+    left: 0;
+    top: 0;
 }
-.LogoEditIconBtn {
-    right: 0px;
-    bottom: 0px;
+.ColorPickerItem {
+
+}
+.LogoPickerItem {
+    display: block;
 }
 
 

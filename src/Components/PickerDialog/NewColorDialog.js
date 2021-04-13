@@ -12,9 +12,8 @@ import Box from '@material-ui/core/Box';
 
 const baseUrl = "https://api.logohaku.fi/logoversion?version="
 
-const EditColorDialog = (props) => {
-    const { onClose, selectedValue, palette, open, ytunnus } = props;
-    console.log('SelectedValue ', selectedValue, ytunnus);
+const NewColorDialog = (props) => {
+    const { onClose, palette, open, ytunnus } = props;
 
     /*const response = await fetch(url, {
         method: 'POST',
@@ -42,16 +41,15 @@ const EditColorDialog = (props) => {
       onClose(null);
     };
   
-    const handleListItemClick = (value, index) => {
-      console.log('value ', value, index)
-      onClose(value, index);
+    const handleListItemClick = (value) => {
+      console.log('value ', value)
+      onClose(value);
     };
 
     const createGridItems = () => {
-        console.log('EditColorDialog ', selectedValue)
-        return palette.map((item, index) => (
+        return palette.map((item) => (
           <Grid key={item + ytunnus} item xs={2}>
-              <Box bgcolor={item} p={3} onClick={() => handleListItemClick(item, selectedValue.index)} />
+              <Box bgcolor={item} p={3} onClick={() => handleListItemClick(item)} />
           </Grid>
         ))
     };
@@ -68,4 +66,4 @@ const EditColorDialog = (props) => {
     );
   }
 
-  export default EditColorDialog;
+  export default NewColorDialog;

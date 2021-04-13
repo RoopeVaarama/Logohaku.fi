@@ -36,7 +36,7 @@ const NewLogoDialog = (props) => {
     }*/
   
     const handleClose = () => {
-      onClose(selectedValue);
+      onClose(null);
     };
   
     const handleListItemClick = (value, index) => {

@@ -3,6 +3,7 @@
     top: 0;
     max-height: 70px;
     width: 100vw;
+    z-index: 20;
   
     display: grid;
     grid-template-areas: "logo logo logo logo nav";

@@ -9,8 +9,10 @@ import {
   useParams,
 } from "react-router-dom";
 import "./Results.css";
+import Box from '@material-ui/core/Box';
 import EditIcon from "@material-ui/icons/Edit";
 import IconButton from "@material-ui/core/IconButton";
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import SceneComponent from "../SceneComponent";
 import ProductsList from "../ProductsList/ProductsList";
 import PresetsList from "../PresetsList/PresetsList";
@@ -26,6 +28,8 @@ import {
 import EditLogoDialog from '../PickerDialog/EditLogoDialog';
 import EditColorDialog from '../PickerDialog/EditColorDialog';
 import NewLogoDialog from '../PickerDialog/NewLogoDialog';
+import NewColorDialog from '../PickerDialog/NewColorDialog';
+import {makeStyles} from "@material-ui/core";
 
 /**
  * Contains the Babylon.js code for rendering the 3D preview window on the results page.
@@ -59,6 +63,19 @@ const postCompany = async (url = "", searchTerm = "") => {
 
 const baseUrl = "https://api.logohaku.fi/data/"
 
+const useStyles = makeStyles({
+  pickerIconEdit: {
+    position: 'absolute',
+    right: 0,
+    top: 22
+  },
+  pickerIconRemove: {
+    position: 'absolute',
+    right: 0,
+    top: 0
+  }
+})
+
 const Results = ({ lang, handleAddToCart }) => {
   const { id } = useParams();
   const [imageURL, setImageURL] = useState("");
@@ -67,6 +84,7 @@ const Results = ({ lang, handleAddToCart }) => {
   const [logoPickerDialogOpen, setLogoPickerDialogOpen] = useState(false);
   const [colorPickerDialogOpen, setColorPickerDialogOpen] = useState(false);
   const [newLogoPickerDialogOpen, setNewLogoPickerDialogOpen] = useState(false);
+  const [newColorPickerDialogOpen, setNewColorPickerDialogOpen] = useState(false);
   const [productsList, setProductsList] = useState(true);
   const [presetsList, setPresetsList] = useState(true);
   const [presetPosition, setPresetPosition] = useState(1);
@@ -76,9 +94,15 @@ const Results = ({ lang, handleAddToCart }) => {
   // Brand (color and logo) states
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedEditableLogo, setSelectedEditableLogo] = useState(null);
-  const [selectedEditableColor, setSelectedEditableColor] = useState(null);
+  const [selectedEditableColor, setSelectedEditableColor] = useState({
+    color: "",
+    index: 0
+  });
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedLogo, setSelectedLogo] = useState(null);
+
+  const styles = useStyles();
+
   const [response, setResponse] = useState(() => {
     // Set JSON response based on search parameter (in place of API usage)
     switch (id) {
@@ -182,11 +206,26 @@ const Results = ({ lang, handleAddToCart }) => {
     setSelectedEditableLogo([item, index]);
     setLogoPickerDialogOpen(true);
   };
-  const handleColorEdit = (item) => {
+  const handleColorEdit = (item, index) => {
     console.log('HandleColorEdit ', item);
-    setSelectedEditableColor(item);
+    setSelectedEditableColor({
+      color: item,
+      index: index
+    });
     setColorPickerDialogOpen(true);
   }
+
+  const handleLogoRemove = (index) => {
+    const newLogos = logos;
+    newLogos.splice(index)
+    setLogos(newLogos);
+  };
+
+  const handleColorRemove = (index) => {
+    const newColors = colors;
+    newColors.splice(index);
+    setColors(newColors);
+  };
 
   const mapLogos = () => {
     const logoArray = logos
@@ -199,9 +238,17 @@ const Results = ({ lang, handleAddToCart }) => {
           variant="outline-light"
           onClick={(e) => print(item.image, e)}
         >
-          <Image src={item.image} fluid className="LogoPickerLogo" />
+          <Image src={item.image} fluid className="LogoPickerItem" />
           <IconButton
-            className="LogoEditIconBtn"
+            className={styles.pickerIconRemove}
+            color="primary"
+            aria-label="delete logo"
+            onClick={(e) => handleLogoRemove(index)}
+          >
+            <HighlightOffIcon />
+          </IconButton>
+          <IconButton
+            className={styles.pickerIconEdit}
             color="primary"
             aria-label="edit logo"
             onClick={(e) => handleLogoEdit(item.image, index)}
@@ -215,17 +262,14 @@ const Results = ({ lang, handleAddToCart }) => {
 
   const mapColors = () => {
     console.log("colors: ", colors);
-    return colors.map((color) => (
+    return colors.map((color, index) => (
       <td className="ColorContainer">
         <Button
           className="LogoPickerImgBtn"
           variant="outline-light"
           onClick={(e) => printC(color, e)}
         >
-          <div
-            className="ColorPickerItem"
-            style={{ backgroundColor: color }}
-          >
+            <Box bgcolor={color} p={5} className="ColorPickerItem">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -237,12 +281,20 @@ const Results = ({ lang, handleAddToCart }) => {
               <path d="M8 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm4 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM5.5 7a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm.5 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
               <path d="M16 8c0 3.15-1.866 2.585-3.567 2.07C11.42 9.763 10.465 9.473 10 10c-.603.683-.475 1.819-.351 2.92C9.826 14.495 9.996 16 8 16a8 8 0 1 1 8-8zm-8 7c.611 0 .654-.171.655-.176.078-.146.124-.464.07-1.119-.014-.168-.037-.37-.061-.591-.052-.464-.112-1.005-.118-1.462-.01-.707.083-1.61.704-2.314.369-.417.845-.578 1.272-.618.404-.038.812.026 1.16.104.343.077.702.186 1.025.284l.028.008c.346.105.658.199.953.266.653.148.904.083.991.024C14.717 9.38 15 9.161 15 8a7 7 0 1 0-7 7z" />
             </svg>
-          </div>
+          </Box>
           <IconButton
-            className="LogoEditIconBtn"
+            className={styles.pickerIconRemove}
+            color="primary"
+            aria-label="delete logo"
+            onClick={(e) => handleColorRemove(index)}
+          >
+            <HighlightOffIcon />
+          </IconButton>
+          <IconButton
+            className={styles.pickerIconEdit}
             color="primary"
             aria-label="edit logo"
-            onClick={(e) => handleColorEdit(color)}
+            onClick={(e) => handleColorEdit(color, index)}
           >
             <EditIcon />
           </IconButton>
@@ -261,29 +313,48 @@ const Results = ({ lang, handleAddToCart }) => {
   const handleCloseLogos = (value, index) => {
     console.log('Handlecloselogos in results ', value, index)
     
-    const newLogos = logos;
+    if (value !== null) {
+      const newLogos = logos;
     newLogos[index] = {
       image: value,
       colors: []
     }
     console.log('NEW LOGOS ', newLogos)
-    
     setLogos(newLogos);
+  }
+
     setLogoPickerDialogOpen(false);
   };
 
   const handleCloseNewLogo = (value, index) => {
     console.log('HandleCLoseNewLogo ', value, index);
-    const newLogos = logos;
-    newLogos.push({
-      image: value,
-      colors: []
-    })
-    setLogos(newLogos);
+    if (value !== null) {
+      const newLogos = logos;
+      newLogos.push({
+        image: value,
+        colors: []
+      })
+      setLogos(newLogos);
+  }
     setNewLogoPickerDialogOpen(false);
   }
 
-  const handleCloseColors = (value) => {
+  const handleCloseNewColor = (value) => {
+    if (value !== null) {
+      const newColors = colors;
+      newColors.push(value);
+      setColors(newColors);
+    }
+    setNewColorPickerDialogOpen(false);
+  }
+
+  const handleCloseColors = (value, index) => {
+    console.log('handleclosecolors ', value, index)
+    if (value !== null) {
+      const newColors = colors;
+      newColors[index] = value
+      setColors(newColors);
+    }
     setColorPickerDialogOpen(false);
   };
 
@@ -318,12 +389,19 @@ const Results = ({ lang, handleAddToCart }) => {
             {mapColors()}
             <EditColorDialog
               selectedValue={selectedEditableColor}
+              palette={response.palette}
               open={colorPickerDialogOpen}
               onClose={handleCloseColors}
               ytunnus={response.code}
             />
             <td>
-              <Button className="LogoPickerItem">+</Button>
+              <Button className="LogoPickerItem" onClick={() => setNewColorPickerDialogOpen(true)}>+</Button>
+              <NewColorDialog 
+                palette={response.palette}
+                open={newColorPickerDialogOpen}
+                onClose={handleCloseNewColor}
+                ytunnus={response.code}
+              />
             </td>
           </tr>
         </tbody>
