@@ -39,7 +39,6 @@ import { InputManager } from "@babylonjs/core/Inputs/scene.inputManager";
 import TextValues from "../tools/TextValues";
 import "./SceneComponent.css";
 import { makeStyles } from '@material-ui/core/styles';
-import ScrollLock, { TouchScrollable } from 'react-scrolllock';
 
 const useStyles = makeStyles({
   root: {
@@ -235,55 +234,51 @@ const SceneComponent = ({ lang, logo, color, model, selectModel }) => {
   }
 
   return (
-    <div className="Container">
-      <FormControl component="fieldset" className="PositionController" classes={{ root: classes.root }}>
-        <FormLabel component="legend">Logo position</FormLabel>
-        <FormControlLabel
-          value={freePick}
-          control={<Switch color="primary" />}
-          label="Free picking"
-          onChange={handleSwitchChange}
-          labelPlacement="end">
-        </FormControlLabel>
-        <RadioGroup className="PositionRadio" aria-label="positionRadio" name="pos1" value={logoPosition} onChange={handleChange}>
-          {createPositionsRadioButtons()}
-        </RadioGroup>
-      </FormControl>
-      <ScrollLock>
-        <div>
-          <Engine antialias adaptToDeviceRatio canvasId="PreviewCanvas" className="PreviewCanvas">
-            <Scene onSceneMount={onSceneMount} onPointerPick={onPointerPick} >
-              <arcRotateCamera
-                name="camera1"
-                target={Vector3.Zero()}
-                alpha={Math.PI / 2}
-                beta={Math.PI / 3}
-                radius={10}
-                wheelPrecision={[10]}
-              />
-              <hemisphericLight
-                name="light1"
-                intensity={0.7}
-                direction={Vector3.Up()}
-              />
-              <Suspense fallback={<box position={new Vector3(0, 0, 0)}></box>}>
-                <Model
-                  name={model.NAME}
-                  key={model.NAME}
-                  position={modelPosition}
-                  rootUrl={"../Models/"}
-                  sceneFilename={model.URL}
-                  pluginExtension=".gltf"
-                  scaling={modelSize}
-                  onModelLoaded={onModelLoaded}
-                  onCreated={onModelCreated}
-                ></Model>
-              </Suspense>
-            </Scene>
-          </Engine>
-        </div>
-      </ScrollLock>
-    </div>
+      <div className="Container">
+        <FormControl component="fieldset" className="PositionController" classes={{ root: classes.root }}>
+          <FormLabel component="legend">Logo position</FormLabel>
+          <FormControlLabel
+            value={freePick}
+            control={<Switch color="primary" />}
+            label="Free picking"
+            onChange={handleSwitchChange}
+            labelPlacement="end">
+          </FormControlLabel>
+          <RadioGroup className="PositionRadio" aria-label="positionRadio" name="pos1" value={logoPosition} onChange={handleChange}>
+            {createPositionsRadioButtons()}
+          </RadioGroup>
+        </FormControl>
+        <Engine antialias adaptToDeviceRatio canvasId="PreviewCanvas" className="PreviewCanvas">
+          <Scene onSceneMount={onSceneMount} onPointerPick={onPointerPick} >
+            <arcRotateCamera
+              name="camera1"
+              target={Vector3.Zero()}
+              alpha={Math.PI / 2}
+              beta={Math.PI / 3}
+              radius={10}
+              wheelPrecision={[10]}
+            />
+            <hemisphericLight
+              name="light1"
+              intensity={0.7}
+              direction={Vector3.Up()}
+            />
+            <Suspense fallback={<box position={new Vector3(0, 0, 0)}></box>}>
+              <Model
+                name={model.NAME}
+                key={model.NAME}
+                position={modelPosition}
+                rootUrl={"../Models/"}
+                sceneFilename={model.URL}
+                pluginExtension=".gltf"
+                scaling={modelSize}
+                onModelLoaded={onModelLoaded}
+                onCreated={onModelCreated}
+              ></Model>
+            </Suspense>
+          </Scene>
+        </Engine>
+      </div>
   );
 };
 

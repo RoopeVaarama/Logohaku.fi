@@ -105,6 +105,7 @@ const Results = ({ lang, handleAddToCart }) => {
   const [presetPosition, setPresetPosition] = useState(1);
   const [model, setModel] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [lockScroll, setLockScroll] = useState(false);
 
   // Brand (color and logo) states
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -372,115 +373,124 @@ const Results = ({ lang, handleAddToCart }) => {
     }
     setColorPickerDialogOpen(false);
   };
+  const noScroll = () => {
+    setLockScroll(true)
+  }
+
+  const scroll = () => {
+    setLockScroll(false)
+  }
 
   return (
-    <div>
-      <div className="PickerContainer">
-        <Card className={styles.infoCard}>
-          <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-              {TextValues.logoPickerInfo(lang).title}
-            </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-              {TextValues.logoPickerInfo(lang).info}
-            </Typography>
-          </CardContent>
-        </Card>
-        <Table striped bordered className="LogoPicker">
-          <tbody>
-            <tr>
-              {mapLogos()}
-              <EditLogoDialog
-                selectedValue={selectedEditableLogo}
-                open={logoPickerDialogOpen}
-                onClose={handleCloseLogos}
-                ytunnus={response.code}
-              />
-              <td>
-                <Button className="LogoPickerButton" onClick={() => setNewLogoPickerDialogOpen(true)}>+</Button>
-                <NewLogoDialog
-                selectedValue={response.files}
-                open={newLogoPickerDialogOpen}
-                onClose={handleCloseNewLogo}
-                ytunnus={response.code}
-              />
-              </td>
-            </tr>
-          </tbody>
-        </Table>
-      </div>
-      <div className="PickerContainer">
-        <Card className={styles.infoCard}>
-          <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-              {TextValues.colorPickerInfo(lang).title}
-            </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-              {TextValues.colorPickerInfo(lang).info}
-            </Typography>
-          </CardContent>
-        </Card>
-      <Table striped bordered className="ColorPicker">
-        <tbody>
-          <tr>
-            {mapColors()}
-            <EditColorDialog
-              selectedValue={selectedEditableColor}
-              palette={response.palette}
-              open={colorPickerDialogOpen}
-              onClose={handleCloseColors}
-              ytunnus={response.code}
-            />
-            <td>
-              <Button className="LogoPickerItem" onClick={() => setNewColorPickerDialogOpen(true)}>+</Button>
-              <NewColorDialog
-                palette={response.palette}
-                open={newColorPickerDialogOpen}
-                onClose={handleCloseNewColor}
-                ytunnus={response.code}
-              />
-            </td>
-          </tr>
-        </tbody>
-      </Table>
-      </div>
-      <div style={{ width: '95%' }} className="PreviewerWindow">
-        <div className="ButtonPanel">
-          <Button className="CatalogButton" onClick={toggleProductsList}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="50%"
-              height="50%"
-              fill="currentColor"
-              className="CatalogIcon"
-              viewBox="0 0 16 16"
-            >
-              <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V2zm8.5 0v8H15V2H8.5zm0 9v3H15v-3H8.5zm-1-9H1v3h6.5V2zM1 14h6.5V6H1v8z" />
-            </svg>
-            <div className="CatalogText">{TextValues.catalog(lang)}</div>
-          </Button>
+    <ScrollLock isActive={lockScroll}>
+      <div>
+        <div className="PickerContainer">
+          <Card className={styles.infoCard}>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                {TextValues.logoPickerInfo(lang).title}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {TextValues.logoPickerInfo(lang).info}
+              </Typography>
+            </CardContent>
+          </Card>
+          <Table striped bordered className="LogoPicker">
+            <tbody>
+              <tr>
+                {mapLogos()}
+                <EditLogoDialog
+                  selectedValue={selectedEditableLogo}
+                  open={logoPickerDialogOpen}
+                  onClose={handleCloseLogos}
+                  ytunnus={response.code}
+                />
+                <td>
+                  <Button className="LogoPickerButton" onClick={() => setNewLogoPickerDialogOpen(true)}>+</Button>
+                  <NewLogoDialog
+                    selectedValue={response.files}
+                    open={newLogoPickerDialogOpen}
+                    onClose={handleCloseNewLogo}
+                    ytunnus={response.code}
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </Table>
         </div>
-        <div className="Products" hidden={productsList}>
-          <ProductsList
-            productsObjects={productsObjects}
-            selectProduct={selectProduct}
-          ></ProductsList>
+        <div className="PickerContainer">
+          <Card className={styles.infoCard}>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                {TextValues.colorPickerInfo(lang).title}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {TextValues.colorPickerInfo(lang).info}
+              </Typography>
+            </CardContent>
+          </Card>
+          <Table striped bordered className="ColorPicker">
+            <tbody>
+              <tr>
+                {mapColors()}
+                <EditColorDialog
+                  selectedValue={selectedEditableColor}
+                  palette={response.palette}
+                  open={colorPickerDialogOpen}
+                  onClose={handleCloseColors}
+                  ytunnus={response.code}
+                />
+                <td>
+                  <Button className="LogoPickerItem" onClick={() => setNewColorPickerDialogOpen(true)}>+</Button>
+                  <NewColorDialog
+                    palette={response.palette}
+                    open={newColorPickerDialogOpen}
+                    onClose={handleCloseNewColor}
+                    ytunnus={response.code}
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </Table>
         </div>
-        <SceneComponent
-          lang={lang}
-          logo={selectedLogo}
-          color={selectedColor}
-          model={
-            selectedProduct
-              ? Object.values(selectedProduct)[0]
-              : productsObjects.TSHIRT
-          }
-          selectModel={selectModel}
-        />
-        <button onClick={() => addToCart()}>Add to cart</button>
+        <div onMouseOver={noScroll} onMouseLeave={scroll} style={{ width: '95%' }} className="PreviewerWindow">
+          <div className="ButtonPanel">
+            <Button className="CatalogButton" onClick={toggleProductsList}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="50%"
+                height="50%"
+                fill="currentColor"
+                className="CatalogIcon"
+                viewBox="0 0 16 16"
+              >
+                <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V2zm8.5 0v8H15V2H8.5zm0 9v3H15v-3H8.5zm-1-9H1v3h6.5V2zM1 14h6.5V6H1v8z" />
+              </svg>
+              <div className="CatalogText">{TextValues.catalog(lang)}</div>
+            </Button>
+          </div>
+          <div className="Products" hidden={productsList}>
+            <ProductsList
+              productsObjects={productsObjects}
+              selectProduct={selectProduct}
+            ></ProductsList>
+          </div>
+          <SceneComponent
+            lang={lang}
+            logo={selectedLogo}
+            color={selectedColor}
+            model={
+              selectedProduct
+                ? Object.values(selectedProduct)[0]
+                : productsObjects.TSHIRT
+            }
+            selectModel={selectModel}
+          />
+          <button onClick={() => addToCart()}>Add to cart</button>
+        </div>
+        <div className="PlaceholderDiv"></div>
       </div>
-      <div className="PlaceholderDiv"></div>
-    </div>
+    </ScrollLock>
   );
 };
 
