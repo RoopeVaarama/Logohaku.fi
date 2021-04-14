@@ -1,6 +1,7 @@
 .ProductsList {
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: row wrap;
 }
 .ProductCard {
+    flex-basis: 50%
 }
