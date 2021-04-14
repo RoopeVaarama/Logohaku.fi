@@ -39,6 +39,7 @@ import { InputManager } from "@babylonjs/core/Inputs/scene.inputManager";
 import TextValues from "../tools/TextValues";
 import "./SceneComponent.css";
 import { makeStyles } from '@material-ui/core/styles';
+import ScrollLock, { TouchScrollable } from 'react-scrolllock';
 
 const useStyles = makeStyles({
   root: {
@@ -133,9 +134,9 @@ const SceneComponent = ({ lang, logo, color, model, selectModel }) => {
           });
           decal.material = decalMaterial;
           setDecal(decal);
-          }
+        }
       }
-      
+
     }
   }, [logoPosition]);
 
@@ -196,10 +197,10 @@ const SceneComponent = ({ lang, logo, color, model, selectModel }) => {
         const mesh = pickInfo.pickedMesh;
         console.log('PickInfo ', pickInfo.pickedPoint)
         if (pickInfo.pickedPoint !== null) {
-          const meshObj = "POSITION_VECTOR: ["+pickInfo.pickedPoint.x+","+pickInfo.pickedPoint.y+","+pickInfo.pickedPoint.z+"],\n"+"NORMAL_VECTOR: ["+pickInfo.getNormal(true).x+","+pickInfo.getNormal(true).y+","+pickInfo.getNormal(true).z+"],"
+          const meshObj = "POSITION_VECTOR: [" + pickInfo.pickedPoint.x + "," + pickInfo.pickedPoint.y + "," + pickInfo.pickedPoint.z + "],\n" + "NORMAL_VECTOR: [" + pickInfo.getNormal(true).x + "," + pickInfo.getNormal(true).y + "," + pickInfo.getNormal(true).z + "],"
           console.log(meshObj);
         }
-        console.log("PickInfo " + pickInfo.pickedPoint + pickInfo.getNormal(true) +  "mesh " + mesh);
+        console.log("PickInfo " + pickInfo.pickedPoint + pickInfo.getNormal(true) + "mesh " + mesh);
         const decalSize = new Vector3(model.LOGO_SIZE, model.LOGO_SIZE, model.LOGO_SIZE);
         const decalRotation = model.LOGO_ROTATION;
 
@@ -220,8 +221,8 @@ const SceneComponent = ({ lang, logo, color, model, selectModel }) => {
     const logoPositionsArray = Object.entries(model.LOGO_POSITIONS);
     console.log(logoPositionsArray);
     return logoPositionsArray.map((position) => (
-      <FormControlLabel className="RadioButton" disabled={freePick} value={JSON.stringify(position[1])} control={<Radio/>} label={position[1].NAME}></FormControlLabel>
-    )) 
+      <FormControlLabel className="RadioButton" disabled={freePick} value={JSON.stringify(position[1])} control={<Radio />} label={position[1].NAME}></FormControlLabel>
+    ))
   }
 
   const handleChange = (event) => {
@@ -235,49 +236,53 @@ const SceneComponent = ({ lang, logo, color, model, selectModel }) => {
 
   return (
     <div className="Container">
-      <FormControl component="fieldset" className="PositionController" classes={{root: classes.root}}>
+      <FormControl component="fieldset" className="PositionController" classes={{ root: classes.root }}>
         <FormLabel component="legend">Logo position</FormLabel>
         <FormControlLabel
           value={freePick}
-          control={<Switch color="primary"/>}
+          control={<Switch color="primary" />}
           label="Free picking"
           onChange={handleSwitchChange}
-          labelPlacement="end"> 
+          labelPlacement="end">
         </FormControlLabel>
         <RadioGroup className="PositionRadio" aria-label="positionRadio" name="pos1" value={logoPosition} onChange={handleChange}>
           {createPositionsRadioButtons()}
         </RadioGroup>
       </FormControl>
-      <Engine antialias adaptToDeviceRatio canvasId="PreviewCanvas" className="PreviewCanvas">
-        <Scene onSceneMount={onSceneMount} onPointerPick={onPointerPick} >
-          <arcRotateCamera
-            name="camera1"
-            target={Vector3.Zero()}
-            alpha={Math.PI / 2}
-            beta={Math.PI / 3}
-            radius={10}
-            wheelPrecision={[10]}
-          />
-          <hemisphericLight
-            name="light1"
-            intensity={0.7}
-            direction={Vector3.Up()}
-          />
-          <Suspense fallback={<box position={new Vector3(0, 0, 0)}></box>}>
-            <Model
-              name={model.NAME}
-              key={model.NAME}
-              position={modelPosition}
-              rootUrl={"../Models/"}
-              sceneFilename={model.URL}
-              pluginExtension=".gltf"
-              scaling={modelSize}
-              onModelLoaded={onModelLoaded}
-              onCreated={onModelCreated}
-            ></Model>
-          </Suspense>
-        </Scene>
-      </Engine>
+      <ScrollLock>
+        <div>
+          <Engine antialias adaptToDeviceRatio canvasId="PreviewCanvas" className="PreviewCanvas">
+            <Scene onSceneMount={onSceneMount} onPointerPick={onPointerPick} >
+              <arcRotateCamera
+                name="camera1"
+                target={Vector3.Zero()}
+                alpha={Math.PI / 2}
+                beta={Math.PI / 3}
+                radius={10}
+                wheelPrecision={[10]}
+              />
+              <hemisphericLight
+                name="light1"
+                intensity={0.7}
+                direction={Vector3.Up()}
+              />
+              <Suspense fallback={<box position={new Vector3(0, 0, 0)}></box>}>
+                <Model
+                  name={model.NAME}
+                  key={model.NAME}
+                  position={modelPosition}
+                  rootUrl={"../Models/"}
+                  sceneFilename={model.URL}
+                  pluginExtension=".gltf"
+                  scaling={modelSize}
+                  onModelLoaded={onModelLoaded}
+                  onCreated={onModelCreated}
+                ></Model>
+              </Suspense>
+            </Scene>
+          </Engine>
+        </div>
+      </ScrollLock>
     </div>
   );
 };

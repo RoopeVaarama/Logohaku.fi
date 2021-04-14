@@ -29,7 +29,8 @@ import EditLogoDialog from '../PickerDialog/EditLogoDialog';
 import EditColorDialog from '../PickerDialog/EditColorDialog';
 import NewLogoDialog from '../PickerDialog/NewLogoDialog';
 import NewColorDialog from '../PickerDialog/NewColorDialog';
-import {makeStyles} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
+import ScrollLock, { TouchScrollable } from 'react-scrolllock';
 
 /**
  * Contains the Babylon.js code for rendering the 3D preview window on the results page.
@@ -146,7 +147,7 @@ const Results = ({ lang, handleAddToCart }) => {
   useEffect(() => {
     console.log("Responses here! ", response);
     const imageUrl = baseUrl + response.code + "/"
-    console.log('Imageurl ',imageUrl);
+    console.log('Imageurl ', imageUrl);
     setImageURL(imageUrl);
     setSelectedLogo(logos[0].image);
     setSelectedColor(colors[0]);
@@ -269,7 +270,7 @@ const Results = ({ lang, handleAddToCart }) => {
           variant="outline-light"
           onClick={(e) => printC(color, e)}
         >
-            <Box bgcolor={color} p={5} className="ColorPickerItem">
+          <Box bgcolor={color} p={5} className="ColorPickerItem">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -312,16 +313,16 @@ const Results = ({ lang, handleAddToCart }) => {
 
   const handleCloseLogos = (value, index) => {
     console.log('Handlecloselogos in results ', value, index)
-    
+
     if (value !== null) {
       const newLogos = logos;
-    newLogos[index] = {
-      image: value,
-      colors: []
+      newLogos[index] = {
+        image: value,
+        colors: []
+      }
+      console.log('NEW LOGOS ', newLogos)
+      setLogos(newLogos);
     }
-    console.log('NEW LOGOS ', newLogos)
-    setLogos(newLogos);
-  }
 
     setLogoPickerDialogOpen(false);
   };
@@ -335,7 +336,7 @@ const Results = ({ lang, handleAddToCart }) => {
         colors: []
       })
       setLogos(newLogos);
-  }
+    }
     setNewLogoPickerDialogOpen(false);
   }
 
@@ -359,9 +360,8 @@ const Results = ({ lang, handleAddToCart }) => {
   };
 
   return (
-    <div>
-      <h1>{TextValues.results(lang)}</h1>
-      <Table striped bordered className="LogoPicker">
+    <div style={{ width: '100%' }}>
+      <Table style={{ width: '95%' }} striped bordered className="LogoPicker">
         <tbody>
           <tr>
             {mapLogos()}
@@ -374,16 +374,16 @@ const Results = ({ lang, handleAddToCart }) => {
             <td>
               <Button className="LogoPickerButton" onClick={() => setNewLogoPickerDialogOpen(true)}>+</Button>
               <NewLogoDialog
-              selectedValue={response.files}
-              open={newLogoPickerDialogOpen}
-              onClose={handleCloseNewLogo}
-              ytunnus={response.code}
-            />
+                selectedValue={response.files}
+                open={newLogoPickerDialogOpen}
+                onClose={handleCloseNewLogo}
+                ytunnus={response.code}
+              />
             </td>
           </tr>
         </tbody>
       </Table>
-      <Table striped bordered className="ColorPicker">
+      <Table style={{ width: '90%' }} striped bordered className="ColorPicker">
         <tbody>
           <tr>
             {mapColors()}
@@ -396,7 +396,7 @@ const Results = ({ lang, handleAddToCart }) => {
             />
             <td>
               <Button className="LogoPickerItem" onClick={() => setNewColorPickerDialogOpen(true)}>+</Button>
-              <NewColorDialog 
+              <NewColorDialog
                 palette={response.palette}
                 open={newColorPickerDialogOpen}
                 onClose={handleCloseNewColor}
@@ -406,7 +406,7 @@ const Results = ({ lang, handleAddToCart }) => {
           </tr>
         </tbody>
       </Table>
-      <div className="PreviewerWindow">
+      <div style={{ width: '95%' }} className="PreviewerWindow">
         <div className="ButtonPanel">
           <Button className="CatalogButton" onClick={toggleProductsList}>
             <svg
