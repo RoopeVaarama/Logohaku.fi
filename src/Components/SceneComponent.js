@@ -260,8 +260,13 @@ const SceneComponent = ({ lang, logo, color, model, selectModel }) => {
           />
           <hemisphericLight
             name="light1"
-            intensity={0.7}
-            direction={Vector3.Up()}
+            intensity={0.75}
+            direction={new Vector3(-1, 1, 0)}
+          />
+          <hemisphericLight
+            name="light2"
+            intensity={0.75}
+            direction={new Vector3(1, 1, 0)}
           />
           <Suspense fallback={<box position={new Vector3(0, 0, 0)}></box>}>
             <Model

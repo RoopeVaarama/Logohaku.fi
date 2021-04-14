@@ -374,7 +374,6 @@ const Results = ({ lang, handleAddToCart }) => {
 
   return (
     <div>
-      <h1>{TextValues.results(lang)}</h1>
       <div className="PickerContainer">
         <Card className={styles.infoCard}>
           <CardContent>
