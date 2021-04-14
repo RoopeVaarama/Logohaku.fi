@@ -64,6 +64,14 @@ const TextValues = {
                 return "Eng";
         }
     },
+    catalog: function(langcode){
+        switch(langcode) {
+            case "fi":
+                return "Tuotteet";
+            default:
+                return "Products";
+        }
+    },
     tshirt: function(langcode){
         switch (langcode) {
             case "fi":
@@ -200,5 +208,34 @@ const TextValues = {
                     return "Shaft";
             }
         },
+
+    logoPickerInfo: function(langcode){
+        switch (langcode) {
+            case "fi":
+                return {
+                    title: "Yrityksesi logot",
+                    info: "Älykäs logohakualgoritmimme hakee suoraan internetistä yrityksesi logot."
+                };
+            default:
+                return {
+                    title: "Logos of your company",
+                    info: "Our smart logo searching algorithm fetches your company's logos straight from the internet."
+                };
+        }
+    },
+    colorPickerInfo: function(langcode){
+        switch (langcode) {
+            case "fi":
+                return {
+                    title: "Yrityksesi teemavärit",
+                    info: "Logohakualgoritmimme hakee myös suoraan internetistä yrityksesi väriteeman."
+                };
+            default:
+                return {
+                    title: "Color theme of your company",
+                    info: "Our smart logo searching algorithm also fetches your company's color themes."
+                };
+        }
+    }
 }
 export default TextValues;

@@ -65,7 +65,7 @@ const ProductsObjects = ({lang}) => {
             },
             MAX_LOGO_AMOUNT: 2,
             NAME: textValues.tshirt(lang),
-            THUMB: "placeholder thumbnail"
+            THUMB: "tpaita.png"
         },
         MASK: {
             ID: 2,
@@ -105,7 +105,7 @@ const ProductsObjects = ({lang}) => {
             },
             MAX_LOGO_AMOUNT: 2,
             NAME: textValues.mask(lang),
-            THUMB: "placeholder thumbnail"
+            THUMB: "maski.png"
         },
         PEN: {
             ID: 3,
@@ -139,7 +139,7 @@ const ProductsObjects = ({lang}) => {
             },
             MAX_LOGO_AMOUNT: 2,
             NAME: textValues.pen(lang),
-            THUMB: "placeholder thumbnail"
+            THUMB: "kyna.png"
         }}
 
     return products
