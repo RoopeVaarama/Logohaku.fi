@@ -5,6 +5,7 @@
     justify-content: center;
     width: 90vw;
     margin-bottom: 16px;
+    height: inherit;
 }
 .LogoPicker {
     table-layout: fixed;

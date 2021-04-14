@@ -250,8 +250,9 @@ const SceneComponent = ({ lang, logo, color, model, selectModel }) => {
         </RadioGroup>
       </FormControl>
       <ScrollLock>
-        <div>
+            <div>
         <Engine antialias adaptToDeviceRatio canvasId="PreviewCanvas" className="PreviewCanvas">
+          
           <Scene onSceneMount={onSceneMount} onPointerPick={onPointerPick} >
             <arcRotateCamera
               name="camera1"
@@ -287,7 +288,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel }) => {
           </Scene>
         </Engine>
         </div>
-      </ScrollLock>
+        </ScrollLock>
       
     </div>
   );
