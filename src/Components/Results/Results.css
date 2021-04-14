@@ -3,12 +3,13 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
-    width: 100%;
+    width: 90vw;
     margin-bottom: 16px;
+    height: inherit;
 }
 .LogoPicker {
     table-layout: fixed;
-    flex-basis: 50%;
+    flex-basis: 60%;
 }
 .LogoPickerLogo {
     height: inherit;
@@ -27,7 +28,7 @@
 
 .ColorPicker {
     table-layout: fixed;
-    flex-basis: 50%;
+    flex-basis: 60%;
 }
 .ColorPickerItem {
     height: inherit;
@@ -58,7 +59,7 @@
 .PreviewerWindow {
     display: flex;
     flex-flow: row nowrap;
-    width: 65vw;
+    width: 85vw;
     height: 65vh;
     margin: auto;
     margin-bottom: 150px;

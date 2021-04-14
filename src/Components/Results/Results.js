@@ -453,7 +453,7 @@ const Results = ({ lang, handleAddToCart }) => {
             </tbody>
           </Table>
         </div>
-        <div onMouseOver={noScroll} onMouseLeave={scroll} style={{ width: '95%' }} className="PreviewerWindow">
+        <div className="PreviewerWindow">
           <div className="ButtonPanel">
             <Button className="CatalogButton" onClick={toggleProductsList}>
               <svg
@@ -469,26 +469,43 @@ const Results = ({ lang, handleAddToCart }) => {
               <div className="CatalogText">{TextValues.catalog(lang)}</div>
             </Button>
           </div>
-          <div className="Products" hidden={productsList}>
-            <ProductsList
-              productsObjects={productsObjects}
-              selectProduct={selectProduct}
-            ></ProductsList>
+          <div onMouseOver={noScroll} onMouseLeave={scroll} style={{ width: '95%' }} className="PreviewerWindow">
+            <div className="ButtonPanel">
+              <Button className="CatalogButton" onClick={toggleProductsList}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="50%"
+                  height="50%"
+                  fill="currentColor"
+                  className="CatalogIcon"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V2zm8.5 0v8H15V2H8.5zm0 9v3H15v-3H8.5zm-1-9H1v3h6.5V2zM1 14h6.5V6H1v8z" />
+                </svg>
+                <div className="CatalogText">{TextValues.catalog(lang)}</div>
+              </Button>
+            </div>
+            <div className="Products" hidden={productsList}>
+              <ProductsList
+                productsObjects={productsObjects}
+                selectProduct={selectProduct}
+              ></ProductsList>
+            </div>
+            <SceneComponent
+              lang={lang}
+              logo={selectedLogo}
+              color={selectedColor}
+              model={
+                selectedProduct
+                  ? Object.values(selectedProduct)[0]
+                  : productsObjects.TSHIRT
+              }
+              selectModel={selectModel}
+            />
+            <button onClick={() => addToCart()}>Add to cart</button>
           </div>
-          <SceneComponent
-            lang={lang}
-            logo={selectedLogo}
-            color={selectedColor}
-            model={
-              selectedProduct
-                ? Object.values(selectedProduct)[0]
-                : productsObjects.TSHIRT
-            }
-            selectModel={selectModel}
-          />
-          <button onClick={() => addToCart()}>Add to cart</button>
+          <div className="PlaceholderDiv"></div>
         </div>
-        <div className="PlaceholderDiv"></div>
       </div>
     </ScrollLock>
   );
