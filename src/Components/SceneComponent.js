@@ -1,31 +1,6 @@
-import {
-  Box,
-  Engine,
-  Ground,
-  Model,
-  Scene,
-  DynamicTexture,
-  Image,
-} from "react-babylonjs";
-import {
-  Vector3,
-  Color3,
-  MeshBuilder,
-  Color4,
-  ActionManager,
-  SetValueAction,
-  Texture,
-  StandardMaterial,
-  ExecuteCodeAction,
-  VertexBuffer,
-} from "@babylonjs/core";
-import React, {
-  Suspense,
-  useEffect,
-  useRef,
-  useState,
-  addEventListener,
-} from "react";
+import { Box, Engine, Ground, Model, Scene, DynamicTexture, Image } from "react-babylonjs";
+import { Vector3, Color3, MeshBuilder, Color4, ActionManager, SetValueAction, Texture, StandardMaterial, ExecuteCodeAction, VertexBuffer } from "@babylonjs/core";
+import React, { Suspense, useEffect, useRef, useState, addEventListener } from "react";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import Button from "@material-ui/core/Button";
