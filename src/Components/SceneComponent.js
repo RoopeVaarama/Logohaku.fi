@@ -1,5 +1,5 @@
 import { Box, Engine, Ground, Model, Scene, DynamicTexture, Image } from "react-babylonjs";
-import { Vector3, Color3, MeshBuilder, Color4, ActionManager, SetValueAction, Texture, StandardMaterial, ExecuteCodeAction, VertexBuffer } from "@babylonjs/core";
+import { Vector3, Color3, MeshBuilder, Tools, Texture, StandardMaterial, ExecuteCodeAction, VertexBuffer, FreeCamera } from "@babylonjs/core";
 import React, { Suspense, useEffect, useRef, useState, addEventListener } from "react";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
@@ -29,7 +29,7 @@ const useStyles = makeStyles({
  *
  */
 
-const SceneComponent = ({ lang, logo, color, model, selectModel }) => {
+const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setScene, setActiveCamera }) => {
   const [scene1, setScene1] = useState(null);
   const [decal, setDecal] = useState(null);
   const [selectedLogo, setSelectedLogo] = useState(null);
@@ -132,6 +132,14 @@ const SceneComponent = ({ lang, logo, color, model, selectModel }) => {
     const { canvas, scene } = e;
     scene.clearColor = Color3.FromHexString("#f5f5f5")
     setScene1(scene);
+    setScene(scene);
+    console.log('OnSceneMount ', scene, scene.getEngine(), scene.getCameraByName(
+      "camera1"))
+    setEngine(scene.getEngine());
+    const frontCam = new FreeCamera("FrontCamera", new Vector3(0, 0, 15), scene, false);
+    const backCam = new FreeCamera("BackCamera", new Vector3(0, 0, -15), scene, false);
+    frontCam.setTarget(Vector3.Zero());
+    backCam.setTarget(Vector3.Zero());
     console.log("onscenemount " + { scene1 });
   }
 
@@ -142,6 +150,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel }) => {
 
   const onModelCreated = (rootMesh) => {
     setCurrentModel(rootMesh);
+    setActiveCamera([scene1.getCameraByName('FrontCamera'), scene1.getCameraByName('BackCamera')])
     console.log("Created model: ", rootMesh);
     const meshes = rootMesh._scene.meshes;
     console.log("current model ", meshes, color);
@@ -153,6 +162,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel }) => {
       }
     }
   };
+
 
   const onPointerPick = (e, pickInfo) => {
     if (freePick) {

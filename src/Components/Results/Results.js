@@ -1,4 +1,5 @@
 import React, { Suspense, useState, useEffect } from "react";
+import { Tools } from "@babylonjs/core";
 import TextValues from "../../tools/TextValues";
 import PickerDialog from "../PickerDialog/PickerDialog";
 import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-router-dom";
@@ -110,6 +111,11 @@ const Results = ({ lang, handleAddToCart }) => {
   });
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedLogo, setSelectedLogo] = useState(null);
+
+  // States for the Babylon scene and engine
+  const [scene, setScene] = useState(null);
+  const [engine, setEngine] = useState(null);
+  const [activeCamera, setActiveCamera] = useState(null);
 
   const styles = useStyles();
 
@@ -237,6 +243,13 @@ const Results = ({ lang, handleAddToCart }) => {
     setColors(newColors);
   };
 
+  const createScreenshot = () => {
+    console.log('CreateScreenshot ', scene, engine, activeCamera)
+    const screenshotFront = new Tools.CreateScreenshotUsingRenderTarget(engine, activeCamera[0], 1600);
+    const screenshotBack = new Tools.CreateScreenshotUsingRenderTarget(engine, activeCamera[1], 1600);
+    console.log('screenshot done ')
+  }
+
   const mapLogos = () => {
     const logoArray = logos
     console.log("Logo Arrays ", logoArray);
@@ -314,6 +327,7 @@ const Results = ({ lang, handleAddToCart }) => {
   };
   console.log(selectedProduct);
   const addToCart = () => {
+    createScreenshot();
     console.log("selectedProduct", Object.values(selectedProduct)[0].NAME);
     let product = Object.values(selectedProduct)[0];
     console.log(product);
@@ -447,7 +461,7 @@ const Results = ({ lang, handleAddToCart }) => {
             </tbody>
           </Table>
         </div>
-        <div onMouseOver={noScroll} onMouseLeave={scroll} style={{ width: '95%' }} className="PreviewerWindow">
+        <div style={{ width: '95%' }} className="PreviewerWindow">
           <div className="ButtonPanel">
             <Button className="CatalogButton" onClick={toggleProductsList}>
               <svg
@@ -479,6 +493,9 @@ const Results = ({ lang, handleAddToCart }) => {
                 : productsObjects.TSHIRT
             }
             selectModel={selectModel}
+            setEngine={setEngine}
+            setScene={setScene}
+            setActiveCamera={setActiveCamera}
           />
           <button onClick={() => addToCart()}>Add to cart</button>
         </div>

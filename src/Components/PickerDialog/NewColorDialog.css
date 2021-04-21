@@ -1,0 +1,14 @@
+.sketch-picker {
+    width: 60% !important; 
+    margin-top: 16px;
+}
+.ColorPickerContainer {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+}
+.ColorPickerConfirmation {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-top: 16px;
+}
