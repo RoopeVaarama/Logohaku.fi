@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import TextValues from '../../tools/TextValues';
 import { Link, useHistory } from 'react-router-dom';
 import { Button, Grid, CardContent, Input } from '@material-ui/core';
@@ -10,28 +10,27 @@ const Home = ({ lang }) => {
     const history = useHistory();
     console.log('Language: ', lang);
     const { height, width } = useWindowDimensions();
+    const companyNameRef = useRef();
     let direction = "row"
-    if(width > 850){
+    if (width > 850) {
         direction = "row";
     } else {
         direction = "column";
     }
 
 
-
-    const [value, setValue] = useState(""),
-        onInput = ({ target: { value } }) => setValue(value),
-        submitForm = e => {
-            if (value !== "") {
-                if (value == "metropolia" || value == "paisto" || value == "vanno") {
-                    console.log("value ", value)
-                    setValue()
-                    history.push('/tulokset/' + value);
-                }
-            } else {
-                e.preventDefault();
+    const submitForm = (e) => {
+        let value = companyNameRef.current.value;
+        if (value !== "") {
+            console.log(value)
+            if (value === "metropolia" || value === "paisto" || value === "vanno") {
+                console.log("value ", value)
+                history.push('/tulokset/' + value);
             }
+        } else {
+            e.preventDefault();
         }
+    }
 
     return (
         <HomeDiv>
@@ -44,10 +43,10 @@ const Home = ({ lang }) => {
                         direction="row"
                     >
                         <Grid item xs={10}>
-                            <Input style={{ width: '100%', paddingTop: '10px' }} variant="outlined" id="name" placeholder="Company Name" aria-label="Company Name" aria-describedby="basic-addon1" onChange={onInput} value={value} />
+                            <Input style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder="Company Name" inputRef={companyNameRef} />
                         </Grid>
                         <Grid item xs={2}>
-                            <Button style={{ width: '100%', padding: '10px' }} variant="contained" type="submit"> Search
+                            <Button style={{ width: '100%' }} variant="contained" type="submit"> Search
                         </Button>
                         </Grid>
 

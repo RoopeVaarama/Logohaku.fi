@@ -461,7 +461,11 @@ const Results = ({ lang, handleAddToCart }) => {
             </tbody>
           </Table>
         </div>
+<<<<<<< HEAD
         <div style={{ width: '95%' }} className="PreviewerWindow">
+=======
+        <div /*onMouseOver={noScroll} onMouseLeave={scroll}*/ style={{ width: '95%' }} className="PreviewerWindow">
+>>>>>>> a3dd7ee88860eb08d6d538e241eb7fad496732a9
           <div className="ButtonPanel">
             <Button className="CatalogButton" onClick={toggleProductsList}>
               <svg
