@@ -243,11 +243,13 @@ const Results = ({ lang, handleAddToCart }) => {
     setColors(newColors);
   };
 
-  const createScreenshot = () => {
+  // Creates screenshots of the current canvas from the front and back (Z-axis)
+  // https://doc.babylonjs.com/typedoc/classes/babylon.screenshottools#createscreenshotusingrendertargetasync
+  const createScreenshot = async () => {
     console.log('CreateScreenshot ', scene, engine, activeCamera)
-    const screenshotFront = new Tools.CreateScreenshotUsingRenderTarget(engine, activeCamera[0], 1600);
-    const screenshotBack = new Tools.CreateScreenshotUsingRenderTarget(engine, activeCamera[1], 1600);
-    console.log('screenshot done ')
+    const screenshotFront = await new Tools.CreateScreenshotUsingRenderTargetAsync(engine, activeCamera[0], 1600);
+    const screenshotBack = await new Tools.CreateScreenshotUsingRenderTargetAsync(engine, activeCamera[1], 1600);
+    console.log('screenshot done ', screenshotFront, screenshotBack)
   }
 
   const mapLogos = () => {
@@ -461,11 +463,7 @@ const Results = ({ lang, handleAddToCart }) => {
             </tbody>
           </Table>
         </div>
-<<<<<<< HEAD
-        <div style={{ width: '95%' }} className="PreviewerWindow">
-=======
         <div /*onMouseOver={noScroll} onMouseLeave={scroll}*/ style={{ width: '95%' }} className="PreviewerWindow">
->>>>>>> a3dd7ee88860eb08d6d538e241eb7fad496732a9
           <div className="ButtonPanel">
             <Button className="CatalogButton" onClick={toggleProductsList}>
               <svg
