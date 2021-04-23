@@ -11,7 +11,7 @@ const baseUrl = "https://api.logohaku.fi/logoversion?version="
 
 const NewLogoDialog = (props) => {
     const { onClose, selectedValue, open, ytunnus} = props;
-    console.log('SelectedValue ', selectedValue, ytunnus);
+    //console.log('SelectedValue ', selectedValue, ytunnus);
 
     /*const response = await fetch(url, {
         method: 'POST',
@@ -40,7 +40,7 @@ const NewLogoDialog = (props) => {
     };
   
     const handleListItemClick = (value, index) => {
-      console.log('value ', value, index)
+      //console.log('value ', value, index)
       onClose(value, index);
     };
 

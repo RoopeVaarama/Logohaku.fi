@@ -11,7 +11,7 @@ const baseUrl = "https://api.logohaku.fi/logoversion?version="
 
 const EditLogoDialog = (props) => {
     const { onClose, selectedValue, open, ytunnus} = props;
-    console.log('EditLogoDialog ', selectedValue, ytunnus);
+    //console.log('EditLogoDialog ', selectedValue, ytunnus);
     /*const response = await fetch(url, {
         method: 'POST',
         mode: 'cors',
@@ -39,7 +39,7 @@ const EditLogoDialog = (props) => {
     };
   
     const handleListItemClick = (value, index) => {
-      console.log('value ', value, index)
+      //console.log('value ', value, index)
       onClose(value, index);
     };
 
@@ -48,9 +48,9 @@ const EditLogoDialog = (props) => {
         {const urls = []
         for (var i=1; i<=9;i++) {
           const splitValue = selectedValue[0].split("/").pop()
-          console.log('split value ', splitValue)
+          //console.log('split value ', splitValue)
           const fullUrl = baseUrl + i + "&code=" + ytunnus + "&file=" + splitValue
-          console.log('Full url: ', fullUrl)
+          //console.log('Full url: ', fullUrl)
           urls.push(fullUrl);
         }
         return urls.map((item) => (

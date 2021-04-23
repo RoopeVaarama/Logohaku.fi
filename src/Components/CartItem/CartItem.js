@@ -1,16 +1,18 @@
 import React from 'react';
+import TextValues from '../../tools/TextValues';
 import { Wrapper } from './CartItem.styles';
-import Button from '@material-ui/core/Button';
-import logo from "../../assets/paisto.png";
+import { Button, Input } from '@material-ui/core';
+import { DeleteForever } from '@material-ui/icons';
 
 
-const CartItem = ({ item, addToCart, removeFromCart }) => {
+const CartItem = ({ lang, item, removeFromCart, changeAmount }) => {
+    console.log(item)
     return (
         <Wrapper>
             <div>
                 <h4>{item.name}</h4>
                 <div className="information">
-                    <p>logo position{item.logoPosition}</p>
+                    <p>{TextValues.logoPosition(lang)} {item.logoPosition}</p>
                 </div>
                 <div className='buttons'>
                     <Button
@@ -19,21 +21,21 @@ const CartItem = ({ item, addToCart, removeFromCart }) => {
                         variant="contained"
                         onClick={() => removeFromCart(item.id, item.logoPosition)}
                     >
-                        -
+                        <DeleteForever />
                 </Button>
-                    <p>{item.amount}</p>
-                    <Button
+                    <Input
                         size="small"
-                        disableElevation
-                        variant="contained"
-                        onClick={() => addToCart(item.id, item.name, item.logoPosition)}
-                    >
-                        +
-                </Button>
+                        style={{ marginLeft: "5%", textAlign: 'center', width: '50%' }}
+                        type={'number'}
+                        defaultValue={item.amount}
+                        onChange={(e) => changeAmount(item.id, item.logoPosition, e.target.value)}
+                    />
+
 
                 </div>
             </div>
-            <img src={logo} alt={logo} />
+            <img src={item.screenshotFront} alt={""} />
+            <img src={item.screenshotBack} alt={""} />
         </Wrapper>
     );
 }

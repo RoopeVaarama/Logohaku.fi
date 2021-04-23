@@ -17,7 +17,7 @@ const baseUrl = "https://api.logohaku.fi/logoversion?version="
 
 const EditColorDialog = (props) => {
     const { onClose, selectedValue, palette, open, ytunnus } = props;
-    console.log('SelectedValue ', selectedValue, ytunnus);
+    //console.log('SelectedValue ', selectedValue, ytunnus);
 
     /*const response = await fetch(url, {
         method: 'POST',
@@ -43,7 +43,7 @@ const EditColorDialog = (props) => {
 
     const [pickerColor, setPickerColor] = useState("#00000");
     const handleColorChange = (color, event) => {
-      console.log('HandleColorChange ', color, event)
+      //console.log('HandleColorChange ', color, event)
       setPickerColor(color.hex)
     }
   
@@ -52,12 +52,12 @@ const EditColorDialog = (props) => {
     };
   
     const handleListItemClick = (value, index) => {
-      console.log('value ', value, index)
+      //console.log('value ', value, index)
       onClose(value, index);
     };
 
     const createGridItems = () => {
-        console.log('EditColorDialog ', selectedValue)
+        //console.log('EditColorDialog ', selectedValue)
         return palette.map((item, index) => (
           <Grid key={item + ytunnus} item xs={2}>
               <Box bgcolor={item} p={3} onClick={() => handleListItemClick(item, selectedValue.index)} />

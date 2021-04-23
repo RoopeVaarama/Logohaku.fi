@@ -1,6 +1,6 @@
 const TextValues = {
 
-    home: function(langcode){
+    home: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "Koti";
@@ -8,7 +8,7 @@ const TextValues = {
                 return "Home";
         }
     },
-    results: function(langcode){
+    results: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "Tulokset";
@@ -16,7 +16,7 @@ const TextValues = {
                 return "Results";
         }
     },
-    header: function(langcode){
+    header: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "Hederi";
@@ -24,7 +24,119 @@ const TextValues = {
                 return "Header";
         }
     },
-    aboutUs: function(langcode){
+    firstName: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Etunimi";
+            default:
+                return "First Name";
+        }
+    },
+    lastName: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Sukunimi";
+            default:
+                return "Last Name";
+        }
+    },
+    emailAddress: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Sähköposti";
+            default:
+                return "Email Address";
+        }
+    },
+    companyName: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Yrityksen nimi";
+            default:
+                return "Company Name";
+        }
+    },
+    shippingAddress: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Toimitusosoite";
+            default:
+                return "Shipping Address";
+        }
+    },
+    postCode: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Postinumero";
+            default:
+                return "PostCode";
+        }
+    },
+    phoneNumber: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Puhelinnumero";
+            default:
+                return "Phone Number";
+        }
+    },
+    additionalInformation: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Lisätietoja";
+            default:
+                return "Additional Information";
+        }
+    },
+    logoPosition: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Logon sijainti";
+            default:
+                return "Logo position";
+        }
+    },
+    addToCart: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Lisää ostoskoriin";
+            default:
+                return "Add to cart";
+        }
+    },
+    noItemsInCart: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Ei tuotteita ostoskorissa.";
+            default:
+                return "No items in cart.";
+        }
+    },
+    amount: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Määrä";
+            default:
+                return "Amount";
+        }
+    },
+    yourShoppingCart: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Ostoskori";
+            default:
+                return "Your Shopping Cart";
+        }
+    },
+    orderButton: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Tilaa";
+            default:
+                return "Order";
+        }
+    },
+    aboutUs: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "Yhteystiedot";
@@ -32,7 +144,7 @@ const TextValues = {
                 return "About us";
         }
     },
-    footer: function(langcode){
+    footer: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "Footeri";
@@ -40,7 +152,7 @@ const TextValues = {
                 return "Footer";
         }
     },
-    order: function(langcode){
+    order: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "Tilaussivu";
@@ -48,7 +160,7 @@ const TextValues = {
                 return "Ordar page";
         }
     },
-    notFound: function(langcode){
+    notFound: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "Errori 404: Sivua ei löytynyt!";
@@ -56,7 +168,7 @@ const TextValues = {
                 return "Error 404: Page not found!";
         }
     },
-    langButton: function(langcode){
+    langButton: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "Fin";
@@ -64,15 +176,15 @@ const TextValues = {
                 return "Eng";
         }
     },
-    catalog: function(langcode){
-        switch(langcode) {
+    catalog: function (langcode) {
+        switch (langcode) {
             case "fi":
                 return "Tuotteet";
             default:
                 return "Products";
         }
     },
-    tshirt: function(langcode){
+    tshirt: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "T-paita";
@@ -80,7 +192,7 @@ const TextValues = {
                 return "T-shirt";
         }
     },
-    mask: function(langcode){
+    mask: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "Maski";
@@ -88,7 +200,7 @@ const TextValues = {
                 return "Mask";
         }
     },
-    pen: function(langcode){
+    pen: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "Kynä";
@@ -96,7 +208,7 @@ const TextValues = {
                 return "Pen";
         }
     },
-    bag: function(langcode){
+    bag: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "Kassi";
@@ -104,7 +216,7 @@ const TextValues = {
                 return "Bag";
         }
     },
-    logo_positions: function(langcode){
+    logo_positions: function (langcode) {
         switch (langcode) {
             case 'fi':
                 return "Logo paikat";
@@ -112,7 +224,7 @@ const TextValues = {
                 return "Logo positions"
         }
     },
-    left_sleeve: function(langcode){
+    left_sleeve: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "Vasen hiha";
@@ -120,7 +232,7 @@ const TextValues = {
                 return "Left sleeve";
         }
     },
-    right_sleeve: function(langcode){
+    right_sleeve: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "Oikea hiha";
@@ -128,7 +240,7 @@ const TextValues = {
                 return "Right sleeve";
         }
     },
-    right_chest: function(langcode){
+    right_chest: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "Oikea rinta";
@@ -136,7 +248,7 @@ const TextValues = {
                 return "Right chest";
         }
     },
-    left_chest: function(langcode){
+    left_chest: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "Vasen rinta";
@@ -144,7 +256,7 @@ const TextValues = {
                 return "Left chest";
         }
     },
-    middle_chest: function(langcode){
+    middle_chest: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "Keskellä rintaa";
@@ -152,7 +264,7 @@ const TextValues = {
                 return "Middle chest";
         }
     },
-    middle_front: function(langcode){
+    middle_front: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "Keskellä vatsaa";
@@ -160,7 +272,7 @@ const TextValues = {
                 return "Middle of stomach";
         }
     },
-    middle_back: function(langcode){
+    middle_back: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "Keskellä selkää";
@@ -168,7 +280,7 @@ const TextValues = {
                 return "Middle back";
         }
     },
-    middle: function(langcode){
+    middle: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "Keskellä";
@@ -176,7 +288,7 @@ const TextValues = {
                 return "Middle";
         }
     },
-    left: function(langcode){
+    left: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "Vasemmalla";
@@ -184,7 +296,7 @@ const TextValues = {
                 return "Left";
         }
     },
-    right: function(langcode){
+    right: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "Oikealla";
@@ -192,7 +304,7 @@ const TextValues = {
                 return "Right";
         }
     },
-    handle: function(langcode){
+    handle: function (langcode) {
         switch (langcode) {
             case "fi":
                 return "Kahva";
@@ -200,16 +312,16 @@ const TextValues = {
                 return "Handle";
         }
     },
-        shaft: function(langcode){
-            switch (langcode) {
-                case "fi":
-                    return "Varsi";
-                default:
-                    return "Shaft";
-            }
-        },
+    shaft: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Varsi";
+            default:
+                return "Shaft";
+        }
+    },
 
-    logoPickerInfo: function(langcode){
+    logoPickerInfo: function (langcode) {
         switch (langcode) {
             case "fi":
                 return {
@@ -223,7 +335,7 @@ const TextValues = {
                 };
         }
     },
-    colorPickerInfo: function(langcode){
+    colorPickerInfo: function (langcode) {
         switch (langcode) {
             case "fi":
                 return {

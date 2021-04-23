@@ -1,12 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import TextValues from '../../tools/TextValues';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { Wrapper, Form } from './Cart.styles';
 import CartItem from '../CartItem/CartItem';
 import { Button, Input } from '@material-ui/core';
 import emailjs from 'emailjs-com';
 
-const Cart = ({ cartItems, addToCart, removeFromCart, closeCart }) => {
+const Cart = ({ lang, cartItems, removeFromCart, closeCart, changeAmount }) => {
 
     const firstNameRef = useRef();
     const lastNameRef = useRef();
@@ -28,16 +27,11 @@ const Cart = ({ cartItems, addToCart, removeFromCart, closeCart }) => {
         let phoneNumberValue = phoneNumberRef.current.value;
         let additionalInformationValue = additionalInformationRef.current.value;
 
-
-        //console.log(cartItems)
         let items = [];
         cartItems.map(item => {
-            //console.log(item)
-            items.push(item.name, "määrä", item.amount, "logo", item.logoPosition)
+            return items.push(item.name, TextValues.amount(lang), item.amount, TextValues.logoPosition(lang), item.logoPosition)
         })
 
-        //console.log(items)
-        
         const templeteParams = {
             firstNameValue: firstNameValue,
             lastNameValue: lastNameValue,
@@ -50,33 +44,25 @@ const Cart = ({ cartItems, addToCart, removeFromCart, closeCart }) => {
             cartItems: items,
         }
 
-        
         emailjs.send('service_l6d267z', '123456789', templeteParams, 'user_i5c9QI8T9mTXPfuiGqjqM')
             .then((result) => {
                 console.log(result.text);
             }, (error) => {
                 console.log(error.text);
             });
-
-        //console.log(cartItems, e.target, e.target.cartItems.value)
-        /*emailjs.sendForm('service_l6d267z', '123456789', e.target, 'user_i5c9QI8T9mTXPfuiGqjqM')
-            .then((result) => {
-                console.log(result.text);
-            }, (error) => {
-                console.log(error.text);
-            });*/
-
     }
+
     return (
         <Wrapper>
-            <h1>Your Shopping Cart</h1>
-            {cartItems.length === 0 ? <p>No items in cart.</p> : null}
+            <h1>{TextValues.yourShoppingCart(lang)}</h1>
+            {cartItems.length === 0 ? <p>{TextValues.noItemsInCart(lang)}</p> : null}
             {cartItems.map(item => (
                 <CartItem
+                    lang={lang}
                     key={item.id}
                     item={item}
-                    addToCart={addToCart}
                     removeFromCart={removeFromCart}
+                    changeAmount={changeAmount}
                 >
 
                 </CartItem>
@@ -84,23 +70,23 @@ const Cart = ({ cartItems, addToCart, removeFromCart, closeCart }) => {
             {cartItems.length > 0 ?
                 <div style={{ width: '100%', alignItems: 'center', padding: '5px' }}>
                     <Form style={{ alignItems: 'center' }} onSubmit={handleOrder}>
-                        <Input style={{ width: '100%', paddingTop: '10px' }} variant="outlined" type="text" placeholder="First Name" required inputRef={firstNameRef} />
+                        <Input style={{ width: '100%', paddingTop: '10px' }} variant="outlined" type="text" placeholder={TextValues.firstName(lang)} required inputRef={firstNameRef} />
 
-                        <Input variant="outlined" style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder="Last Name" inputRef={lastNameRef} />
+                        <Input variant="outlined" style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder={TextValues.lastName(lang)} inputRef={lastNameRef} />
 
-                        <Input style={{ width: '100%', paddingTop: '10px' }} type="email" placeholder="Email Address" inputRef={emailAddressRef} />
+                        <Input style={{ width: '100%', paddingTop: '10px' }} type="email" placeholder={TextValues.emailAddress(lang)} inputRef={emailAddressRef} />
 
-                        <Input style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder="Company Name" inputRef={companyNameRef} />
+                        <Input style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder={TextValues.companyName(lang)} inputRef={companyNameRef} />
 
-                        <Input style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder="Shipping Address" inputRef={shippingAddressRef} />
+                        <Input style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder={TextValues.shippingAddress(lang)} inputRef={shippingAddressRef} />
 
-                        <Input style={{ width: '100%', paddingTop: '10px' }} type="number" placeholder="Postcode" inputRef={postcodeRef} />
+                        <Input style={{ width: '100%', paddingTop: '10px' }} type="number" placeholder={TextValues.postCode(lang)} inputRef={postcodeRef} />
 
-                        <Input style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder="Phone Number" inputRef={phoneNumberRef} />
+                        <Input style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder={TextValues.phoneNumber(lang)} inputRef={phoneNumberRef} />
 
-                        <Input multiline rows={4} style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder="Additional Information" inputRef={additionalInformationRef} />
+                        <Input multiline rows={4} style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder={TextValues.additionalInformation(lang)} inputRef={additionalInformationRef} />
 
-                        <Button style={{ width: '100%', padding: '10px' }} variant="contained" type="submit"> Order
+                        <Button style={{ width: '100%', padding: '10px' }} variant="contained" color="secondary" type="submit"> {TextValues.orderButton(lang)}
                         </Button>
                     </Form>
 

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
+// eslint-disable-next-line no-unused-vars
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import TextValues from '../../tools/TextValues';
 import "./Header.css";
 import { CSSTransition } from "react-transition-group";
 import logo from "../../assets/paisto.png";
 import Button from '@material-ui/core/Button';
-import  MenuIcon from '@material-ui/icons/Menu';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import { Menu, AddShoppingCart } from '@material-ui/icons';
 
 
 const Header = ({ lang, cartItems, openCart }) => {
@@ -59,16 +59,15 @@ const Header = ({ lang, cartItems, openCart }) => {
             >
                 <nav className="Nav">
                     <Button onClick={() => ButtonClick()}>{TextValues.langButton(localStorage.getItem("lang"))}</Button>
-                    <Button onClick={openCart}><AddShoppingCartIcon />{cartItems.length === 0 ? null : cartItems.length}</Button>
+                    <Button onClick={openCart}><AddShoppingCart />{cartItems.length > 0 ? cartItems.length : null}</Button>
 
                 </nav>
             </CSSTransition>
             <button onClick={toggleNav} className="Burger">
-                <MenuIcon />
+                <Menu />
             </button>
         </header >
     )
 }
-//<Link to="/">{TextValues.home(lang)}</Link>
-//<Link to="/tietoja">{TextValues.aboutUs(lang)}</Link>
+
 export default Header;

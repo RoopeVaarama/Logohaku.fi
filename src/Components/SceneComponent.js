@@ -43,20 +43,20 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
 
   const modelSize = new Vector3(model.SIZE, model.SIZE, model.SIZE);
   modelSize._isDirty = false;
-  console.log("initial name ", color);
+  //console.log("initial name ", color);
   const modelPosition = new Vector3(
     model.POSITION.X,
     model.POSITION.Y,
     model.POSITION.Z
   );
   modelPosition._isDirty = false;
-  console.log("initial pos  ", modelPosition);
+  //console.log("initial pos  ", modelPosition);
 
   useEffect(() => {
     //const RGBColor = hexToRGB(color[1]);
     if (currentModel !== null && color !== null) {
       const meshes = currentModel._scene.meshes;
-      console.log("current model ", meshes, color);
+      //console.log("current model ", meshes, color);
       for (var i in meshes) {
         if (meshes[i].metadata !== null) {
           const newMat = new StandardMaterial("material" + i + i, scene1);
@@ -81,20 +81,20 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
       }
 
       const objectForm = JSON.parse(logoPosition);
-      console.log('ObjectForm ', objectForm);
+      //console.log('ObjectForm ', objectForm);
 
       const decalMaterial = new StandardMaterial("decalMat", scene1);
       decalMaterial.diffuseTexture = new Texture(logo, scene1);
-      console.log("Decal image is: /", logo);
+      //console.log("Decal image is: /", logo);
       decalMaterial.diffuseTexture.hasAlpha = true;
       decalMaterial.zOffset = -20;
 
       var mesh;
       for (var i in currentModel._scene.meshes) {
-        console.log(currentModel._scene.meshes[i])
-        console.log(logoPosition.NAME)
+        //console.log(currentModel._scene.meshes[i])
+        //console.log(logoPosition.NAME)
         if (objectForm.MESH_NAME === currentModel._scene.meshes[i].name) {
-          console.log("match")
+          //console.log("match")
           mesh = currentModel._scene.meshes[i]
           const decalSize = new Vector3(model.LOGO_SIZE, model.LOGO_SIZE, model.LOGO_SIZE);
           const decalRotation = model.LOGO_ROTATION;
@@ -116,13 +116,13 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
 
   useEffect(() => {
     if (currentModel !== null) {
-      console.log("UseEffect ", currentModel);
+      //console.log("UseEffect ", currentModel);
       const modelArray = Object.entries(model);
-      console.log("Object entries ", model);
+      //console.log("Object entries ", model);
       for (var i in modelArray) {
-        console.log("Model array ", modelArray[i].NAME);
+        //console.log("Model array ", modelArray[i].NAME);
         if (modelArray[i].NAME === currentModel.name) {
-          console.log("Model match");
+          //console.log("Model match");
         }
       }
     }
@@ -133,27 +133,26 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
     scene.clearColor = Color3.FromHexString("#f5f5f5")
     setScene1(scene);
     setScene(scene);
-    console.log('OnSceneMount ', scene, scene.getEngine(), scene.getCameraByName(
-      "camera1"))
+    //console.log('OnSceneMount ', scene, scene.getEngine(), scene.getCameraByName("camera1"))
     setEngine(scene.getEngine());
     const frontCam = new FreeCamera("FrontCamera", new Vector3(0, 0, 15), scene, false);
     const backCam = new FreeCamera("BackCamera", new Vector3(0, 0, -15), scene, false);
     frontCam.setTarget(Vector3.Zero());
     backCam.setTarget(Vector3.Zero());
-    console.log("onscenemount " + { scene1 });
+    //console.log("onscenemount " + { scene1 });
   }
 
   const onModelLoaded = (model) => {
-    console.log("Model loaded: ", model.meshes);
+    //console.log("Model loaded: ", model.meshes);
     selectModel(model, decal);
   };
 
   const onModelCreated = (rootMesh) => {
     setCurrentModel(rootMesh);
     setActiveCamera([scene1.getCameraByName('FrontCamera'), scene1.getCameraByName('BackCamera')])
-    console.log("Created model: ", rootMesh);
+    //console.log("Created model: ", rootMesh);
     const meshes = rootMesh._scene.meshes;
-    console.log("current model ", meshes, color);
+    //console.log("current model ", meshes, color);
     for (var i in meshes) {
       if (meshes[i].metadata !== null) {
         const newMat = new StandardMaterial("material" + 1, scene1);
@@ -166,10 +165,10 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
 
   const onPointerPick = (e, pickInfo) => {
     if (freePick) {
-      console.log("Decal material: /", logo);
+      //console.log("Decal material: /", logo);
       const decalMaterial = new StandardMaterial("decalMat", scene1);
       decalMaterial.diffuseTexture = new Texture(logo, scene1);
-      console.log("Decal image is:", logo);
+      //console.log("Decal image is:", logo);
       decalMaterial.diffuseTexture.hasAlpha = true;
       decalMaterial.zOffset = -2;
 
@@ -179,12 +178,12 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
 
       if (pickInfo.hit && pickInfo.pickedMesh.name !== "decal") {
         const mesh = pickInfo.pickedMesh;
-        console.log('PickInfo ', pickInfo.pickedPoint)
+        //console.log('PickInfo ', pickInfo.pickedPoint)
         if (pickInfo.pickedPoint !== null) {
           const meshObj = "POSITION_VECTOR: [" + pickInfo.pickedPoint.x + "," + pickInfo.pickedPoint.y + "," + pickInfo.pickedPoint.z + "],\n" + "NORMAL_VECTOR: [" + pickInfo.getNormal(true).x + "," + pickInfo.getNormal(true).y + "," + pickInfo.getNormal(true).z + "],"
-          console.log(meshObj);
+          //console.log(meshObj);
         }
-        console.log("PickInfo " + pickInfo.pickedPoint + pickInfo.getNormal(true) + "mesh " + mesh);
+        //console.log("PickInfo " + pickInfo.pickedPoint + pickInfo.getNormal(true) + "mesh " + mesh);
         const decalSize = new Vector3(model.LOGO_SIZE, model.LOGO_SIZE, model.LOGO_SIZE);
         const decalRotation = model.LOGO_ROTATION;
 
@@ -203,7 +202,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
 
   const createPositionsRadioButtons = () => {
     const logoPositionsArray = Object.entries(model.LOGO_POSITIONS);
-    console.log(logoPositionsArray);
+    //console.log(logoPositionsArray);
     return logoPositionsArray.map((position) => (
       <FormControlLabel className="RadioButton" disabled={freePick} value={JSON.stringify(position[1])} control={<Radio />} label={position[1].NAME}></FormControlLabel>
     ))

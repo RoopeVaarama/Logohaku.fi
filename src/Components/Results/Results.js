@@ -1,23 +1,18 @@
+// eslint-disable-next-line no-unused-vars
 import React, { Suspense, useState, useEffect } from "react";
 import { Tools } from "@babylonjs/core";
 import TextValues from "../../tools/TextValues";
-import PickerDialog from "../PickerDialog/PickerDialog";
+//import PickerDialog from "../PickerDialog/PickerDialog";
+// eslint-disable-next-line no-unused-vars
 import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-router-dom";
 import "./Results.css";
-import Box from '@material-ui/core/Box';
-import EditIcon from "@material-ui/icons/Edit";
-import IconButton from "@material-ui/core/IconButton";
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import Card from '@material-ui/core/Card';
-import Typography from '@material-ui/core/Typography';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
+import { HighlightOff, Edit } from '@material-ui/icons';
+import { Typography, Button, IconButton, Box, Card, CardContent } from '@material-ui/core';
 import SceneComponent from "../SceneComponent";
 import ProductsList from "../ProductsList/ProductsList";
-import PresetsList from "../PresetsList/PresetsList";
-import Button from "@material-ui/core/Button";
+//import PresetsList from "../PresetsList/PresetsList";
 import ProductsObjects from "../../tools/ProductsEnum";
-import { Vector3 } from "@babylonjs/core";
+//import { Vector3 } from "@babylonjs/core";
 import { Table, Image } from "react-bootstrap";
 import {
   paistoBaseResponse,
@@ -29,7 +24,7 @@ import EditColorDialog from '../PickerDialog/EditColorDialog';
 import NewLogoDialog from '../PickerDialog/NewLogoDialog';
 import NewColorDialog from '../PickerDialog/NewColorDialog';
 import { makeStyles } from "@material-ui/core";
-import ScrollLock, { TouchScrollable } from 'react-scrolllock';
+import ScrollLock from 'react-scrolllock';
 
 /**
  * Contains the Babylon.js code for rendering the 3D preview window on the results page.
@@ -88,7 +83,7 @@ const useStyles = makeStyles({
 
 const Results = ({ lang, handleAddToCart }) => {
   const { id } = useParams();
-  const [imageURL, setImageURL] = useState("");
+  //const [imageURL, setImageURL] = useState("");
 
   // UI component states
   const [logoPickerDialogOpen, setLogoPickerDialogOpen] = useState(false);
@@ -99,7 +94,7 @@ const Results = ({ lang, handleAddToCart }) => {
   const [presetsList, setPresetsList] = useState(true);
   const [presetPosition, setPresetPosition] = useState(1);
   const [model, setModel] = useState(null);
-  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
   const [lockScroll, setLockScroll] = useState(false);
 
   // Brand (color and logo) states
@@ -160,10 +155,10 @@ const Results = ({ lang, handleAddToCart }) => {
   });
 
   useEffect(() => {
-    console.log("Responses here! ", response);
-    const imageUrl = baseUrl + response.code + "/"
-    console.log('Imageurl ', imageUrl);
-    setImageURL(imageUrl);
+    //console.log("Responses here! ", response);
+    //const imageUrl = baseUrl + response.code + "/"
+    //console.log('Imageurl ', imageUrl);
+    //setImageURL(imageUrl);
     setSelectedLogo(logos[0].image);
     setSelectedColor(colors[0]);
     /*postCompany('https://api.logohaku.fi/get', id)
@@ -178,9 +173,9 @@ const Results = ({ lang, handleAddToCart }) => {
   const selectModel = (selectedModel, decal) => {
     if (model != null) {
       model.dispose();
-      console.log("rootmesh ", selectedModel);
+      //console.log("rootmesh ", selectedModel);
       for (var i = 0; i < selectedModel.meshes.length; i++) {
-        console.log("looping ", selectedModel.meshes[i].scaling);
+        //console.log("looping ", selectedModel.meshes[i].scaling);
       }
     }
     if (decal != null) {
@@ -190,7 +185,7 @@ const Results = ({ lang, handleAddToCart }) => {
   };
 
   const selectProduct = (product) => {
-    console.log("Setting product", Object.values(product)[0]);
+    //console.log("Setting product", Object.values(product)[0]);
     setSelectedProduct(product);
   };
 
@@ -209,21 +204,21 @@ const Results = ({ lang, handleAddToCart }) => {
   };
 
   const print = (img) => {
-    console.log("Seleted logo here", img);
+    //console.log("Seleted logo here", img);
     setSelectedLogo(img);
   };
   const printC = (color) => {
-    console.log("SELECTED COLOR ", color);
+    //console.log("SELECTED COLOR ", color);
     setSelectedColor(color);
   };
 
   const handleLogoEdit = (item, index) => {
-    console.log("HandleLogoEdit ", item, index);
+    //console.log("HandleLogoEdit ", item, index);
     setSelectedEditableLogo([item, index]);
     setLogoPickerDialogOpen(true);
   };
   const handleColorEdit = (item, index) => {
-    console.log('HandleColorEdit ', item);
+    //console.log('HandleColorEdit ', item);
     setSelectedEditableColor({
       color: item,
       index: index
@@ -246,16 +241,15 @@ const Results = ({ lang, handleAddToCart }) => {
   // Creates screenshots of the current canvas from the front and back (Z-axis)
   // https://doc.babylonjs.com/typedoc/classes/babylon.screenshottools#createscreenshotusingrendertargetasync
   const createScreenshot = async () => {
-    console.log('CreateScreenshot ', scene, engine, activeCamera)
     const screenshotFront = await new Tools.CreateScreenshotUsingRenderTargetAsync(engine, activeCamera[0], 1600);
     const screenshotBack = await new Tools.CreateScreenshotUsingRenderTargetAsync(engine, activeCamera[1], 1600);
-    console.log('screenshot done ', screenshotFront, screenshotBack)
+    return ({ screenshotFront: screenshotFront, screenshotBack: screenshotBack })
   }
 
   const mapLogos = () => {
     const logoArray = logos
-    console.log("Logo Arrays ", logoArray);
-    console.log('Imageurl ', imageURL);
+    //console.log("Logo Arrays ", logoArray);
+    //console.log('Imageurl ', imageURL);
     return logoArray.map((item, index) => (
       <td className="LogoContainer">
         <Button
@@ -270,7 +264,7 @@ const Results = ({ lang, handleAddToCart }) => {
             aria-label="delete logo"
             onClick={(e) => handleLogoRemove(index)}
           >
-            <HighlightOffIcon />
+            <HighlightOff />
           </IconButton>
           <IconButton
             className={styles.pickerIconEdit}
@@ -278,7 +272,7 @@ const Results = ({ lang, handleAddToCart }) => {
             aria-label="edit logo"
             onClick={(e) => handleLogoEdit(item.image, index)}
           >
-            <EditIcon />
+            <Edit />
           </IconButton>
         </Button>
       </td>
@@ -286,7 +280,7 @@ const Results = ({ lang, handleAddToCart }) => {
   };
 
   const mapColors = () => {
-    console.log("colors: ", colors);
+    //console.log("colors: ", colors);
     return colors.map((color, index) => (
       <td className="ColorContainer">
         <Button
@@ -313,7 +307,7 @@ const Results = ({ lang, handleAddToCart }) => {
             aria-label="delete logo"
             onClick={(e) => handleColorRemove(index)}
           >
-            <HighlightOffIcon />
+            <HighlightOff />
           </IconButton>
           <IconButton
             className={styles.pickerIconEdit}
@@ -321,23 +315,24 @@ const Results = ({ lang, handleAddToCart }) => {
             aria-label="edit logo"
             onClick={(e) => handleColorEdit(color, index)}
           >
-            <EditIcon />
+            <Edit />
           </IconButton>
         </Button>
       </td>
     ));
   };
-  console.log(selectedProduct);
+
   const addToCart = () => {
-    createScreenshot();
-    console.log("selectedProduct", Object.values(selectedProduct)[0].NAME);
     let product = Object.values(selectedProduct)[0];
-    console.log(product);
-    handleAddToCart(product.ID, product.NAME, presetPosition);
+    createScreenshot().then((res) => {
+      let screenshotFront = res.screenshotFront
+      let screenshotBack = res.screenshotBack
+      handleAddToCart(product.ID, product.NAME, presetPosition, screenshotFront, screenshotBack);
+    });
   };
 
   const handleCloseLogos = (value, index) => {
-    console.log('Handlecloselogos in results ', value, index)
+    //console.log('Handlecloselogos in results ', value, index)
 
     if (value !== null) {
       const newLogos = logos;
@@ -345,7 +340,7 @@ const Results = ({ lang, handleAddToCart }) => {
         image: value,
         colors: []
       }
-      console.log('NEW LOGOS ', newLogos)
+      //console.log('NEW LOGOS ', newLogos)
       setLogos(newLogos);
     }
 
@@ -353,7 +348,7 @@ const Results = ({ lang, handleAddToCart }) => {
   };
 
   const handleCloseNewLogo = (value, index) => {
-    console.log('HandleCLoseNewLogo ', value, index);
+    //console.log('HandleCLoseNewLogo ', value, index);
     if (value !== null) {
       const newLogos = logos;
       newLogos.push({
@@ -375,7 +370,7 @@ const Results = ({ lang, handleAddToCart }) => {
   }
 
   const handleCloseColors = (value, index) => {
-    console.log('handleclosecolors ', value, index)
+    //console.log('handleclosecolors ', value, index)
     if (value !== null) {
       const newColors = colors;
       newColors[index] = value
@@ -465,7 +460,7 @@ const Results = ({ lang, handleAddToCart }) => {
         </div>
         <div /*onMouseOver={noScroll} onMouseLeave={scroll}*/ style={{ width: '95%' }} className="PreviewerWindow">
           <div className="ButtonPanel">
-            <Button className="CatalogButton" onClick={toggleProductsList}>
+            <Button variant="contained" color="secondary" className="CatalogButton" onClick={toggleProductsList}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="50%"
@@ -478,6 +473,8 @@ const Results = ({ lang, handleAddToCart }) => {
               </svg>
               <div className="CatalogText">{TextValues.catalog(lang)}</div>
             </Button>
+            {selectedProduct ?
+              <Button variant="contained" color="primary" style={{ width: '100%', height: '5%' }} onClick={() => addToCart()}>{TextValues.addToCart(lang)}</Button> : null}
           </div>
           <div className="Products" hidden={productsList}>
             <ProductsList
@@ -499,7 +496,6 @@ const Results = ({ lang, handleAddToCart }) => {
             setScene={setScene}
             setActiveCamera={setActiveCamera}
           />
-          <button onClick={() => addToCart()}>Add to cart</button>
         </div>
         <div className="PlaceholderDiv"></div>
       </div>

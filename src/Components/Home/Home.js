@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react';
-import TextValues from '../../tools/TextValues';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useRef } from 'react';
+//import TextValues from '../../tools/TextValues';
+import { useHistory } from 'react-router-dom';
 import { Button, Grid, CardContent, Input } from '@material-ui/core';
 import { Wrapper, HomeDiv, Title, Title2, Form } from './Home.styles';
 import useWindowDimensions from '../../Hooks/WindowDimentions'
@@ -9,7 +9,7 @@ import useWindowDimensions from '../../Hooks/WindowDimentions'
 const Home = ({ lang }) => {
     const history = useHistory();
     console.log('Language: ', lang);
-    const { height, width } = useWindowDimensions();
+    const { /*height,*/ width } = useWindowDimensions();
     const companyNameRef = useRef();
     let direction = "row"
     if (width > 850) {
@@ -22,7 +22,7 @@ const Home = ({ lang }) => {
     const submitForm = (e) => {
         let value = companyNameRef.current.value;
         if (value !== "") {
-            console.log(value)
+            //console.log(value)
             if (value === "metropolia" || value === "paisto" || value === "vanno") {
                 console.log("value ", value)
                 history.push('/tulokset/' + value);
@@ -53,6 +53,7 @@ const Home = ({ lang }) => {
                     </Grid>
                 </Form>
             </Wrapper>
+
             <Wrapper>
                 <CardContent>
                     <Title2>Miten homma toimii?</Title2>
@@ -91,6 +92,7 @@ const Home = ({ lang }) => {
                     </Grid>
                 </CardContent>
             </Wrapper >
+
             <Wrapper>
                 <CardContent>
                     <Title2>Yhteystiedot</Title2>

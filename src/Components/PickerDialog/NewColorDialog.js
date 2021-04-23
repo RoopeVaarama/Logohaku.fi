@@ -49,7 +49,7 @@ const NewColorDialog = (props) => {
     }*/
     const [pickerColor, setPickerColor] = useState("#00000");
     const handleColorChange = (color, event) => {
-      console.log('HandleColorChange ', color, event)
+      //console.log('HandleColorChange ', color, event)
       setPickerColor(color.hex)
     }
 
@@ -58,7 +58,7 @@ const NewColorDialog = (props) => {
     };
   
     const handleListItemClick = (value) => {
-      console.log('value ', value)
+      //console.log('value ', value)
       onClose(value);
     };
 
