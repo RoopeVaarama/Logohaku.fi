@@ -1,7 +1,14 @@
 .ProductsList {
-    display: flex;
-    flex-flow: row wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    width: 100%;
+    justify-items: center;
+    align-items: center;
 }
+
 .ProductCard {
-    flex-basis: 50%
+    width: 150px;
+    text-align: center;
+    margin: 0px;
+    display: table;
 }

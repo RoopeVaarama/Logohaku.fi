@@ -30,14 +30,26 @@ const App = () => {
 
     const handleAddToCart = (id, name, logoPosition, screenshotFront, screenshotBack) => {
         setCartItems(prev => {
+
+            //Is item in cart already and does the position match
+            const isItemInCart = prev.find(item => item.id === id);
+            const isItemPosition = prev.find(item => item.logoPosition === logoPosition);
+
+            if (isItemInCart && isItemPosition) {
+                return prev.map(item =>
+                    item.id === id && item.logoPosition === logoPosition
+                        ? { ...item, amount: item.amount + 1 } : item
+                );
+            }
+
             //First time adding the item
             return [...prev, { id, name, logoPosition, amount: 1, screenshotFront, screenshotBack }];
         });
+
         localStorage.setItem("cartItems", JSON.stringify(cartItems))
     }
 
     const handleChangeAmount = (id, logoPosition, amount) => {
-        console.log(amount)
         if (amount < 1) {
             setCartItems(prev =>
                 prev.reduce((ack, item) => {

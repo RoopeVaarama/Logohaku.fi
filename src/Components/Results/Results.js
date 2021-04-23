@@ -25,6 +25,7 @@ import NewLogoDialog from '../PickerDialog/NewLogoDialog';
 import NewColorDialog from '../PickerDialog/NewColorDialog';
 import { makeStyles } from "@material-ui/core";
 import ScrollLock from 'react-scrolllock';
+import useWindowDimensions from '../../Hooks/WindowDimentions'
 
 /**
  * Contains the Babylon.js code for rendering the 3D preview window on the results page.
@@ -246,6 +247,18 @@ const Results = ({ lang, handleAddToCart }) => {
     return ({ screenshotFront: screenshotFront, screenshotBack: screenshotBack })
   }
 
+  const { /*height,*/ width } = useWindowDimensions();
+  let productsWidth = "300px"
+  if (width < 1000 ){
+    productsWidth = "150px";
+  }
+  if (width > 1000) {
+    productsWidth = "350px"
+  }
+  if (width > 2000) {
+    productsWidth = "450px"
+  }
+
   const mapLogos = () => {
     const logoArray = logos
     //console.log("Logo Arrays ", logoArray);
@@ -459,28 +472,18 @@ const Results = ({ lang, handleAddToCart }) => {
           </Table>
         </div>
         <div /*onMouseOver={noScroll} onMouseLeave={scroll}*/ style={{ width: '95%' }} className="PreviewerWindow">
-          <div className="ButtonPanel">
-            <Button variant="contained" color="secondary" className="CatalogButton" onClick={toggleProductsList}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="50%"
-                height="50%"
-                fill="currentColor"
-                className="CatalogIcon"
-                viewBox="0 0 16 16"
-              >
-                <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V2zm8.5 0v8H15V2H8.5zm0 9v3H15v-3H8.5zm-1-9H1v3h6.5V2zM1 14h6.5V6H1v8z" />
-              </svg>
-              <div className="CatalogText">{TextValues.catalog(lang)}</div>
-            </Button>
-            {selectedProduct ?
-              <Button variant="contained" color="primary" style={{ width: '100%', height: '5%' }} onClick={() => addToCart()}>{TextValues.addToCart(lang)}</Button> : null}
-          </div>
-          <div className="Products" hidden={productsList}>
+          <div style={{ position: 'relative', width: productsWidth}} className="Products">
             <ProductsList
               productsObjects={productsObjects}
               selectProduct={selectProduct}
             ></ProductsList>
+            <div style={{ width: '100%', height: "100px", position: "absolute", bottom: "0", }}>
+              <div style={{ width: '100%', height: "60%" }}>
+                <p>div for amount?</p>
+              </div>
+              {selectedProduct ?
+                <Button variant="contained" color="primary" style={{ width: '100%', height: '40%' }} onClick={() => addToCart()}>{TextValues.addToCart(lang)}</Button> : null}
+            </div>
           </div>
           <SceneComponent
             lang={lang}
@@ -497,10 +500,28 @@ const Results = ({ lang, handleAddToCart }) => {
             setActiveCamera={setActiveCamera}
           />
         </div>
-        <div className="PlaceholderDiv"></div>
       </div>
+      <div className="PlaceholderDiv"></div>
+
     </ScrollLock>
   );
 };
 
 export default Results;
+
+
+/*<div className="ButtonPanel">
+            <Button variant="contained" color="secondary" className="CatalogButton" onClick={toggleProductsList}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="50%"
+                height="50%"
+                fill="currentColor"
+                className="CatalogIcon"
+                viewBox="0 0 16 16"
+              >
+                <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V2zm8.5 0v8H15V2H8.5zm0 9v3H15v-3H8.5zm-1-9H1v3h6.5V2zM1 14h6.5V6H1v8z" />
+              </svg>
+              <div className="CatalogText">{TextValues.catalog(lang)}</div>
+            </Button>
+          </div>*/
