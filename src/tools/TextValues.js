@@ -320,7 +320,14 @@ const TextValues = {
                 return "Shaft";
         }
     },
-
+    search: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Hae";
+            default:
+                return "Search";
+        }
+    },
     logoPickerInfo: function (langcode) {
         switch (langcode) {
             case "fi":

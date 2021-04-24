@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const HomeDiv = styled.div`
 margin: auto;
-justify-content:center;`;
+justify-content:center;
+`;
 
 export const Wrapper = styled.div`
 

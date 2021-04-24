@@ -1,14 +1,14 @@
 import React, { useRef } from 'react';
-//import TextValues from '../../tools/TextValues';
+import TextValues from '../../tools/TextValues';
 import { useHistory } from 'react-router-dom';
 import { Button, Grid, CardContent, Input } from '@material-ui/core';
+import { Search } from '@material-ui/icons';
 import { Wrapper, HomeDiv, Title, Title2, Form } from './Home.styles';
-import useWindowDimensions from '../../Hooks/WindowDimentions'
+import useWindowDimensions from '../../Hooks/WindowDimentions';
 
 
 const Home = ({ lang }) => {
     const history = useHistory();
-    console.log('Language: ', lang);
     const { /*height,*/ width } = useWindowDimensions();
     const companyNameRef = useRef();
     let direction = "row"
@@ -46,7 +46,7 @@ const Home = ({ lang }) => {
                             <Input style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder="Company Name" inputRef={companyNameRef} />
                         </Grid>
                         <Grid item xs={2}>
-                            <Button style={{ width: '100%' }} variant="contained" type="submit"> Search
+                            <Button style={{ width: '100%' }} variant="contained" color="primary" type="submit">{TextValues.search(lang)}  <Search /> 
                         </Button>
                         </Grid>
 

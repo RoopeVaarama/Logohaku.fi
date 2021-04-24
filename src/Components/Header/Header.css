@@ -1,12 +1,12 @@
 .Header {
     position: fixed;
     top: 0;
-    max-height: 70px;
+    max-height: 100px;
     width: 100vw;
     z-index: 20;
   
     display: grid;
-    grid-template-areas: "logo logo logo logo nav";
+    grid-template-areas: "logo logo logo logo logo logo nav";
   
     /* Cosmetics */
     background-color: #282c34;
@@ -37,7 +37,7 @@
   }
   
   .Nav button {
-    padding: 10px;
+    padding: 5px;
     outline: none;
     border: none;
     font-size: 20px;
