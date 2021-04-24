@@ -13,118 +13,119 @@ import Paper from '@material-ui/core/Paper';
 import { Image } from 'react-bootstrap';
 import './PickerDialog.css'
 import { DialogContent } from '@material-ui/core';
+import TextValues from '../../tools/TextValues';
 
 const baseUrl = "https://api.logohaku.fi/logoversion?version="
 
 const PickerDialog = (props) => {
-    const { onClose, selectedValue, open, ytunnus, mode} = props;
-    console.log('SelectedValue ', selectedValue, ytunnus, mode);
-    const testLogos = {
-      "logo1": "0b.png",
-      "logo2": "0b.png",
-      "logo3": "0b.png",
-      "logo4": "0b.png",
-      "logo5": "0c.svg"
-    }
-
-    const testColors = {
-      "color1": "#D32A05",
-      "color2": "#15D305",
-      "color3": "#0556D3",
-      "color4": "#D305D3",
-      "color5": "#D30566"
-    }
-
-    /*const response = await fetch(url, {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'authority': 'api.logohaku.fi',
-          'method': 'POST',
-          'path': '/get',
-          'scheme': 'https'
-    
-        },
-        redirect: 'follow',
-        referrerPolicy: 'strict-origin-when-cross-origin',
-        formData: {
-          'company': searchTerm,
-          'type': 'input'
-        }
-      })
-      return response.json
-    }*/
-  
-    const handleClose = () => {
-      onClose(selectedValue);
-    };
-  
-    const handleListItemClick = (value, index) => {
-      console.log('value ', value, index)
-      onClose(value, index);
-    };
-
-    const handleListItemClickNew = (value, index) => {
-      console.log('New item received in pickedialog ', value, index);
-      onClose(value, index);
-    }
-
-    const createGridItems = () => {
-      if (mode === 'logo' && selectedValue !== null) {
-        const urls = []
-        for (var i=1; i<=9;i++) {
-          const splitValue = selectedValue[0].split("/").pop()
-          console.log('split value ', splitValue)
-          const fullUrl = baseUrl + i + "&code=" + ytunnus + "&file=" + splitValue
-          console.log('Full url: ', fullUrl)
-          urls.push(fullUrl);
-        }
-        return urls.map((item) => (
-          <Grid key={item[0] + ytunnus + mode} item xs={3}>
-            <Paper className={item[0]}>
-              <Image src={item} className="img-fluid" onClick={() => handleListItemClick(item, selectedValue[1])}/>
-            </Paper>
-          </Grid>
-        ))
-      } else if (mode === 'color') {
-        const logoArray = Object.entries(testLogos)
-        console.log(logoArray);
-        return logoArray.map((item) => (
-          <Grid key={item[0] + ytunnus + mode} item xs={3}>
-            <Paper className={item[0]}>
-              <Image src={"/" + item[1]} className="img-fluid" />
-            </Paper>
-          </Grid>
-        ))
-      } else if (mode === 'newLogo' && selectedValue !== null) {
-        const urls = [];
-        const baseUrl = "https://api.logohaku.fi/data/" + ytunnus + "/"
-        for (var x=0; x<selectedValue.length; x++) {
-          const fullUrl = baseUrl + selectedValue[i];
-          urls.push(fullUrl);
-        }
-        return urls.map((item, index) => (
-          <Grid key={item + ytunnus + mode} item xs={3}>
-            <Paper>
-              <Image src={item} className="img-fluid" onClick={() => handleListItemClickNew(item, index)}/>
-            </Paper>
-          </Grid>
-        ))
-      }
-    };
-  
-    return (
-      <Dialog onClose={handleClose} aria-labelledby={"customized-dialog-title" + mode} open={open} className="Dialog" fullwidth>
-        <DialogTitle id="customized-dialog-title" className="DialogTitle" >Customize your logo</DialogTitle>
-          <DialogContent dividers>
-            <Grid container className="PickerGrid" spacing={2}>
-              {createGridItems()}
-            </Grid>
-          </DialogContent>
-      </Dialog>
-    );
+  const { onClose, selectedValue, open, ytunnus, mode, lang } = props;
+  console.log('SelectedValue ', selectedValue, ytunnus, mode);
+  const testLogos = {
+    "logo1": "0b.png",
+    "logo2": "0b.png",
+    "logo3": "0b.png",
+    "logo4": "0b.png",
+    "logo5": "0c.svg"
   }
 
-  export default PickerDialog;
+  const testColors = {
+    "color1": "#D32A05",
+    "color2": "#15D305",
+    "color3": "#0556D3",
+    "color4": "#D305D3",
+    "color5": "#D30566"
+  }
+
+  /*const response = await fetch(url, {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'authority': 'api.logohaku.fi',
+        'method': 'POST',
+        'path': '/get',
+        'scheme': 'https'
+  
+      },
+      redirect: 'follow',
+      referrerPolicy: 'strict-origin-when-cross-origin',
+      formData: {
+        'company': searchTerm,
+        'type': 'input'
+      }
+    })
+    return response.json
+  }*/
+
+  const handleClose = () => {
+    onClose(selectedValue);
+  };
+
+  const handleListItemClick = (value, index) => {
+    console.log('value ', value, index)
+    onClose(value, index);
+  };
+
+  const handleListItemClickNew = (value, index) => {
+    console.log('New item received in pickedialog ', value, index);
+    onClose(value, index);
+  }
+
+  const createGridItems = () => {
+    if (mode === 'logo' && selectedValue !== null) {
+      const urls = []
+      for (var i = 1; i <= 9; i++) {
+        const splitValue = selectedValue[0].split("/").pop()
+        console.log('split value ', splitValue)
+        const fullUrl = baseUrl + i + "&code=" + ytunnus + "&file=" + splitValue
+        console.log('Full url: ', fullUrl)
+        urls.push(fullUrl);
+      }
+      return urls.map((item) => (
+        <Grid key={item[0] + ytunnus + mode} item xs={3}>
+          <Paper className={item[0]}>
+            <Image src={item} className="img-fluid" onClick={() => handleListItemClick(item, selectedValue[1])} />
+          </Paper>
+        </Grid>
+      ))
+    } else if (mode === 'color') {
+      const logoArray = Object.entries(testLogos)
+      console.log(logoArray);
+      return logoArray.map((item) => (
+        <Grid key={item[0] + ytunnus + mode} item xs={3}>
+          <Paper className={item[0]}>
+            <Image src={"/" + item[1]} className="img-fluid" />
+          </Paper>
+        </Grid>
+      ))
+    } else if (mode === 'newLogo' && selectedValue !== null) {
+      const urls = [];
+      const baseUrl = "https://api.logohaku.fi/data/" + ytunnus + "/"
+      for (var x = 0; x < selectedValue.length; x++) {
+        const fullUrl = baseUrl + selectedValue[i];
+        urls.push(fullUrl);
+      }
+      return urls.map((item, index) => (
+        <Grid key={item + ytunnus + mode} item xs={3}>
+          <Paper>
+            <Image src={item} className="img-fluid" onClick={() => handleListItemClickNew(item, index)} />
+          </Paper>
+        </Grid>
+      ))
+    }
+  };
+
+  return (
+    <Dialog onClose={handleClose} aria-labelledby={"customized-dialog-title" + mode} open={open} className="Dialog" fullwidth>
+      <DialogTitle id="customized-dialog-title" className="DialogTitle" >{TextValues.customizeYourLogo(lang)}</DialogTitle>
+      <DialogContent dividers>
+        <Grid container className="PickerGrid" spacing={2}>
+          {createGridItems()}
+        </Grid>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+export default PickerDialog;

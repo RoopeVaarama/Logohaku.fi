@@ -4,7 +4,7 @@ import { Col, Row, Container } from 'react-bootstrap';
 import "./AboutUs.css";
 
 
-const AboutUs = ({lang}) => {
+const AboutUs = ({ lang }) => {
     return (
         <div className="About">
             <Container className="Box1">

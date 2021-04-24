@@ -216,6 +216,30 @@ const TextValues = {
                 return "Bag";
         }
     },
+    selectColor: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Valitse väri";
+            default:
+                return "Select color";
+        }
+    },
+    selectColorCompanyPalette: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Valitse väri yrityksen paletista tai valitse omasi";
+            default:
+                return "Select a color from your company's palette or make your own";
+        }
+    },
+    customizeYourLogo: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Kustomoi logosi";
+            default:
+                return "Customize your logo";
+        }
+    },
     logo_positions: function (langcode) {
         switch (langcode) {
             case 'fi':

@@ -5,7 +5,7 @@ import TextValues from '../../tools/TextValues';
 import "./Header.css";
 import { CSSTransition } from "react-transition-group";
 import logo from "../../assets/paisto.png";
-import Button from '@material-ui/core/Button';
+import { Button } from '@material-ui/core';
 import { Menu, AddShoppingCart } from '@material-ui/icons';
 
 

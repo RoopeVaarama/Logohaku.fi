@@ -425,6 +425,7 @@ const Results = ({ lang, handleAddToCart }) => {
                   open={logoPickerDialogOpen}
                   onClose={handleCloseLogos}
                   ytunnus={response.code}
+                  lang={lang}
                 />
                 <td>
                   <Button className="LogoPickerButton" onClick={() => setNewLogoPickerDialogOpen(true)}>+</Button>
@@ -433,6 +434,7 @@ const Results = ({ lang, handleAddToCart }) => {
                     open={newLogoPickerDialogOpen}
                     onClose={handleCloseNewLogo}
                     ytunnus={response.code}
+                    lang={lang}
                   />
                 </td>
               </tr>
@@ -460,6 +462,7 @@ const Results = ({ lang, handleAddToCart }) => {
                   open={colorPickerDialogOpen}
                   onClose={handleCloseColors}
                   ytunnus={response.code}
+                  lang={lang}
                 />
                 <td>
                   <Button className="LogoPickerItem" onClick={() => setNewColorPickerDialogOpen(true)}>+</Button>
@@ -468,6 +471,7 @@ const Results = ({ lang, handleAddToCart }) => {
                     open={newColorPickerDialogOpen}
                     onClose={handleCloseNewColor}
                     ytunnus={response.code}
+                    lang={lang}
                   />
                 </td>
               </tr>

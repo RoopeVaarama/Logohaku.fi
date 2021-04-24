@@ -8,7 +8,7 @@ import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
 import AboutUs from './Components/AboutUs/AboutUs';
 //import Footer from './Components/Footer/Footer';
-import Order from './Components/Order/Order';
+//import Order from './Components/Order/Order';
 import NotFound from './Components/NotFound';
 //import TextValues from './tools/TextValues';
 import Results from './Components/Results/Results';
@@ -99,10 +99,6 @@ const App = () => {
             <Header lang={lang} cartItems={cartItems} openCart={() => setCartOpen(true)} />
             <div className="Content">
                 <Switch>
-                    <Route exact path="/ostoskori">
-                        <Order lang={lang} cartItems={cartItems} addToCart={(id, name, logoPosition, screenshotFront, screenshotBack) => handleAddToCart(id, name, logoPosition, screenshotFront, screenshotBack)}
-                            removeFromCart={(id, logoPosition) => handleRemoveFromCart(id, logoPosition)} />
-                    </Route>
                     <Route exact path="/tietoja">
                         <AboutUs lang={lang} />
                     </Route>
@@ -123,3 +119,7 @@ const App = () => {
 }
 
 ReactDOM.render(<Router> <App /> </Router>, document.getElementById('root'))
+/*<Route exact path="/ostoskori">
+                        <Order lang={lang} cartItems={cartItems} addToCart={(id, name, logoPosition, screenshotFront, screenshotBack) => handleAddToCart(id, name, logoPosition, screenshotFront, screenshotBack)}
+                            removeFromCart={(id, logoPosition) => handleRemoveFromCart(id, logoPosition)} />
+                    </Route>*/
