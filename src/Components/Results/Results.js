@@ -91,9 +91,9 @@ const Results = ({ lang, handleAddToCart }) => {
   const [colorPickerDialogOpen, setColorPickerDialogOpen] = useState(false);
   const [newLogoPickerDialogOpen, setNewLogoPickerDialogOpen] = useState(false);
   const [newColorPickerDialogOpen, setNewColorPickerDialogOpen] = useState(false);
-  const [productsList, setProductsList] = useState(true);
-  const [presetsList, setPresetsList] = useState(true);
-  const [presetPosition, setPresetPosition] = useState(1);
+  //const [productsList, setProductsList] = useState(true);
+  //const [presetsList, setPresetsList] = useState(true);
+  //const [presetPosition, setPresetPosition] = useState(1);
   const [model, setModel] = useState(null);
   //const [loading, setLoading] = useState(true);
   const [lockScroll, setLockScroll] = useState(false);
@@ -192,6 +192,7 @@ const Results = ({ lang, handleAddToCart }) => {
     setSelectedProduct(product);
   };
 
+  /*
   const toggleProductsList = () => {
     setProductsList(!productsList);
     if (presetsList === false) {
@@ -204,7 +205,7 @@ const Results = ({ lang, handleAddToCart }) => {
     if (productsList === false) {
       setProductsList(true);
     }
-  };
+  };*/
 
   const print = (img) => {
     //console.log("Seleted logo here", img);
