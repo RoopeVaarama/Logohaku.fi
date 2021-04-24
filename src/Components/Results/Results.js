@@ -500,7 +500,8 @@ const Results = ({ lang, handleAddToCart }) => {
             setEngine={setEngine}
             setScene={setScene}
             setActiveCamera={setActiveCamera}
-            setLogoPos={setLogoPosition}
+            logoPosition={logoPosition}
+            setLogoPosition={setLogoPosition}
           />
         </div>
       </div>

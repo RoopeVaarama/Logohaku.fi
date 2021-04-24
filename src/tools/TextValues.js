@@ -224,6 +224,14 @@ const TextValues = {
                 return "Logo positions"
         }
     },
+    freePicking: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Vapaa sijoitus";
+            default:
+                return "Free Picking";
+        }
+    },
     left_sleeve: function (langcode) {
         switch (langcode) {
             case "fi":

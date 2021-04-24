@@ -15,7 +15,7 @@ import {
   //MenuItem, Menu, Button,
 } from "@material-ui/core";
 //import { InputManager } from "@babylonjs/core/Inputs/scene.inputManager";
-//import TextValues from "../tools/TextValues";
+import TextValues from "../tools/TextValues";
 import "./SceneComponent.css";
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -33,13 +33,13 @@ const useStyles = makeStyles({
  *
  */
 
-const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setScene, setActiveCamera, setLogoPos }) => {
+const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setScene, setActiveCamera, logoPosition, setLogoPosition }) => {
   const [scene1, setScene1] = useState(null);
   const [decal, setDecal] = useState(null);
   //const [selectedLogo, setSelectedLogo] = useState(null);
   const [currentModel, setCurrentModel] = useState(null);
   //const [currentModelJson, setCurrentModelJson] = useState(null);
-  const [logoPosition, setLogoPosition] = useState(null);
+  //const [logoPosition, setLogoPosition] = useState(null);
   //const [logoPositionName, setLogoPositionName] = useState(null);
   const [freePick, setFreePick] = useState(false);
 
@@ -215,7 +215,6 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
   const handleChange = (event) => {
     console.log('event ', event.target.value)
     setLogoPosition(event.target.value)
-    setLogoPos(event.target.value)
   }
   const handleSwitchChange = (event) => {
     console.log('Handle switch change ', event.target.checked)
@@ -225,11 +224,11 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
   return (
     <div className="Container">
       <FormControl component="fieldset" className="PositionController" classes={{ root: classes.root }}>
-        <FormLabel component="legend">Logo position</FormLabel>
+        <FormLabel component="legend">{TextValues.logoPosition(lang)}</FormLabel>
         <FormControlLabel
           value={freePick}
           control={<Switch color="primary" />}
-          label="Free picking"
+          label={TextValues.freePicking(lang)}
           onChange={handleSwitchChange}
           labelPlacement="end">
         </FormControlLabel>

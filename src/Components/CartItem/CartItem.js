@@ -6,13 +6,20 @@ import { DeleteForever } from '@material-ui/icons';
 
 
 const CartItem = ({ lang, item, removeFromCart, changeAmount }) => {
-    console.log(item)
+    let logoPositionLabel = "";
+    if (item.logoPosition) {
+        let logoPositionText = item.logoPosition.split(":")
+        logoPositionLabel = logoPositionText[logoPositionText.length - 1]
+    }
     return (
         <Wrapper>
             <div>
                 <h4>{item.name}</h4>
                 <div className="information">
-                    <p>{TextValues.logoPosition(lang)} {item.logoPosition}</p>
+                    <p>{TextValues.logoPosition(lang)} {logoPositionLabel}</p>
+                </div>
+                <div>
+                    <p>Some data</p>
                 </div>
                 <div className='buttons'>
                     <Button
@@ -22,7 +29,7 @@ const CartItem = ({ lang, item, removeFromCart, changeAmount }) => {
                         onClick={() => removeFromCart(item.id, item.logoPosition)}
                     >
                         <DeleteForever />
-                </Button>
+                    </Button>
                     <Input
                         size="small"
                         style={{ marginLeft: "5%", textAlign: 'center', width: '50%' }}
