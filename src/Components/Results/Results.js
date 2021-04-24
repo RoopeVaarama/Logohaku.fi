@@ -98,6 +98,8 @@ const Results = ({ lang, handleAddToCart }) => {
   //const [loading, setLoading] = useState(true);
   const [lockScroll, setLockScroll] = useState(false);
 
+  const [logoPosition, setLogoPosition] = useState(null);
+
   // Brand (color and logo) states
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedEditableLogo, setSelectedEditableLogo] = useState(null);
@@ -340,7 +342,7 @@ const Results = ({ lang, handleAddToCart }) => {
     createScreenshot().then((res) => {
       let screenshotFront = res.screenshotFront
       let screenshotBack = res.screenshotBack
-      handleAddToCart(product.ID, product.NAME, presetPosition, screenshotFront, screenshotBack);
+      handleAddToCart(product.ID, product.NAME, logoPosition, screenshotFront, screenshotBack);
     });
   };
 
@@ -498,6 +500,7 @@ const Results = ({ lang, handleAddToCart }) => {
             setEngine={setEngine}
             setScene={setScene}
             setActiveCamera={setActiveCamera}
+            setLogoPos={setLogoPosition}
           />
         </div>
       </div>

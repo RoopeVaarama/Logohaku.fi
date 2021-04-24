@@ -29,6 +29,7 @@ const App = () => {
     }, []);
 
     const handleAddToCart = (id, name, logoPosition, screenshotFront, screenshotBack) => {
+        console.log(logoPosition)
         setCartItems(prev => {
 
             //Is item in cart already and does the position match

@@ -1,17 +1,21 @@
-import { Box, Engine, Ground, Model, Scene, DynamicTexture, Image } from "react-babylonjs";
-import { Vector3, Color3, MeshBuilder, Tools, Texture, StandardMaterial, ExecuteCodeAction, VertexBuffer, FreeCamera } from "@babylonjs/core";
-import React, { Suspense, useEffect, useRef, useState, addEventListener } from "react";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
-import Button from "@material-ui/core/Button";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Radio from "@material-ui/core/Radio";
-import Switch from '@material-ui/core/Switch';
-import { InputManager } from "@babylonjs/core/Inputs/scene.inputManager";
-import TextValues from "../tools/TextValues";
+import {
+  Engine, Model, Scene,
+  //DynamicTexture, Image, Ground, Box 
+} from "react-babylonjs";
+import {
+  Vector3, Color3, MeshBuilder, Texture, StandardMaterial, FreeCamera
+  //Tools, ExecuteCodeAction, VertexBuffer,  
+} from "@babylonjs/core";
+import React, {
+  Suspense, useEffect, useState,
+  //MenuItemuseRef, addEventListener
+} from "react";
+import {
+  FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Switch,
+  //MenuItem, Menu, Button,
+} from "@material-ui/core";
+//import { InputManager } from "@babylonjs/core/Inputs/scene.inputManager";
+//import TextValues from "../tools/TextValues";
 import "./SceneComponent.css";
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -29,14 +33,14 @@ const useStyles = makeStyles({
  *
  */
 
-const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setScene, setActiveCamera }) => {
+const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setScene, setActiveCamera, setLogoPos }) => {
   const [scene1, setScene1] = useState(null);
   const [decal, setDecal] = useState(null);
-  const [selectedLogo, setSelectedLogo] = useState(null);
+  //const [selectedLogo, setSelectedLogo] = useState(null);
   const [currentModel, setCurrentModel] = useState(null);
-  const [currentModelJson, setCurrentModelJson] = useState(null);
+  //const [currentModelJson, setCurrentModelJson] = useState(null);
   const [logoPosition, setLogoPosition] = useState(null);
-  const [logoPositionName, setLogoPositionName] = useState(null);
+  //const [logoPositionName, setLogoPositionName] = useState(null);
   const [freePick, setFreePick] = useState(false);
 
   const classes = useStyles();
@@ -211,6 +215,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
   const handleChange = (event) => {
     console.log('event ', event.target.value)
     setLogoPosition(event.target.value)
+    setLogoPos(event.target.value)
   }
   const handleSwitchChange = (event) => {
     console.log('Handle switch change ', event.target.checked)
