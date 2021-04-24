@@ -200,6 +200,14 @@ const TextValues = {
                 return "Mask";
         }
     },
+    thankYouForOrder: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Kiitos tilauksestasi!";
+            default:
+                return "Thank you for your order!";
+        }
+    },
     pen: function (langcode) {
         switch (langcode) {
             case "fi":
@@ -246,6 +254,14 @@ const TextValues = {
                 return "Logo paikat";
             default:
                 return "Logo positions"
+        }
+    },
+    closeCart: function (langcode) {
+        switch (langcode) {
+            case 'fi':
+                return "Sulje";
+            default:
+                return "Close"
         }
     },
     freePicking: function (langcode) {

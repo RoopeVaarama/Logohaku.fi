@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import TextValues from '../../tools/TextValues';
 import { Wrapper, Form } from './Cart.styles';
 import CartItem from '../CartItem/CartItem';
@@ -7,6 +7,7 @@ import emailjs from 'emailjs-com';
 
 const Cart = ({ lang, cartItems, removeFromCart, closeCart, changeAmount }) => {
 
+    const [showCart, setShowCart] = useState(true);
     const firstNameRef = useRef();
     const lastNameRef = useRef();
     const emailAddressRef = useRef();
@@ -16,8 +17,15 @@ const Cart = ({ lang, cartItems, removeFromCart, closeCart, changeAmount }) => {
     const phoneNumberRef = useRef();
     const additionalInformationRef = useRef();
 
+    const handleOnClick = () => {
+        setShowCart(true);
+        closeCart();
+    }
+
     const handleOrder = (e) => {
         e.preventDefault();
+
+
         let firstNameValue = firstNameRef.current.value;
         let lastNameValue = lastNameRef.current.value;
         let emailAddressValue = emailAddressRef.current.value;
@@ -43,55 +51,63 @@ const Cart = ({ lang, cartItems, removeFromCart, closeCart, changeAmount }) => {
             additionalInformationValue: additionalInformationValue,
             cartItems: items,
         }
-
+        
         emailjs.send('service_l6d267z', '123456789', templeteParams, 'user_i5c9QI8T9mTXPfuiGqjqM')
             .then((result) => {
                 console.log(result.text);
+                setShowCart(false);
             }, (error) => {
                 console.log(error.text);
+                alert(error.text);
             });
     }
 
     return (
-        <Wrapper>
-            <h1>{TextValues.yourShoppingCart(lang)}</h1>
-            {cartItems.length === 0 ? <p>{TextValues.noItemsInCart(lang)}</p> : null}
-            {cartItems.map(item => (
-                <CartItem
-                    lang={lang}
-                    key={item.id}
-                    item={item}
-                    removeFromCart={removeFromCart}
-                    changeAmount={changeAmount}
-                >
+        showCart ?
+            <Wrapper>
+                <h1>{TextValues.yourShoppingCart(lang)}</h1>
+                {cartItems.length === 0 ? <p>{TextValues.noItemsInCart(lang)}</p> : null}
+                {cartItems.map(item => (
+                    <CartItem
+                        lang={lang}
+                        key={item.id}
+                        item={item}
+                        removeFromCart={removeFromCart}
+                        changeAmount={changeAmount}
+                    >
 
-                </CartItem>
-            ))}
-            {cartItems.length > 0 ?
-                <div style={{ width: '100%', alignItems: 'center', padding: '5px' }}>
-                    <Form style={{ alignItems: 'center' }} onSubmit={handleOrder}>
-                        <Input style={{ width: '100%', paddingTop: '10px' }} variant="outlined" type="text" placeholder={TextValues.firstName(lang)} required inputRef={firstNameRef} />
+                    </CartItem>
+                ))}
+                {cartItems.length > 0 ?
+                    <div style={{ width: '100%', alignItems: 'center', padding: '5px' }}>
+                        <Form style={{ alignItems: 'center' }} onSubmit={handleOrder}>
+                            <Input style={{ width: '100%', paddingTop: '10px' }} variant="outlined" type="text" placeholder={TextValues.firstName(lang)} required inputRef={firstNameRef} />
 
-                        <Input variant="outlined" style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder={TextValues.lastName(lang)} inputRef={lastNameRef} />
+                            <Input variant="outlined" style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder={TextValues.lastName(lang)} inputRef={lastNameRef} />
 
-                        <Input style={{ width: '100%', paddingTop: '10px' }} type="email" placeholder={TextValues.emailAddress(lang)} inputRef={emailAddressRef} />
+                            <Input style={{ width: '100%', paddingTop: '10px' }} type="email" placeholder={TextValues.emailAddress(lang)} inputRef={emailAddressRef} />
 
-                        <Input style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder={TextValues.companyName(lang)} inputRef={companyNameRef} />
+                            <Input style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder={TextValues.companyName(lang)} inputRef={companyNameRef} />
 
-                        <Input style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder={TextValues.shippingAddress(lang)} inputRef={shippingAddressRef} />
+                            <Input style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder={TextValues.shippingAddress(lang)} inputRef={shippingAddressRef} />
 
-                        <Input style={{ width: '100%', paddingTop: '10px' }} type="number" placeholder={TextValues.postCode(lang)} inputRef={postcodeRef} />
+                            <Input style={{ width: '100%', paddingTop: '10px' }} type="number" placeholder={TextValues.postCode(lang)} inputRef={postcodeRef} />
 
-                        <Input style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder={TextValues.phoneNumber(lang)} inputRef={phoneNumberRef} />
+                            <Input style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder={TextValues.phoneNumber(lang)} inputRef={phoneNumberRef} />
 
-                        <Input multiline rows={4} style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder={TextValues.additionalInformation(lang)} inputRef={additionalInformationRef} />
+                            <Input multiline rows={4} style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder={TextValues.additionalInformation(lang)} inputRef={additionalInformationRef} />
 
-                        <Button style={{ width: '100%', padding: '10px' }} variant="contained" color="secondary" type="submit"> {TextValues.orderButton(lang)}
-                        </Button>
-                    </Form>
+                            <Button style={{ width: '100%', padding: '10px' }} variant="contained" color="secondary" type="submit"> {TextValues.orderButton(lang)}
+                            </Button>
+                        </Form>
 
-                </div> : null}
-        </Wrapper >
+                    </div> : null}
+            </Wrapper > :
+
+            <Wrapper>
+                <h1 style={{ marginTop: "10%", textAlign: 'center' }}>{TextValues.thankYouForOrder(lang)}</h1>
+                <Button style={{ marginTop: "20px", marginLeft: "5%", width: '90%', padding: '10px', alignContent: 'center'}} variant='contained' color='primary' onClick={() => handleOnClick()} >{TextValues.closeCart(lang)}</Button>
+            </Wrapper>
     )
 }
 export default Cart;
