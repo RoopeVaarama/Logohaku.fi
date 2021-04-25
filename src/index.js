@@ -28,7 +28,7 @@ const App = () => {
 
     }, []);
 
-    const handleAddToCart = (id, name, logoPosition, screenshotFront, screenshotBack) => {
+    const handleAddToCart = (id, name, logoPosition, logoLabel, screenshotFront, screenshotBack, selectedLogo) => {
         console.log(logoPosition)
         setCartItems(prev => {
 
@@ -44,7 +44,7 @@ const App = () => {
             }
 
             //First time adding the item
-            return [...prev, { id, name, logoPosition, amount: 1, screenshotFront, screenshotBack }];
+            return [...prev, { id, name, logoPosition, logoLabel, amount: 1, screenshotFront, screenshotBack, selectedLogo }];
         });
 
         localStorage.setItem("cartItems", JSON.stringify(cartItems))
@@ -107,7 +107,7 @@ const App = () => {
                     </Route>
                     <Route
                         exact path="/tulokset/:id"
-                        children={<Results lang={lang} handleAddToCart={(id, name, logoPosition, screenshotFront, screenshotBack) => handleAddToCart(id, name, logoPosition, screenshotFront, screenshotBack)} />}>
+                        children={<Results lang={lang} handleAddToCart={(id, name, logoPosition, logoLabel, screenshotFront, screenshotBack, selectedLogo) => handleAddToCart(id, name, logoPosition, logoLabel, screenshotFront, screenshotBack, selectedLogo)} />}>
                     </Route>
                     <Route>
                         <NotFound lang={lang} />

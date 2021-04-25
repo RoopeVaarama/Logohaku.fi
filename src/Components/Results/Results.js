@@ -27,6 +27,8 @@ import { makeStyles } from "@material-ui/core";
 import ScrollLock from 'react-scrolllock';
 import AddIcon from '@material-ui/icons/Add';
 import useWindowDimensions from '../../Hooks/WindowDimentions'
+import useWindowDimensions from '../../Hooks/WindowDimentions';
+import nextId from "react-id-generator";
 
 /**
  * Contains the Babylon.js code for rendering the 3D preview window on the results page.
@@ -85,6 +87,7 @@ const useStyles = makeStyles({
 
 const Results = ({ lang, handleAddToCart }) => {
   const { id } = useParams();
+  const itemID = nextId('itemID-');
   //const [imageURL, setImageURL] = useState("");
 
   // UI component states
@@ -92,14 +95,15 @@ const Results = ({ lang, handleAddToCart }) => {
   const [colorPickerDialogOpen, setColorPickerDialogOpen] = useState(false);
   const [newLogoPickerDialogOpen, setNewLogoPickerDialogOpen] = useState(false);
   const [newColorPickerDialogOpen, setNewColorPickerDialogOpen] = useState(false);
+  const [model, setModel] = useState(null);
+  const [lockScroll, setLockScroll] = useState(false);
+
   //const [productsList, setProductsList] = useState(true);
   //const [presetsList, setPresetsList] = useState(true);
   //const [presetPosition, setPresetPosition] = useState(1);
-  const [model, setModel] = useState(null);
   //const [loading, setLoading] = useState(true);
-  const [lockScroll, setLockScroll] = useState(false);
 
-  const [logoPosition, setLogoPosition] = useState(null);
+
 
   // Brand (color and logo) states
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -111,6 +115,10 @@ const Results = ({ lang, handleAddToCart }) => {
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedLogo, setSelectedLogo] = useState(null);
   const [logoRotation, setLogoRotation] = useState(0);
+  const [logoPosition, setLogoPosition] = useState(null);
+  const [logoLabel, setLogoLabel] = useState(null);
+  const [freeLogoPosition, setFreeLogoPosition] = useState(false);
+  const [freePick, setFreePick] = useState(false);
 
   // States for the Babylon scene and engine
   const [scene, setScene] = useState(null);
@@ -254,7 +262,7 @@ const Results = ({ lang, handleAddToCart }) => {
 
   const { /*height,*/ width } = useWindowDimensions();
   let productsWidth = "300px"
-  if (width < 1000 ){
+  if (width < 1000) {
     productsWidth = "150px";
   }
   if (width > 1000) {
@@ -342,10 +350,15 @@ const Results = ({ lang, handleAddToCart }) => {
 
   const addToCart = () => {
     let product = Object.values(selectedProduct)[0];
+    console.log(logoLabel, freeLogoPosition)
+    let logoPos = logoPosition;
+    if(freePick){
+      logoPos = freeLogoPosition;
+    }
     createScreenshot().then((res) => {
       let screenshotFront = res.screenshotFront
       let screenshotBack = res.screenshotBack
-      handleAddToCart(product.ID, product.NAME, logoPosition, screenshotFront, screenshotBack);
+      handleAddToCart(itemID, product.NAME, logoPos, logoLabel, screenshotFront, screenshotBack, selectedLogo);
     });
   };
 
@@ -485,7 +498,7 @@ const Results = ({ lang, handleAddToCart }) => {
           </Table>
         </div>
         <div /*onMouseOver={noScroll} onMouseLeave={scroll}*/ style={{ width: '95%' }} className="PreviewerWindow">
-          <div style={{ position: 'relative', width: productsWidth}} className="Products">
+          <div style={{ position: 'relative', width: productsWidth }} className="Products">
             <ProductsList
               productsObjects={productsObjects}
               selectProduct={selectProduct}
@@ -516,6 +529,10 @@ const Results = ({ lang, handleAddToCart }) => {
             setActiveCamera={setActiveCamera}
             logoPosition={logoPosition}
             setLogoPosition={setLogoPosition}
+            setLogoLabel={setLogoLabel}
+            freePick={freePick}
+            setFreePick={setFreePick}
+            setFreeLogoPosition={setFreeLogoPosition}
           />
         </div>
       </div>
