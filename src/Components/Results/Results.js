@@ -27,7 +27,6 @@ import { makeStyles } from "@material-ui/core";
 import ScrollLock from 'react-scrolllock';
 import AddIcon from '@material-ui/icons/Add';
 import useWindowDimensions from '../../Hooks/WindowDimentions'
-import useWindowDimensions from '../../Hooks/WindowDimentions';
 import nextId from "react-id-generator";
 
 /**
@@ -117,7 +116,6 @@ const Results = ({ lang, handleAddToCart }) => {
   const [logoRotation, setLogoRotation] = useState(0);
   const [logoPosition, setLogoPosition] = useState(null);
   const [logoLabel, setLogoLabel] = useState(null);
-  const [freeLogoPosition, setFreeLogoPosition] = useState(false);
   const [freePick, setFreePick] = useState(false);
 
   // States for the Babylon scene and engine
@@ -350,11 +348,7 @@ const Results = ({ lang, handleAddToCart }) => {
 
   const addToCart = () => {
     let product = Object.values(selectedProduct)[0];
-    console.log(logoLabel, freeLogoPosition)
     let logoPos = logoPosition;
-    if(freePick){
-      logoPos = freeLogoPosition;
-    }
     createScreenshot().then((res) => {
       let screenshotFront = res.screenshotFront
       let screenshotBack = res.screenshotBack
@@ -532,7 +526,6 @@ const Results = ({ lang, handleAddToCart }) => {
             setLogoLabel={setLogoLabel}
             freePick={freePick}
             setFreePick={setFreePick}
-            setFreeLogoPosition={setFreeLogoPosition}
           />
         </div>
       </div>

@@ -39,7 +39,7 @@ const useStyles = makeStyles({
  *
  */
 
-const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setScene, setActiveCamera, logoPosition, setLogoPosition, setLogoLabel, freePick, setFreePick, setFreeLogoPosition, logoRotation, setLogoRotation  }) => {
+const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setScene, setActiveCamera, logoPosition, setLogoPosition, setLogoLabel, freePick, setFreePick, logoRotation, setLogoRotation }) => {
   const [scene1, setScene1] = useState(null);
   const [decal, setDecal] = useState(null);
   const [currentModel, setCurrentModel] = useState(null);
@@ -82,6 +82,46 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
   }, [color]);
 
   useEffect(() => {
+    if (logoPosition !== null && !freePick) {
+      if (decal !== null) {
+        decal.dispose();
+      }
+
+      const objectForm = JSON.parse(logoPosition);
+      //console.log('ObjectForm ', objectForm);
+
+      const decalMaterial = new StandardMaterial("decalMat", scene1);
+      decalMaterial.diffuseTexture = new Texture(logo, scene1);
+      //console.log("Decal image is: /", logo);
+      decalMaterial.diffuseTexture.hasAlpha = true;
+      decalMaterial.zOffset = -20;
+
+      var mesh;
+      for (var i in currentModel._scene.meshes) {
+        //console.log(currentModel._scene.meshes[i])
+        //console.log(logoPosition.NAME)
+        if (objectForm.MESH_NAME === currentModel._scene.meshes[i].name) {
+          //console.log("match")
+          mesh = currentModel._scene.meshes[i]
+          const decalSize = new Vector3(model.LOGO_SIZE, model.LOGO_SIZE, model.LOGO_SIZE);
+          const decalRotation = logoRotation;
+
+          /**************************CREATE DECAL*************************************************/
+          const decal = MeshBuilder.CreateDecal("decal", mesh, {
+            position: new Vector3(objectForm.POSITION_VECTOR[0], objectForm.POSITION_VECTOR[1], objectForm.POSITION_VECTOR[2]),
+            normal: new Vector3(objectForm.NORMAL_VECTOR[0], objectForm.NORMAL_VECTOR[1], objectForm.NORMAL_VECTOR[2]),
+            size: decalSize,
+            angle: decalRotation
+          });
+          decal.material = decalMaterial;
+          setDecal(decal);
+        }
+      }
+
+    }
+  }, [logoPosition]);
+
+  useEffect(() => {
     if (logoPosition !== null) {
       if (decal !== null) {
         decal.dispose();
@@ -119,7 +159,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
       }
 
     }
-  }, [logoPosition, logoRotation]);
+  }, [logoRotation]);
 
   useEffect(() => {
     if (currentModel !== null) {
@@ -180,20 +220,25 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
       decalMaterial.diffuseTexture.hasAlpha = true;
       decalMaterial.zOffset = -2;
 
+      console.log('Checking if decal exists', decal);
       if (decal != null && pickInfo.name !== "decal") {
         decal.dispose();
       }
+      console.log('Checking if decal exists', decal);
 
       if (pickInfo.hit && pickInfo.pickedMesh.name !== "decal") {
         const mesh = pickInfo.pickedMesh;
         //console.log('PickInfo ', pickInfo.pickedPoint)
         if (pickInfo.pickedPoint !== null) {
           const meshObj = "POSITION_VECTOR: [" + pickInfo.pickedPoint.x + "," + pickInfo.pickedPoint.y + "," + pickInfo.pickedPoint.z + "],\n" + "NORMAL_VECTOR: [" + pickInfo.getNormal(true).x + "," + pickInfo.getNormal(true).y + "," + pickInfo.getNormal(true).z + "],"
-<<<<<<< HEAD
-=======
-          setFreeLogoPosition(meshObj)
+          const newLogoPosition = {
+            MESH_NAME: pickInfo.pickedMesh.name,
+            NAME: "freePick",
+            NORMAL_VECTOR: [pickInfo.getNormal(true).x, pickInfo.getNormal(true).y, pickInfo.getNormal(true).z],
+            POSITION_VECTOR: [pickInfo.pickedPoint.x, pickInfo.pickedPoint.y, pickInfo.pickedPoint.z]
+          }
+          handleFreeLogoChange(JSON.stringify(newLogoPosition));
           setLogoLabel(TextValues.freePicking(lang))
->>>>>>> 558c80c3e5d0491a36c9edc4eabfd7cef38d26b0
           console.log(meshObj);
         }
         console.log("PickInfo " + pickInfo.pickedPoint + pickInfo.getNormal(true) + "mesh " + mesh);
@@ -232,6 +277,10 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
     console.log('event ', JSON.parse(event.target.value))
     setLogoPosition(event.target.value)
   }
+  const handleFreeLogoChange = (pos) => {
+    setLogoPosition(pos);
+  }
+
   const handleSwitchChange = (event) => {
     console.log('Handle switch change ', event.target.checked)
     setFreePick(event.target.checked);
@@ -305,6 +354,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
         max={360}
         className={classes.slider}
         onChange={handleRotationChange}
+        value={model.ROTATION}
         />
        </div>
     </div>

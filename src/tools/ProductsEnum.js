@@ -127,7 +127,7 @@ const ProductsObjects = ({lang}) => {
             FILE_TYPE: ".gltf",
             SIZE: 1.5,
             LOGO_SIZE: 0.3,
-            LOGO_ROTATION: Math.PI / 2,
+            LOGO_ROTATION: 90,
             POSITION: {
                 X: 0,
                 Y: -2,
