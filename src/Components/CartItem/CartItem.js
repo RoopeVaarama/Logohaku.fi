@@ -6,20 +6,13 @@ import { DeleteForever } from '@material-ui/icons';
 
 
 const CartItem = ({ lang, item, removeFromCart, changeAmount }) => {
-    let logoPositionLabel = "";
-    if (item.logoPosition) {
-        let logoPositionText = item.logoPosition.split(":")
-        logoPositionLabel = logoPositionText[logoPositionText.length - 1]
-    }
+    console.log(item.id)
     return (
         <Wrapper>
             <div>
                 <h4>{item.name}</h4>
                 <div className="information">
-                    <p>{TextValues.logoPosition(lang)} {logoPositionLabel}</p>
-                </div>
-                <div>
-                    <p>Some data</p>
+                    <p>{TextValues.logoPosition(lang)}: {item.logoLabel}</p>
                 </div>
                 <div className='buttons'>
                     <Button
@@ -37,12 +30,16 @@ const CartItem = ({ lang, item, removeFromCart, changeAmount }) => {
                         defaultValue={item.amount}
                         onChange={(e) => changeAmount(item.id, item.logoPosition, e.target.value)}
                     />
-
-
+                </div>
+                <div>
+                    <p>Logo:</p>
+                    <img src={item.selectedLogo} alt={""} />
                 </div>
             </div>
-            <img src={item.screenshotFront} alt={""} />
-            <img src={item.screenshotBack} alt={""} />
+            <div style={{ display: 'gridRow' }}>
+                <img src={item.screenshotFront} alt={""} />
+                <img src={item.screenshotBack} alt={""} />
+            </div>
         </Wrapper>
     );
 }

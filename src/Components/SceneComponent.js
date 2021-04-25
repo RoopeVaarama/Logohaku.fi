@@ -33,15 +33,12 @@ const useStyles = makeStyles({
  *
  */
 
-const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setScene, setActiveCamera, logoPosition, setLogoPosition }) => {
+const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setScene, setActiveCamera, logoPosition, setLogoPosition, setLogoLabel, freePick, setFreePick, setFreeLogoPosition }) => {
   const [scene1, setScene1] = useState(null);
   const [decal, setDecal] = useState(null);
-  //const [selectedLogo, setSelectedLogo] = useState(null);
   const [currentModel, setCurrentModel] = useState(null);
+  //const [selectedLogo, setSelectedLogo] = useState(null);
   //const [currentModelJson, setCurrentModelJson] = useState(null);
-  //const [logoPosition, setLogoPosition] = useState(null);
-  //const [logoPositionName, setLogoPositionName] = useState(null);
-  const [freePick, setFreePick] = useState(false);
 
   const classes = useStyles();
 
@@ -185,9 +182,11 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
         //console.log('PickInfo ', pickInfo.pickedPoint)
         if (pickInfo.pickedPoint !== null) {
           const meshObj = "POSITION_VECTOR: [" + pickInfo.pickedPoint.x + "," + pickInfo.pickedPoint.y + "," + pickInfo.pickedPoint.z + "],\n" + "NORMAL_VECTOR: [" + pickInfo.getNormal(true).x + "," + pickInfo.getNormal(true).y + "," + pickInfo.getNormal(true).z + "],"
-          //console.log(meshObj);
+          setFreeLogoPosition(meshObj)
+          setLogoLabel(TextValues.freePicking(lang))
+          console.log(meshObj);
         }
-        //console.log("PickInfo " + pickInfo.pickedPoint + pickInfo.getNormal(true) + "mesh " + mesh);
+        console.log("PickInfo " + pickInfo.pickedPoint + pickInfo.getNormal(true) + "mesh " + mesh);
         const decalSize = new Vector3(model.LOGO_SIZE, model.LOGO_SIZE, model.LOGO_SIZE);
         const decalRotation = model.LOGO_ROTATION;
 
@@ -213,7 +212,10 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
   }
 
   const handleChange = (event) => {
-    console.log('event ', event.target.value)
+    let val = JSON.parse(event.target.value)
+    //console.log(val.NAME)
+    setLogoLabel(val.NAME)
+    console.log('event ', JSON.parse(event.target.value))
     setLogoPosition(event.target.value)
   }
   const handleSwitchChange = (event) => {
