@@ -7,7 +7,7 @@ import TextValues from "../../tools/TextValues";
 import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-router-dom";
 import "./Results.css";
 import { HighlightOff, Edit } from '@material-ui/icons';
-import { Typography, Button, IconButton, Box, Card, CardContent } from '@material-ui/core';
+import { Typography, Button, IconButton, Box, Card, CardContent, Input } from '@material-ui/core';
 import SceneComponent from "../SceneComponent";
 import ProductsList from "../ProductsList/ProductsList";
 //import PresetsList from "../PresetsList/PresetsList";
@@ -116,6 +116,7 @@ const Results = ({ lang, handleAddToCart }) => {
   const [logoLabel, setLogoLabel] = useState(null);
   const [freeLogoPosition, setFreeLogoPosition] = useState(false);
   const [freePick, setFreePick] = useState(false);
+  const [itemAmount, setItemAmount] = useState(1);
 
   // States for the Babylon scene and engine
   const [scene, setScene] = useState(null);
@@ -349,13 +350,13 @@ const Results = ({ lang, handleAddToCart }) => {
     let product = Object.values(selectedProduct)[0];
     console.log(logoLabel, freeLogoPosition)
     let logoPos = logoPosition;
-    if(freePick){
+    if (freePick) {
       logoPos = freeLogoPosition;
     }
     createScreenshot().then((res) => {
       let screenshotFront = res.screenshotFront
       let screenshotBack = res.screenshotBack
-      handleAddToCart(itemID, product.NAME, logoPos, logoLabel, screenshotFront, screenshotBack, selectedLogo);
+      handleAddToCart(itemID, product.NAME, logoPos, logoLabel, itemAmount, screenshotFront, screenshotBack, selectedLogo);
     });
   };
 
@@ -496,13 +497,18 @@ const Results = ({ lang, handleAddToCart }) => {
               productsObjects={productsObjects}
               selectProduct={selectProduct}
             ></ProductsList>
-            <div style={{ width: '100%', height: "100px", position: "absolute", bottom: "0", }}>
-              <div style={{ width: '100%', height: "60%" }}>
-                <p>div for amount?</p>
+
+            {selectedProduct ?
+              <div style={{ width: '100%', height: "80px", position: "absolute", bottom: "0", }}>
+                <Input
+                  style={{ marginLeft: "5%", textAlign: 'center', width: '80%', height: '10%', marginBottom: '10px', padding: '10px' }}
+                  type={'number'}
+                  defaultValue={itemAmount}
+                  onChange={(e) => setItemAmount(e.target.value)}
+                />
+                <Button variant="contained" color="primary" style={{ width: '100%', height: '60%' }} onClick={() => addToCart()}>{TextValues.addToCart(lang)}</Button>
               </div>
-              {selectedProduct ?
-                <Button variant="contained" color="primary" style={{ width: '100%', height: '40%' }} onClick={() => addToCart()}>{TextValues.addToCart(lang)}</Button> : null}
-            </div>
+              : null}
           </div>
           <SceneComponent
             lang={lang}
@@ -528,7 +534,7 @@ const Results = ({ lang, handleAddToCart }) => {
       </div>
       <div className="PlaceholderDiv"></div>
 
-    </ScrollLock>
+    </ScrollLock >
   );
 };
 
