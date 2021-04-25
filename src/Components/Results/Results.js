@@ -119,7 +119,7 @@ const Results = ({ lang, handleAddToCart }) => {
   const [itemAmount, setItemAmount] = useState(1);
 
   // States for the Babylon scene and engine
-  const [scene, setScene] = useState(null);
+  //const [scene, setScene] = useState(null);
   const [engine, setEngine] = useState(null);
   const [activeCamera, setActiveCamera] = useState(null);
 
@@ -521,7 +521,8 @@ const Results = ({ lang, handleAddToCart }) => {
             }
             selectModel={selectModel}
             setEngine={setEngine}
-            setScene={setScene}
+            //scene={scene}
+            //setScene={setScene}
             setActiveCamera={setActiveCamera}
             logoPosition={logoPosition}
             setLogoPosition={setLogoPosition}

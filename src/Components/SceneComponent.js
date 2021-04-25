@@ -33,12 +33,12 @@ const useStyles = makeStyles({
  *
  */
 
-const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setScene, setActiveCamera, logoPosition, setLogoPosition, setLogoLabel, freePick, setFreePick, setFreeLogoPosition }) => {
-  const [scene1, setScene1] = useState(null);
+const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, /*scene, setScene,*/ setActiveCamera, logoPosition, setLogoPosition, setLogoLabel, freePick, setFreePick, setFreeLogoPosition }) => {
   const [decal, setDecal] = useState(null);
   const [currentModel, setCurrentModel] = useState(null);
   //const [selectedLogo, setSelectedLogo] = useState(null);
   //const [currentModelJson, setCurrentModelJson] = useState(null);
+  const [scene, setScene] = useState(null);
 
   const classes = useStyles();
 
@@ -60,7 +60,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
       //console.log("current model ", meshes, color);
       for (var i in meshes) {
         if (meshes[i].metadata !== null) {
-          const newMat = new StandardMaterial("material" + i + i, scene1);
+          const newMat = new StandardMaterial("material" + i + i, scene);
           newMat.diffuseColor = new Color3.FromHexString(color);
           meshes[i].material = newMat;
         }
@@ -84,8 +84,8 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
       const objectForm = JSON.parse(logoPosition);
       //console.log('ObjectForm ', objectForm);
 
-      const decalMaterial = new StandardMaterial("decalMat", scene1);
-      decalMaterial.diffuseTexture = new Texture(logo, scene1);
+      const decalMaterial = new StandardMaterial("decalMat", scene);
+      decalMaterial.diffuseTexture = new Texture(logo, scene);
       //console.log("Decal image is: /", logo);
       decalMaterial.diffuseTexture.hasAlpha = true;
       decalMaterial.zOffset = -20;
@@ -132,7 +132,6 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
   function onSceneMount(e) {
     const { canvas, scene } = e;
     scene.clearColor = Color3.FromHexString("#f5f5f5")
-    setScene1(scene);
     setScene(scene);
     //console.log('OnSceneMount ', scene, scene.getEngine(), scene.getCameraByName("camera1"))
     setEngine(scene.getEngine());
@@ -150,13 +149,13 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
 
   const onModelCreated = (rootMesh) => {
     setCurrentModel(rootMesh);
-    setActiveCamera([scene1.getCameraByName('FrontCamera'), scene1.getCameraByName('BackCamera')])
+    setActiveCamera([scene.getCameraByName('FrontCamera'), scene.getCameraByName('BackCamera')])
     //console.log("Created model: ", rootMesh);
     const meshes = rootMesh._scene.meshes;
     //console.log("current model ", meshes, color);
     for (var i in meshes) {
       if (meshes[i].metadata !== null) {
-        const newMat = new StandardMaterial("material" + 1, scene1);
+        const newMat = new StandardMaterial("material" + 1, scene);
         newMat.diffuseColor = new Color3.FromHexString(color);
         meshes[i].material = newMat;
       }
@@ -167,8 +166,8 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
   const onPointerPick = (e, pickInfo) => {
     if (freePick) {
       //console.log("Decal material: /", logo);
-      const decalMaterial = new StandardMaterial("decalMat", scene1);
-      decalMaterial.diffuseTexture = new Texture(logo, scene1);
+      const decalMaterial = new StandardMaterial("decalMat", scene);
+      decalMaterial.diffuseTexture = new Texture(logo, scene);
       //console.log("Decal image is:", logo);
       decalMaterial.diffuseTexture.hasAlpha = true;
       decalMaterial.zOffset = -2;
