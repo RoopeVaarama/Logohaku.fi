@@ -39,7 +39,7 @@ const useStyles = makeStyles({
  *
  */
 
-const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setScene, setActiveCamera, logoPosition, setLogoPosition, setLogoLabel, freePick, setFreePick, logoRotation, setLogoRotation }) => {
+const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setActiveCamera, logoPosition, setLogoPosition, setLogoLabel, freePick, setFreePick, logoRotation, setLogoRotation }) => {
   const [scene1, setScene1] = useState(null);
   const [decal, setDecal] = useState(null);
   const [currentModel, setCurrentModel] = useState(null);
@@ -61,7 +61,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
 
   useEffect(() => {
     //const RGBColor = hexToRGB(color[1]);
-    if (currentModel !== null && color !== null && currentModel.CUSTOM_COLOR_ON === true) {
+    if (currentModel !== null && color !== null && model.CUSTOM_COLOR_ON === true) {
       const meshes = currentModel._scene.meshes;
       //console.log("current model ", meshes, color);
       for (var i in meshes) {
@@ -179,7 +179,6 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
     const { canvas, scene } = e;
     scene.clearColor = Color3.FromHexString("#f5f5f5")
     setScene1(scene);
-    setScene(scene);
     //console.log('OnSceneMount ', scene, scene.getEngine(), scene.getCameraByName("camera1"))
     setEngine(scene.getEngine());
     const frontCam = new FreeCamera("FrontCamera", new Vector3(0, 0, 15), scene, false);
