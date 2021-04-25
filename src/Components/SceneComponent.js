@@ -11,7 +11,7 @@ import React, {
   //MenuItemuseRef, addEventListener
 } from "react";
 import {
-  FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Switch,
+  FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Switch, Slider, Typography
   //MenuItem, Menu, Button,
 } from "@material-ui/core";
 //import { InputManager } from "@babylonjs/core/Inputs/scene.inputManager";
@@ -22,6 +22,12 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
   root: {
     position: 'absolute'
+  },
+  slider: {
+    height: "50%",
+    width: "8px",
+    right: "0",
+    marginTop: "8px"
   }
 });
 
@@ -33,7 +39,7 @@ const useStyles = makeStyles({
  *
  */
 
-const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setScene, setActiveCamera, logoPosition, setLogoPosition }) => {
+const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setScene, setActiveCamera, logoPosition, setLogoPosition, logoRotation, setLogoRotation }) => {
   const [scene1, setScene1] = useState(null);
   const [decal, setDecal] = useState(null);
   //const [selectedLogo, setSelectedLogo] = useState(null);
@@ -58,7 +64,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
 
   useEffect(() => {
     //const RGBColor = hexToRGB(color[1]);
-    if (currentModel !== null && color !== null) {
+    if (currentModel !== null && color !== null && currentModel.CUSTOM_COLOR_ON === true) {
       const meshes = currentModel._scene.meshes;
       //console.log("current model ", meshes, color);
       for (var i in meshes) {
@@ -101,7 +107,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
           //console.log("match")
           mesh = currentModel._scene.meshes[i]
           const decalSize = new Vector3(model.LOGO_SIZE, model.LOGO_SIZE, model.LOGO_SIZE);
-          const decalRotation = model.LOGO_ROTATION;
+          const decalRotation = logoRotation;
 
           /**************************CREATE DECAL*************************************************/
           const decal = MeshBuilder.CreateDecal("decal", mesh, {
@@ -116,7 +122,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
       }
 
     }
-  }, [logoPosition]);
+  }, [logoPosition, logoRotation]);
 
   useEffect(() => {
     if (currentModel !== null) {
@@ -157,13 +163,14 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
     //console.log("Created model: ", rootMesh);
     const meshes = rootMesh._scene.meshes;
     //console.log("current model ", meshes, color);
-    for (var i in meshes) {
+    if (model.CUSTOM_COLOR_ON === true) {
+      for (var i in meshes) {
       if (meshes[i].metadata !== null) {
         const newMat = new StandardMaterial("material" + 1, scene1);
         newMat.diffuseColor = new Color3.FromHexString(color);
         meshes[i].material = newMat;
       }
-    }
+    }}
   };
 
 
@@ -185,11 +192,11 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
         //console.log('PickInfo ', pickInfo.pickedPoint)
         if (pickInfo.pickedPoint !== null) {
           const meshObj = "POSITION_VECTOR: [" + pickInfo.pickedPoint.x + "," + pickInfo.pickedPoint.y + "," + pickInfo.pickedPoint.z + "],\n" + "NORMAL_VECTOR: [" + pickInfo.getNormal(true).x + "," + pickInfo.getNormal(true).y + "," + pickInfo.getNormal(true).z + "],"
-          //console.log(meshObj);
+          console.log(meshObj);
         }
         //console.log("PickInfo " + pickInfo.pickedPoint + pickInfo.getNormal(true) + "mesh " + mesh);
         const decalSize = new Vector3(model.LOGO_SIZE, model.LOGO_SIZE, model.LOGO_SIZE);
-        const decalRotation = model.LOGO_ROTATION;
+        const decalRotation = logoRotation
 
         /**************************CREATE DECAL*************************************************/
         const decal = MeshBuilder.CreateDecal("decal", mesh, {
@@ -203,6 +210,10 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
       }
     }
   };
+
+  const degToRad = (degrees) => {
+    return degrees * (Math.PI / 180);
+  }
 
   const createPositionsRadioButtons = () => {
     const logoPositionsArray = Object.entries(model.LOGO_POSITIONS);
@@ -219,6 +230,10 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
   const handleSwitchChange = (event) => {
     console.log('Handle switch change ', event.target.checked)
     setFreePick(event.target.checked);
+  }
+
+  const handleRotationChange = (event, newRotation) => {
+    setLogoRotation(degToRad(newRotation));
   }
 
   return (
@@ -263,7 +278,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
               position={modelPosition}
               rootUrl={"../Models/"}
               sceneFilename={model.URL}
-              pluginExtension=".gltf"
+              pluginExtension={model.FILE_TYPE}
               scaling={modelSize}
               onModelLoaded={onModelLoaded}
               onCreated={onModelCreated}
@@ -271,6 +286,22 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
           </Suspense>
         </Scene>
       </Engine>
+      <div className="RotationContainer">
+      <Typography>
+        {TextValues.logo_rotation_title(lang)}
+      </Typography>
+      <Slider
+        orientation="vertical"
+        defaultValue={0}
+        aria-labelledby="rotation-slider"
+        valueLabelDisplay="auto"
+        step={15}
+        min={0}
+        max={360}
+        className={classes.slider}
+        onChange={handleRotationChange}
+        />
+       </div>
     </div>
   );
 };

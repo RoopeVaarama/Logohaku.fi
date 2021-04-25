@@ -216,6 +216,22 @@ const TextValues = {
                 return "Pen";
         }
     },
+    van: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Pakettiauto";
+            default:
+                return "Van";
+        }
+    },
+    box: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Laatikko";
+            default:
+                return "Box";
+        }
+    },
     bag: function (langcode) {
         switch (langcode) {
             case "fi":
@@ -254,6 +270,14 @@ const TextValues = {
                 return "Logo paikat";
             default:
                 return "Logo positions"
+        }
+    },
+    logo_rotation_title: function (langcode) {
+        switch (langcode) {
+            case 'fi':
+                return "Logon kulma";
+            default:
+                return "Logo rotation";
         }
     },
     closeCart: function (langcode) {

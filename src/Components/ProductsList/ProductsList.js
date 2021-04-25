@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Image } from "react-bootstrap";
 import { Card } from 'semantic-ui-react'
+import { Typography, makeStyles, } from '@material-ui/core';
+import TextValues  from '../../tools/TextValues';
 
 import './ProductsList.css';
 
@@ -26,20 +28,34 @@ const renderProductButtons = (productEntries, selectProduct) => {
     ))
 }
 
+const styles = makeStyles({
+    root: {
+        marginTop: '8px',
+        marginBottom: '8px'
+    }
+})
+
 const onClick = (product, selectProduct) => {
     const selectedProduct = Object.fromEntries([product])
     selectProduct(selectedProduct)
 }
 
 
-const ProductsList = ({ productsObjects, selectProduct }) => {
+const ProductsList = ({ productsObjects, selectProduct, lang}) => {
     const productEntries = Object.entries(productsObjects)
     const [products, setProducts] = useState(renderProductButtons(productEntries, selectProduct));
 
+    const style = styles();
+
     return (
+        <>
+        <Typography variant="h5" className={style.root} >
+            {TextValues.catalog(lang)}
+        </Typography>
         <div className="ProductsList">
             {products}
         </div>
+        </>
     )
 }
 

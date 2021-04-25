@@ -6,6 +6,7 @@ const ProductsObjects = ({lang}) => {
         TSHIRT: {
             ID: 1,
             URL: "tshirt.gltf",
+            FILE_TYPE: ".gltf",
             SIZE: 10,
             LOGO_SIZE: 1,
             LOGO_ROTATION: 0,
@@ -63,6 +64,12 @@ const ProductsObjects = ({lang}) => {
                     NAME: textValues.middle_back(lang) 
                 },
             },
+            CUSTOM_COLOR_ON: true,
+            COLOR_DEFAULTS: {
+                BLACK: "#000000",
+                WHITE: "#FFFFFF",
+                NONE: ""
+            },
             MAX_LOGO_AMOUNT: 2,
             NAME: textValues.tshirt(lang),
             THUMB: "tpaita.png"
@@ -70,6 +77,7 @@ const ProductsObjects = ({lang}) => {
         MASK: {
             ID: 2,
             URL: "mask.gltf",
+            FILE_TYPE: ".gltf",
             SIZE: 0.010,
             LOGO_SIZE: 1,
             LOGO_ROTATION: 0,
@@ -103,6 +111,12 @@ const ProductsObjects = ({lang}) => {
                     NAME: textValues.right(lang) 
                 }
             },
+            CUSTOM_COLOR_ON: true,
+            COLOR_DEFAULTS: {
+                BLACK: "#000000",
+                WHITE: "#FFFFFF",
+                NONE: ""
+            },
             MAX_LOGO_AMOUNT: 2,
             NAME: textValues.mask(lang),
             THUMB: "maski.png"
@@ -110,6 +124,7 @@ const ProductsObjects = ({lang}) => {
         PEN: {
             ID: 3,
             URL: "pen.gltf",
+            FILE_TYPE: ".gltf",
             SIZE: 1.5,
             LOGO_SIZE: 0.3,
             LOGO_ROTATION: Math.PI / 2,
@@ -137,10 +152,68 @@ const ProductsObjects = ({lang}) => {
                     NAME: textValues.shaft(lang) 
                 },
             },
+            CUSTOM_COLOR_ON: true,
+            COLOR_DEFAULTS: {
+                BLACK: "#000000",
+                WHITE: "#FFFFFF",
+                NONE: ""
+            },
             MAX_LOGO_AMOUNT: 2,
             NAME: textValues.pen(lang),
             THUMB: "kyna.png"
-        }}
+        },
+        VAN: {
+            ID: 4,
+            URL: "van.gltf",
+            FILE_TYPE: ".gltf",
+            SIZE: 0.05,
+            LOGO_SIZE: 1.25,
+            LOGO_ROTATION: 0,
+            POSITION: {
+                X: 0,
+                Y: -1,
+                Z: 0
+            },
+            LOGO_POSITION_FREE: {
+                X: 0,
+                Y: 0,
+                Z: 0
+            },
+            LOGO_POSITIONS: {
+
+            },
+            CUSTOM_COLOR_ON: false,
+            MAX_LOGO_AMOUNT: 2,
+            NAME: textValues.van(lang),
+            THUMB: "paku.png"
+        },
+        BOX: {
+            ID: 5,
+            URL: "box.gltf",
+            FILE_TYPE: ".gltf",
+            SIZE: 4,
+            LOGO_SIZE: 1,
+            LOGO_ROTATION: 0,
+            POSITION: {
+                X: 0,
+                Y: 0,
+                Z: 0
+            },
+            LOGO_POSITION_FREE: {
+                X: 0,
+                Y: 0,
+                Z: 0
+            },
+            LOGO_POSITIONS: {
+
+            },
+            CUSTOM_COLOR_ON: false,
+            MAX_LOGO_AMOUNT: 2,
+            NAME: textValues.box(lang),
+            THUMB: "laatikko.png"
+        }
+    
+    }
 
     return products
 };

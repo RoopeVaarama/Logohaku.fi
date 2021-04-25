@@ -25,6 +25,7 @@ import NewLogoDialog from '../PickerDialog/NewLogoDialog';
 import NewColorDialog from '../PickerDialog/NewColorDialog';
 import { makeStyles } from "@material-ui/core";
 import ScrollLock from 'react-scrolllock';
+import AddIcon from '@material-ui/icons/Add';
 import useWindowDimensions from '../../Hooks/WindowDimentions'
 
 /**
@@ -109,6 +110,7 @@ const Results = ({ lang, handleAddToCart }) => {
   });
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedLogo, setSelectedLogo] = useState(null);
+  const [logoRotation, setLogoRotation] = useState(0);
 
   // States for the Babylon scene and engine
   const [scene, setScene] = useState(null);
@@ -428,7 +430,9 @@ const Results = ({ lang, handleAddToCart }) => {
                   lang={lang}
                 />
                 <td>
-                  <Button className="LogoPickerButton" onClick={() => setNewLogoPickerDialogOpen(true)}>+</Button>
+                  <IconButton className="LogoPickerItem" onClick={() => setNewLogoPickerDialogOpen(true)}>
+                    <AddIcon />
+                  </IconButton>
                   <NewLogoDialog
                     selectedValue={response.files}
                     open={newLogoPickerDialogOpen}
@@ -465,7 +469,9 @@ const Results = ({ lang, handleAddToCart }) => {
                   lang={lang}
                 />
                 <td>
-                  <Button className="LogoPickerItem" onClick={() => setNewColorPickerDialogOpen(true)}>+</Button>
+                  <IconButton className="LogoPickerItem" onClick={() => setNewColorPickerDialogOpen(true)}>
+                    <AddIcon />
+                  </IconButton>
                   <NewColorDialog
                     palette={response.palette}
                     open={newColorPickerDialogOpen}
@@ -483,6 +489,7 @@ const Results = ({ lang, handleAddToCart }) => {
             <ProductsList
               productsObjects={productsObjects}
               selectProduct={selectProduct}
+              lang={lang}
             ></ProductsList>
             <div style={{ width: '100%', height: "100px", position: "absolute", bottom: "0", }}>
               <div style={{ width: '100%', height: "60%" }}>
@@ -496,6 +503,8 @@ const Results = ({ lang, handleAddToCart }) => {
             lang={lang}
             logo={selectedLogo}
             color={selectedColor}
+            logoRotation={logoRotation}
+            setLogoRotation={setLogoRotation}
             model={
               selectedProduct
                 ? Object.values(selectedProduct)[0]
