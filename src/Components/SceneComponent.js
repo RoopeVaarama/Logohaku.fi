@@ -354,7 +354,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setS
         max={360}
         className={classes.slider}
         onChange={handleRotationChange}
-        value={model.ROTATION}
+        defaultValue={model.ROTATION}
         />
        </div>
     </div>

@@ -24,7 +24,6 @@ const CartItem = ({ lang, item, removeFromCart, changeAmount }) => {
                         <DeleteForever />
                     </Button>
                     <Input
-                        size="small"
                         style={{ marginLeft: "5%", textAlign: 'center', width: '50%' }}
                         type={'number'}
                         defaultValue={item.amount}
