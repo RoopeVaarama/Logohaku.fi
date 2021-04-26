@@ -280,6 +280,14 @@ const TextValues = {
                 return "Logo rotation";
         }
     },
+    logo_size_title: function (langcode) {
+        switch (langcode) {
+            case 'fi':
+                return "Logon koko";
+            default:
+                return "Logo size";
+        }
+    },
     closeCart: function (langcode) {
         switch (langcode) {
             case 'fi':

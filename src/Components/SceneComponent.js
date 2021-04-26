@@ -18,6 +18,7 @@ import {
 import TextValues from "../tools/TextValues";
 import "./SceneComponent.css";
 import { makeStyles } from '@material-ui/core/styles';
+import calculateAspectRatios from 'calculate-aspect-ratio';
 
 const useStyles = makeStyles({
   root: {
@@ -39,7 +40,7 @@ const useStyles = makeStyles({
  *
  */
 
-const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setActiveCamera, logoPosition, setLogoPosition, setLogoLabel, freePick, setFreePick, logoRotation, setLogoRotation }) => {
+const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setActiveCamera, logoPosition, setLogoPosition, setLogoLabel, freePick, setFreePick, logoRotation, setLogoRotation, logoSize, setLogoSize, logoAspectRatios}) => {
   const [scene1, setScene1] = useState(null);
   const [decal, setDecal] = useState(null);
   const [currentModel, setCurrentModel] = useState(null);
@@ -92,9 +93,25 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
 
       const decalMaterial = new StandardMaterial("decalMat", scene1);
       decalMaterial.diffuseTexture = new Texture(logo, scene1);
+
+      var actualLogoSize = null;
+      if (logo in logoAspectRatios) {
+        const splitAspectRatio = logoAspectRatios[logo].split(':')
+        console.log(splitAspectRatio)
+
+        if (splitAspectRatio[0] > splitAspectRatio[1]) {
+          const ratio = splitAspectRatio[0] / splitAspectRatio[1];
+          actualLogoSize = new Vector3(logoSize * ratio, logoSize, 1);
+        } else if (splitAspectRatio[1] > splitAspectRatio[0]) {
+          const ratio = splitAspectRatio[1] / splitAspectRatio[0];
+          actualLogoSize = new Vector3(logoSize, logoSize * ratio, 1);
+        } else if (splitAspectRatio[0] === splitAspectRatio[1]) {
+          actualLogoSize = new Vector3(logoSize, logoSize, 1);
+        }
+      }
       //console.log("Decal image is: /", logo);
       decalMaterial.diffuseTexture.hasAlpha = true;
-      decalMaterial.zOffset = -20;
+      decalMaterial.zOffset = -2;
 
       var mesh;
       for (var i in currentModel._scene.meshes) {
@@ -103,7 +120,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
         if (objectForm.MESH_NAME === currentModel._scene.meshes[i].name) {
           //console.log("match")
           mesh = currentModel._scene.meshes[i]
-          const decalSize = new Vector3(model.LOGO_SIZE, model.LOGO_SIZE, model.LOGO_SIZE);
+          const decalSize = actualLogoSize;
           const decalRotation = logoRotation;
 
           /**************************CREATE DECAL*************************************************/
@@ -132,6 +149,23 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
 
       const decalMaterial = new StandardMaterial("decalMat", scene1);
       decalMaterial.diffuseTexture = new Texture(logo, scene1);
+
+      var actualLogoSize = null;
+      if (logo in logoAspectRatios) {
+        const splitAspectRatio = logoAspectRatios[logo].split(':')
+        console.log(splitAspectRatio)
+
+        if (splitAspectRatio[0] > splitAspectRatio[1]) {
+          const ratio = splitAspectRatio[0] / splitAspectRatio[1];
+          actualLogoSize = new Vector3(logoSize * ratio, logoSize, 1);
+        } else if (splitAspectRatio[1] > splitAspectRatio[0]) {
+          const ratio = splitAspectRatio[1] / splitAspectRatio[0];
+          actualLogoSize = new Vector3(logoSize, logoSize * ratio, 1);
+        } else if (splitAspectRatio[0] === splitAspectRatio[1]) {
+          actualLogoSize = new Vector3(logoSize, logoSize, 1);
+        }
+      }
+
       //console.log("Decal image is: /", logo);
       decalMaterial.diffuseTexture.hasAlpha = true;
       decalMaterial.zOffset = -20;
@@ -140,10 +174,10 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
       for (var i in currentModel._scene.meshes) {
         //console.log(currentModel._scene.meshes[i])
         //console.log(logoPosition.NAME)
-        if (objectForm.MESH_NAME === currentModel._scene.meshes[i].name) {
+        if (objectForm.MESH_NAME === currentModel._scene.meshes[i].name && logoSize !== null) {
           //console.log("match")
           mesh = currentModel._scene.meshes[i]
-          const decalSize = new Vector3(model.LOGO_SIZE, model.LOGO_SIZE, model.LOGO_SIZE);
+          const decalSize = actualLogoSize;
           const decalRotation = logoRotation;
 
           /**************************CREATE DECAL*************************************************/
@@ -159,7 +193,8 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
       }
 
     }
-  }, [logoRotation]);
+  }, [logoRotation, logoSize]);
+
 
   useEffect(() => {
     if (currentModel !== null) {
@@ -216,6 +251,22 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
       const decalMaterial = new StandardMaterial("decalMat", scene1);
       decalMaterial.diffuseTexture = new Texture(logo, scene1);
       //console.log("Decal image is:", logo);
+
+      var actualLogoSize = null;
+      if (logo in logoAspectRatios) {
+        const splitAspectRatio = logoAspectRatios[logo].split(':')
+        console.log(splitAspectRatio)
+
+        if (splitAspectRatio[0] > splitAspectRatio[1]) {
+          const ratio = splitAspectRatio[0] / splitAspectRatio[1];
+          actualLogoSize = new Vector3(logoSize * ratio, logoSize, 1);
+        } else if (splitAspectRatio[1] > splitAspectRatio[0]) {
+          const ratio = splitAspectRatio[1] / splitAspectRatio[0];
+          actualLogoSize = new Vector3(logoSize, logoSize * ratio, 1);
+        } else if (splitAspectRatio[0] === splitAspectRatio[1]) {
+          actualLogoSize = new Vector3(logoSize, logoSize, 1);
+        }
+      }
       decalMaterial.diffuseTexture.hasAlpha = true;
       decalMaterial.zOffset = -2;
 
@@ -241,7 +292,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
           console.log(meshObj);
         }
         console.log("PickInfo " + pickInfo.pickedPoint + pickInfo.getNormal(true) + "mesh " + mesh);
-        const decalSize = new Vector3(model.LOGO_SIZE, model.LOGO_SIZE, model.LOGO_SIZE);
+        const decalSize = actualLogoSize;
         const decalRotation = logoRotation
 
         /**************************CREATE DECAL*************************************************/
@@ -260,6 +311,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
   const degToRad = (degrees) => {
     return degrees * (Math.PI / 180);
   }
+
 
   const createPositionsRadioButtons = () => {
     const logoPositionsArray = Object.entries(model.LOGO_POSITIONS);
@@ -287,6 +339,10 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
 
   const handleRotationChange = (event, newRotation) => {
     setLogoRotation(degToRad(newRotation));
+  }
+
+  const handleSizeChange = (event, newSize) => {
+    setLogoSize(newSize / 10)
   }
 
   return (
@@ -339,22 +395,41 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
           </Suspense>
         </Scene>
       </Engine>
-      <div className="RotationContainer">
-      <Typography>
-        {TextValues.logo_rotation_title(lang)}
-      </Typography>
-      <Slider
-        orientation="vertical"
-        defaultValue={0}
-        aria-labelledby="rotation-slider"
-        valueLabelDisplay="auto"
-        step={15}
-        min={0}
-        max={360}
-        className={classes.slider}
-        onChange={handleRotationChange}
-        defaultValue={model.ROTATION}
-        />
+      <div className="SliderContainer">
+        <div className="RotationContainer">
+          <Typography>
+            {TextValues.logo_rotation_title(lang)}
+          </Typography>
+          <Slider
+            orientation="vertical"
+            defaultValue={0}
+            aria-labelledby="rotation-slider"
+            valueLabelDisplay="auto"
+            step={15}
+            min={0}
+            max={360}
+            className={classes.slider}
+            onChange={handleRotationChange}
+            defaultValue={model.LOGO_ROTATION}
+            />
+          </div>
+          <div className="SizeContainer">
+            <Typography>
+              {TextValues.logo_size_title(lang)}
+            </Typography>
+            <Slider
+              orientation="vertical"
+              defaultValue={0}
+              aria-labelledby="rotation-slider"
+              valueLabelDisplay="auto"
+              step={10}
+              min={0}
+              max={200}
+              className={classes.slider}
+              onChange={handleSizeChange}
+              defaultValue={model.LOGO_SIZE * 10}
+              />
+        </div>
        </div>
     </div>
   );

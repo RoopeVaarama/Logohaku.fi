@@ -20,13 +20,30 @@
     left:30px; 
     z-index: 2;
 }
-.RotationContainer {
+
+.SliderContainer {
     position: absolute;
     right: 8px;
     top: 8px;
+    height: 100%;
+    display: flex;
+    flex-flow: row reverse nowrap;
+}
+
+.RotationContainer {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
     height: 50%;
+    margin: 8px;
+}
+
+.SizeContainer {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    margin: 8px;
 }

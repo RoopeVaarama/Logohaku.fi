@@ -28,6 +28,7 @@ import ScrollLock from 'react-scrolllock';
 import AddIcon from '@material-ui/icons/Add';
 import useWindowDimensions from '../../Hooks/WindowDimentions'
 import nextId from "react-id-generator";
+import calculateAspectRatios from 'calculate-aspect-ratio';
 
 /**
  * Contains the Babylon.js code for rendering the 3D preview window on the results page.
@@ -115,6 +116,8 @@ const Results = ({ lang, handleAddToCart }) => {
   const [selectedLogo, setSelectedLogo] = useState(null);
   const [logoRotation, setLogoRotation] = useState(0);
   const [logoPosition, setLogoPosition] = useState(null);
+  const [logoSize, setLogoSize] = useState(1);
+  const [logoAspectRatios, setLogoAspectRatios] = useState({});
   const [logoLabel, setLogoLabel] = useState(null);
   const [freePick, setFreePick] = useState(false);
   const [itemAmount, setItemAmount] = useState(1);
@@ -282,7 +285,16 @@ const Results = ({ lang, handleAddToCart }) => {
           variant="outline-light"
           onClick={(e) => print(item.image, e)}
         >
-          <Image src={item.image} fluid className="LogoPickerItem" />
+          <Image src={item.image} fluid className="LogoPickerItem" onLoad={(e) => {
+            console.log(e.target.width, e.target.height, e.target);
+            const newAspectRatio = calculateAspectRatios(e.target.width, e.target.height);
+            const newAspectRatioObject = {
+              [e.target.currentSrc] : newAspectRatio
+            }
+            const logoAspectRatioArray = logoAspectRatios;
+            logoAspectRatioArray[e.target.currentSrc] = newAspectRatio
+            setLogoAspectRatios(logoAspectRatioArray);
+          }} />
           <IconButton
             className={styles.pickerIconRemove}
             color="primary"
@@ -517,7 +529,10 @@ const Results = ({ lang, handleAddToCart }) => {
             logo={selectedLogo}
             color={selectedColor}
             logoRotation={logoRotation}
+            logoSize={logoSize}
             setLogoRotation={setLogoRotation}
+            setLogoSize={setLogoSize}
+            logoAspectRatios={logoAspectRatios}
             model={
               selectedProduct
                 ? Object.values(selectedProduct)[0]
