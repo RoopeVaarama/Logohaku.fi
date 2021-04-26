@@ -248,6 +248,14 @@ const TextValues = {
                 return "Select color";
         }
     },
+    colorPickerDisabled : function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Valitsemasi tuotteen värejä ei voi muokata.";
+            default: 
+                return "Unable to customize colors for selected product."
+        }
+    },
     selectColorCompanyPalette: function (langcode) {
         switch (langcode) {
             case "fi":
@@ -296,6 +304,8 @@ const TextValues = {
                 return "Close"
         }
     },
+    /** Logo positions for the product
+     */
     freePicking: function (langcode) {
         switch (langcode) {
             case "fi":
@@ -304,6 +314,7 @@ const TextValues = {
                 return "Free Picking";
         }
     },
+    // T-shirt
     left_sleeve: function (langcode) {
         switch (langcode) {
             case "fi":
@@ -360,6 +371,8 @@ const TextValues = {
                 return "Middle back";
         }
     },
+    // End T-shirt
+    // Mask
     middle: function (langcode) {
         switch (langcode) {
             case "fi":
@@ -384,6 +397,8 @@ const TextValues = {
                 return "Right";
         }
     },
+    // End mask
+    // Pen
     handle: function (langcode) {
         switch (langcode) {
             case "fi":
@@ -400,6 +415,99 @@ const TextValues = {
                 return "Shaft";
         }
     },
+    // End pen
+    // Van
+    driver_side_middle_wall: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Kuljettajan puolen keskiseinä";
+            default:
+                return "Driver side middle wall";
+        }
+    },
+    driver_side_back_wall: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Kuljettajan puolen seinän perä";
+            default:
+                return "Driver side back wall";
+        }
+    },
+    passenger_side_middle_wall: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Matkustajan puolen keskiseinä";
+            default:
+                return "Passenger side middle wall";
+        }
+    },
+    passenger_side_back_wall: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Matkustajan puolen seinän perä";
+            default:
+                return "Passenger side back wall";
+        }
+    },
+    front_hood: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Konepelti";
+            default:
+                return "Front hood";
+        }
+    },
+    back_door_left: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Vasen takaovi";
+            default:
+                return "Left backdoor";
+        }
+    },
+    back_door_right: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Oikea takaovi";
+            default:
+                return "Right backdoor";
+        }
+    },
+    // End van
+    // Box
+    side1: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Sivu 1";
+            default:
+                return "Side 1";
+        }
+    },
+    side2: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Sivu 2";
+            default:
+                return "Side 2";
+        }
+    },
+    side3: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Sivu 3";
+            default:
+                return "Side 3";
+        }
+    },
+    side4: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Sivu 4";
+            default:
+                return "Side 4";
+        }
+    },
+    // End box
     search: function (langcode) {
         switch (langcode) {
             case "fi":

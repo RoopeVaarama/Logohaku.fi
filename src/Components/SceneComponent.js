@@ -40,7 +40,7 @@ const useStyles = makeStyles({
  *
  */
 
-const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setActiveCamera, logoPosition, setLogoPosition, setLogoLabel, freePick, setFreePick, logoRotation, setLogoRotation, logoSize, setLogoSize, logoAspectRatios}) => {
+const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setActiveCamera, logoPosition, setLogoPosition, setLogoLabel, freePick, setFreePick, logoRotation, setLogoRotation, logoSize, setLogoSize, logoAspectRatios, setUsableColors}) => {
   const [scene1, setScene1] = useState(null);
   const [decal, setDecal] = useState(null);
   const [currentModel, setCurrentModel] = useState(null);
@@ -61,12 +61,20 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
   //console.log("initial pos  ", modelPosition);
 
   useEffect(() => {
+    if (model.CUSTOM_COLOR_ON) {
+      setUsableColors(true);
+    } else {
+      setUsableColors(false)
+    }
+  });
+
+  useEffect(() => {
     //const RGBColor = hexToRGB(color[1]);
     if (currentModel !== null && color !== null && model.CUSTOM_COLOR_ON === true) {
       const meshes = currentModel._scene.meshes;
       //console.log("current model ", meshes, color);
       for (var i in meshes) {
-        if (meshes[i].metadata !== null) {
+        if (meshes[i].metadata !== null && model.COLORABLE_MESHES.includes(meshes[i].name)) {
           const newMat = new StandardMaterial("material" + i + i, scene1);
           newMat.diffuseColor = new Color3.FromHexString(color);
           meshes[i].material = newMat;
@@ -193,7 +201,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
       }
 
     }
-  }, [logoRotation, logoSize]);
+  }, [logoRotation, logoSize, logo]);
 
 
   useEffect(() => {
@@ -236,7 +244,8 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
     //console.log("current model ", meshes, color);
     if (model.CUSTOM_COLOR_ON === true) {
       for (var i in meshes) {
-      if (meshes[i].metadata !== null) {
+        console.log('meshes ', meshes[i], model.COLORABLE_MESHES, model.COLORABLE_MESHES.includes(meshes[i].name))
+      if (meshes[i].metadata !== null && model.COLORABLE_MESHES.includes(meshes[i].name)) {
         const newMat = new StandardMaterial("material" + 1, scene1);
         newMat.diffuseColor = new Color3.FromHexString(color);
         meshes[i].material = newMat;
@@ -280,7 +289,8 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
         const mesh = pickInfo.pickedMesh;
         //console.log('PickInfo ', pickInfo.pickedPoint)
         if (pickInfo.pickedPoint !== null) {
-          const meshObj = "POSITION_VECTOR: [" + pickInfo.pickedPoint.x + "," + pickInfo.pickedPoint.y + "," + pickInfo.pickedPoint.z + "],\n" + "NORMAL_VECTOR: [" + pickInfo.getNormal(true).x + "," + pickInfo.getNormal(true).y + "," + pickInfo.getNormal(true).z + "],"
+          const meshObj = "POSITION_VECTOR: [" + pickInfo.pickedPoint.x + "," + pickInfo.pickedPoint.y + "," + pickInfo.pickedPoint.z + "],\n" + "NORMAL_VECTOR: [" + pickInfo.getNormal(true).x + "," + pickInfo.getNormal(true).y + "," + pickInfo.getNormal(true).z + "],\n"
+          + "MESH_NAME: " + pickInfo.pickedMesh.name + ",\nNAME: "
           const newLogoPosition = {
             MESH_NAME: pickInfo.pickedMesh.name,
             NAME: "freePick",
@@ -342,7 +352,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
   }
 
   const handleSizeChange = (event, newSize) => {
-    setLogoSize(newSize / 10)
+    setLogoSize(newSize / 100)
   }
 
   return (
@@ -401,6 +411,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
             {TextValues.logo_rotation_title(lang)}
           </Typography>
           <Slider
+            key="rotationSlider"
             orientation="vertical"
             defaultValue={0}
             aria-labelledby="rotation-slider"
@@ -410,7 +421,6 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
             max={360}
             className={classes.slider}
             onChange={handleRotationChange}
-            defaultValue={model.LOGO_ROTATION}
             />
           </div>
           <div className="SizeContainer">
@@ -418,16 +428,17 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
               {TextValues.logo_size_title(lang)}
             </Typography>
             <Slider
+              key="sizeSlider"
               orientation="vertical"
               defaultValue={0}
               aria-labelledby="rotation-slider"
               valueLabelDisplay="auto"
               step={10}
               min={0}
-              max={200}
+              max={400}
               className={classes.slider}
               onChange={handleSizeChange}
-              defaultValue={model.LOGO_SIZE * 10}
+              defaultValue={100}
               />
         </div>
        </div>

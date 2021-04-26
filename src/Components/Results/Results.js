@@ -82,6 +82,11 @@ const useStyles = makeStyles({
   },
   pickerTable: {
     flexBasis: '80%'
+  },
+  colorPickerDisabledText: {
+    position: "absolute",
+    width: "100%",
+    height: "100%"
   }
 })
 
@@ -114,6 +119,7 @@ const Results = ({ lang, handleAddToCart }) => {
   });
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedLogo, setSelectedLogo] = useState(null);
+  const [usableColors, setUsableColors] = useState(true);
   const [logoRotation, setLogoRotation] = useState(0);
   const [logoPosition, setLogoPosition] = useState(null);
   const [logoSize, setLogoSize] = useState(1);
@@ -476,7 +482,7 @@ const Results = ({ lang, handleAddToCart }) => {
               </Typography>
             </CardContent>
           </Card>
-          <Table striped bordered className="ColorPicker">
+          <Table striped bordered className={usableColors ? 'ColorPicker' : 'ColorPickerDisabled'}>
             <tbody>
               <tr>
                 {mapColors()}
@@ -502,6 +508,11 @@ const Results = ({ lang, handleAddToCart }) => {
                 </td>
               </tr>
             </tbody>
+            {!usableColors &&
+            <Typography variant="body2" className={styles.colorPickerDisabledText}>
+              {TextValues.colorPickerDisabled(lang)}
+            </Typography>
+            }
           </Table>
         </div>
         <div /*onMouseOver={noScroll} onMouseLeave={scroll}*/ style={{ width: '95%' }} className="PreviewerWindow">
@@ -533,6 +544,7 @@ const Results = ({ lang, handleAddToCart }) => {
             setLogoRotation={setLogoRotation}
             setLogoSize={setLogoSize}
             logoAspectRatios={logoAspectRatios}
+            setUsableColors={setUsableColors}
             model={
               selectedProduct
                 ? Object.values(selectedProduct)[0]

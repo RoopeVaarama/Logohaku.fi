@@ -30,6 +30,13 @@
     table-layout: fixed;
     flex-basis: 60%;
 }
+.ColorPickerDisabled {
+    table-layout: fixed;
+    flex-basis: 60%;
+    pointer-events: none;
+    opacity: 50%;
+    z-index: 4;
+}
 .ColorPickerItem {
     height: inherit;
     padding: 12px;

@@ -70,6 +70,7 @@ const ProductsObjects = ({lang}) => {
                 WHITE: "#FFFFFF",
                 NONE: ""
             },
+            COLORABLE_MESHES: ["node4"],
             MAX_LOGO_AMOUNT: 2,
             NAME: textValues.tshirt(lang),
             THUMB: "tpaita.png"
@@ -117,6 +118,7 @@ const ProductsObjects = ({lang}) => {
                 WHITE: "#FFFFFF",
                 NONE: ""
             },
+            COLORABLE_MESHES: ["Plane.001_Cloth3_0"],
             MAX_LOGO_AMOUNT: 2,
             NAME: textValues.mask(lang),
             THUMB: "maski.png"
@@ -156,8 +158,8 @@ const ProductsObjects = ({lang}) => {
             COLOR_DEFAULTS: {
                 BLACK: "#000000",
                 WHITE: "#FFFFFF",
-                NONE: ""
             },
+            COLORABLE_MESHES: ["pen_lambert4_0", "pen_lambert5_0"],
             MAX_LOGO_AMOUNT: 2,
             NAME: textValues.pen(lang),
             THUMB: "kyna.png"
@@ -179,7 +181,49 @@ const ProductsObjects = ({lang}) => {
                 Y: 0,
                 Z: 0
             },
-            LOGO_POSITIONS: {
+            LOGO_POSITIONS : {
+                DRIVER_SIDE_MIDDLE_WALL : {
+                    POSITION_VECTOR: [-1.273094225254664,2.1012258748154236,1.6688976229873402],
+                    NORMAL_VECTOR: [-0.004966310100764375,0.17480631286207318,0.9845903151806592],
+                    MESH_NAME: "body_chvan_body_0",
+                    NAME: textValues.driver_side_middle_wall(lang)
+                },
+                DRIVER_SIDE_BACK_WALL : {
+                    POSITION_VECTOR: [-2.7012842810263984,2.154943348947418,1.652569557064166],
+                    NORMAL_VECTOR: [-0.008388614892717276,0.1854939706908834,0.9826095959115764],
+                    MESH_NAME: "body_chvan_body_0",
+                    NAME: textValues.driver_side_back_wall(lang)
+                },
+                PASSENGER_SIDE_MIDDLE_WALL : {
+                    POSITION_VECTOR: [0.09240839443492957,2.115235800643772,-1.6735496897737017],
+                    NORMAL_VECTOR: [-0.004479315388928243,0.16270311376063862,-0.986664903858569],
+                    MESH_NAME: "panel_door_chvan_body_0",
+                    NAME: textValues.passenger_side_middle_wall(lang)
+                },
+                PASSENGER_SIDE_BACK_WALL : {
+                    POSITION_VECTOR: [-2.665593128189671,2.154210382436276,-1.6532170595547244],
+                    NORMAL_VECTOR: [-0.007623587461638424,0.18506830343959524,-0.9826960893257919],
+                    MESH_NAME: "body_chvan_body_0",
+                    NAME: textValues.passenger_side_back_wall(lang)
+                },
+                FRONT_HOOD : {
+                    POSITION_VECTOR: [4.3794504583466605,1.45747968038045,0.010198650977888149],
+                    NORMAL_VECTOR: [0.37229828960880296,0.928113113246344,0.00018048417896857001],
+                    MESH_NAME: "body_chvan_body_0",
+                    NAME: textValues.front_hood(lang)
+                },
+                BACK_DOOR_LEFT : {
+                    POSITION_VECTOR: [-5.034980166687404,1.0055645917878377,0.6369751721489694],
+                    NORMAL_VECTOR: [-0.9994225806395689,-0.03355486064595444,0.005345711811798844],
+                    MESH_NAME: "body_chvan_body_0",
+                    NAME: textValues.back_door_left(lang)
+                },
+                BACK_DOOR_RIGHT : {
+                    POSITION_VECTOR: [-5.035351883080912,0.9834735961765246,-0.6349514922214529],
+                    NORMAL_VECTOR: [-0.9994951622358891,-0.0313168406868736,-0.005355012273282066],
+                    MESH_NAME: "body_chvan_body_0",
+                    NAME: textValues.back_door_right(lang)
+                }
 
             },
             CUSTOM_COLOR_ON: false,
@@ -205,7 +249,30 @@ const ProductsObjects = ({lang}) => {
                 Z: 0
             },
             LOGO_POSITIONS: {
-
+                SIDE1 : {
+                    POSITION_VECTOR: [-0.037394202162782955,0.02353921300311146,1.222222339014209],
+                    NORMAL_VECTOR: [0,0,1],
+                    MESH_NAME: "CardboardBox_LP_lambert1_0",
+                    NAME: textValues.side1(lang)
+                },
+                SIDE2 : {
+                    POSITION_VECTOR: [1.5111111112435642,-0.03369836558780129,-0.0018200026175047013],
+                    NORMAL_VECTOR: [1,0,0],
+                    MESH_NAME: "CardboardBox_LP_lambert1_0",
+                    NAME: textValues.side2(lang)
+                },
+                SIDE3 : {
+                    POSITION_VECTOR: [0.04165303397475062,0.07918895792682723,-1.222222339014209],
+                    NORMAL_VECTOR: [0,0,-1],
+                    MESH_NAME: "CardboardBox_LP_lambert1_0",
+                    NAME: textValues.side3(lang)
+                },
+                SIDE4 : {
+                    POSITION_VECTOR: [-1.511111111243566,-0.06427192909584867,-0.06919523472539635],
+                    NORMAL_VECTOR: [-1,0,0],
+                    MESH_NAME: "CardboardBox_LP_lambert1_0",
+                    NAME: textValues.side4(lang)
+                }
             },
             CUSTOM_COLOR_ON: false,
             MAX_LOGO_AMOUNT: 2,
