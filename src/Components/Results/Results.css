@@ -26,6 +26,12 @@
     border-color: transparent;
 }
 
+.LogoPickerImgBtnSelected {
+    background-color: aquamarine;
+    border-color: transparent;
+
+}
+
 .ColorPicker {
     table-layout: fixed;
     flex-basis: 60%;

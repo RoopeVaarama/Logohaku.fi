@@ -87,7 +87,14 @@ const useStyles = makeStyles({
     position: "absolute",
     width: "100%",
     height: "100%"
+  },
+  logoPickerImgBtnSelected: {
+    backgroundColor: "rgba(155, 155, 155, 0.5)",
+  },
+  colorPickerImgBtnSelected: {
+    backgroundColor: "rgba(155, 155, 155, 0.5)",
   }
+
 })
 
 const Results = ({ lang, handleAddToCart }) => {
@@ -107,33 +114,6 @@ const Results = ({ lang, handleAddToCart }) => {
   //const [presetsList, setPresetsList] = useState(true);
   //const [presetPosition, setPresetPosition] = useState(1);
   //const [loading, setLoading] = useState(true);
-
-
-
-  // Brand (color and logo) states
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [selectedEditableLogo, setSelectedEditableLogo] = useState(null);
-  const [selectedEditableColor, setSelectedEditableColor] = useState({
-    color: "",
-    index: 0
-  });
-  const [selectedColor, setSelectedColor] = useState(null);
-  const [selectedLogo, setSelectedLogo] = useState(null);
-  const [usableColors, setUsableColors] = useState(true);
-  const [logoRotation, setLogoRotation] = useState(0);
-  const [logoPosition, setLogoPosition] = useState(null);
-  const [logoSize, setLogoSize] = useState(1);
-  const [logoAspectRatios, setLogoAspectRatios] = useState({});
-  const [logoLabel, setLogoLabel] = useState(null);
-  const [freePick, setFreePick] = useState(false);
-  const [itemAmount, setItemAmount] = useState(1);
-
-  // States for the Babylon scene and engine
-  //const [scene, setScene] = useState(null);
-  const [engine, setEngine] = useState(null);
-  const [activeCamera, setActiveCamera] = useState(null);
-
-  const styles = useStyles();
 
   const [response, setResponse] = useState(() => {
     // Set JSON response based on search parameter (in place of API usage)
@@ -175,6 +155,44 @@ const Results = ({ lang, handleAddToCart }) => {
     }
   });
 
+  // Create the products object and use default model (T-shirt)
+  const productsObjects = ProductsObjects({ lang });
+
+  // Brand (color and logo) states
+  const [selectedProduct, setSelectedProduct] = useState(productsObjects.TSHIRT);
+  const [selectedEditableLogo, setSelectedEditableLogo] = useState(null);
+  const [selectedEditableColor, setSelectedEditableColor] = useState({
+    color: "",
+    index: 0
+  });
+  const [selectedColor, setSelectedColor] = useState(() => {
+    return colors[0];
+  });
+  const [selectedLogo, setSelectedLogo] = useState(() => {
+    return logos[0];
+  });
+  const [selectedLogoIndex, setSelectedLogoIndex] = useState(0);
+  const [selectedColorIndex, setSelectedColorIndex] = useState(0);
+  const [usableColors, setUsableColors] = useState(true);
+  const [logoRotation, setLogoRotation] = useState(0);
+  const [logoPosition, setLogoPosition] = useState(() => {
+    return null
+  });
+  const [logoSize, setLogoSize] = useState(1);
+  const [logoAspectRatios, setLogoAspectRatios] = useState({});
+  const [logoLabel, setLogoLabel] = useState(null);
+  const [freePick, setFreePick] = useState(false);
+  const [itemAmount, setItemAmount] = useState(1);
+
+  // States for the Babylon scene and engine
+  //const [scene, setScene] = useState(null);
+  const [engine, setEngine] = useState(null);
+  const [activeCamera, setActiveCamera] = useState(null);
+
+  const styles = useStyles();
+
+  
+
   useEffect(() => {
     //console.log("Responses here! ", response);
     //const imageUrl = baseUrl + response.code + "/"
@@ -188,8 +206,7 @@ const Results = ({ lang, handleAddToCart }) => {
     })*/
   }, []);
 
-  // Create the products object and use default model (T-shirt)
-  const productsObjects = ProductsObjects({ lang });
+  
 
   const selectModel = (selectedModel, decal) => {
     if (model != null) {
@@ -207,6 +224,7 @@ const Results = ({ lang, handleAddToCart }) => {
 
   const selectProduct = (product) => {
     //console.log("Setting product", Object.values(product)[0]);
+    console.log('select product ', product)
     setSelectedProduct(product);
   };
 
@@ -287,9 +305,12 @@ const Results = ({ lang, handleAddToCart }) => {
     return logoArray.map((item, index) => (
       <td className="LogoContainer">
         <Button
-          className="LogoPickerImgBtn"
+          className={selectedLogoIndex === index ? styles.logoPickerImgBtnSelected : ""}
           variant="outline-light"
-          onClick={(e) => print(item.image, e)}
+          onClick={(e) => {
+            setSelectedLogoIndex(index)
+            print(item.image, e)
+          }}
         >
           <Image src={item.image} fluid className="LogoPickerItem" onLoad={(e) => {
             console.log(e.target.width, e.target.height, e.target);
@@ -327,9 +348,13 @@ const Results = ({ lang, handleAddToCart }) => {
     return colors.map((color, index) => (
       <td className="ColorContainer">
         <Button
-          className="LogoPickerImgBtn"
+          className={selectedColorIndex === index ? styles.colorPickerImgBtnSelected : ""}
           variant="outline-light"
-          onClick={(e) => printC(color, e)}
+          onClick={(e) => {
+            console.log('selected color ', index)
+            setSelectedColorIndex(index)
+            printC(color, e)
+          }}
         >
           <Box bgcolor={color} p={5} className="ColorPickerItem">
             <svg
@@ -523,7 +548,6 @@ const Results = ({ lang, handleAddToCart }) => {
               lang={lang}
             ></ProductsList>
 
-            {selectedProduct ?
               <div style={{ width: '100%', height: "80px", position: "absolute", bottom: "0", }}>
                 <Input
                   style={{ marginLeft: "5%", textAlign: 'center', width: '80%', height: '10%', marginBottom: '10px', padding: '10px' }}
@@ -533,7 +557,6 @@ const Results = ({ lang, handleAddToCart }) => {
                 />
                 <Button variant="contained" color="primary" style={{ width: '100%', height: '60%' }} onClick={() => addToCart()}>{TextValues.addToCart(lang)}</Button>
               </div>
-              : null}
           </div>
           <SceneComponent
             lang={lang}
@@ -547,8 +570,6 @@ const Results = ({ lang, handleAddToCart }) => {
             setUsableColors={setUsableColors}
             model={
               selectedProduct
-                ? Object.values(selectedProduct)[0]
-                : productsObjects.TSHIRT
             }
             selectModel={selectModel}
             setEngine={setEngine}

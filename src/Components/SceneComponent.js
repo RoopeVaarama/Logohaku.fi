@@ -51,6 +51,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
 
   const modelSize = new Vector3(model.SIZE, model.SIZE, model.SIZE);
   modelSize._isDirty = false;
+
   //console.log("initial name ", color);
   const modelPosition = new Vector3(
     model.POSITION.X,
@@ -105,8 +106,6 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
       var actualLogoSize = null;
       if (logo in logoAspectRatios) {
         const splitAspectRatio = logoAspectRatios[logo].split(':')
-        console.log(splitAspectRatio)
-
         if (splitAspectRatio[0] > splitAspectRatio[1]) {
           const ratio = splitAspectRatio[0] / splitAspectRatio[1];
           actualLogoSize = new Vector3(logoSize * ratio, logoSize, 1);
@@ -161,7 +160,6 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
       var actualLogoSize = null;
       if (logo in logoAspectRatios) {
         const splitAspectRatio = logoAspectRatios[logo].split(':')
-        console.log(splitAspectRatio)
 
         if (splitAspectRatio[0] > splitAspectRatio[1]) {
           const ratio = splitAspectRatio[0] / splitAspectRatio[1];
@@ -279,11 +277,9 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
       decalMaterial.diffuseTexture.hasAlpha = true;
       decalMaterial.zOffset = -2;
 
-      console.log('Checking if decal exists', decal);
       if (decal != null && pickInfo.name !== "decal") {
         decal.dispose();
       }
-      console.log('Checking if decal exists', decal);
 
       if (pickInfo.hit && pickInfo.pickedMesh.name !== "decal") {
         const mesh = pickInfo.pickedMesh;
@@ -299,9 +295,8 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
           }
           handleFreeLogoChange(JSON.stringify(newLogoPosition));
           setLogoLabel(TextValues.freePicking(lang))
-          console.log(meshObj);
         }
-        console.log("PickInfo " + pickInfo.pickedPoint + pickInfo.getNormal(true) + "mesh " + mesh);
+       // console.log("PickInfo " + pickInfo.pickedPoint + pickInfo.getNormal(true) + "mesh " + mesh);
         const decalSize = actualLogoSize;
         const decalRotation = logoRotation
 
@@ -335,7 +330,6 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
     let val = JSON.parse(event.target.value)
     //console.log(val.NAME)
     setLogoLabel(val.NAME)
-    console.log('event ', JSON.parse(event.target.value))
     setLogoPosition(event.target.value)
   }
   const handleFreeLogoChange = (pos) => {
@@ -343,7 +337,6 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
   }
 
   const handleSwitchChange = (event) => {
-    console.log('Handle switch change ', event.target.checked)
     setFreePick(event.target.checked);
   }
 
