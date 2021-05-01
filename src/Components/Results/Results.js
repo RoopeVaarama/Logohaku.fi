@@ -288,10 +288,10 @@ const Results = ({ lang, handleAddToCart }) => {
 
   const { /*height,*/ width } = useWindowDimensions();
   let productsWidth = "300px"
-  if (width < 1000) {
-    productsWidth = "250px";
+  if (width < 960) {
+    productsWidth = "200px";
   }
-  if (width > 1000) {
+  if (width > 960) {
     productsWidth = "350px"
   }
   if (width > 2000) {
