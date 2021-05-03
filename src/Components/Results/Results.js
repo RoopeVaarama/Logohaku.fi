@@ -8,12 +8,13 @@ import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-r
 import "./Results.css";
 import { HighlightOff, Edit } from '@material-ui/icons';
 import { Typography, Button, IconButton, Box, Card, CardContent, Input } from '@material-ui/core';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import SceneComponent from "../SceneComponent";
 import ProductsList from "../ProductsList/ProductsList";
 //import PresetsList from "../PresetsList/PresetsList";
 import ProductsObjects from "../../tools/ProductsEnum";
 //import { Vector3 } from "@babylonjs/core";
-import { Table, Image } from "react-bootstrap";
+import {  Image } from "react-bootstrap";
 import {
   paistoBaseResponse,
   metropoliaBaseResponse,
@@ -23,7 +24,7 @@ import EditLogoDialog from '../PickerDialog/EditLogoDialog';
 import EditColorDialog from '../PickerDialog/EditColorDialog';
 import NewLogoDialog from '../PickerDialog/NewLogoDialog';
 import NewColorDialog from '../PickerDialog/NewColorDialog';
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 import useWindowDimensions from '../../Hooks/WindowDimentions'
 import nextId from "react-id-generator";
@@ -82,16 +83,40 @@ const useStyles = makeStyles({
   pickerTable: {
     flexBasis: '80%'
   },
+  pickerItemBtn: {
+    padding: '16px',
+    height: '100%'
+  },
+  ColorPicker: {
+    flexBasis: '60%',
+  },
+  ColorPickerDisabled: {
+      tableLayout: 'fixed',
+      flexBasis: '60%',
+      pointerEvents: 'none',
+      opacity: '50%',
+      zIndex: '4',
+  },
   colorPickerDisabledText: {
     position: "absolute",
     width: "100%",
     height: "100%"
   },
+  logoPickerImgBtnNormal: {
+    border: "1px solid rgba(224, 224, 224, 1)",
+    padding: '0px'
+  },
+  colorPickerImgBtnNormal: {
+    border: "1px solid rgba(224, 224, 224, 1)",
+    padding: '0px'
+  },
   logoPickerImgBtnSelected: {
     backgroundColor: "rgba(155, 155, 155, 0.5)",
+    padding: '0px'
   },
   colorPickerImgBtnSelected: {
     backgroundColor: "rgba(155, 155, 155, 0.5)",
+    padding: '0px'
   }
 
 })
@@ -301,9 +326,12 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
     //console.log("Logo Arrays ", logoArray);
     //console.log('Imageurl ', imageURL);
     return logoArray.map((item, index) => (
-      <td className="LogoContainer">
-        <Button
-          className={selectedLogoIndex === index ? styles.logoPickerImgBtnSelected : ""}
+      <TableCell alignCenter className={selectedLogoIndex === index ? styles.logoPickerImgBtnSelected : styles.logoPickerImgBtnNormal}>
+        <div className="LogoItemWrapper">
+        <Button 
+          
+          className={styles.pickerItemBtn}
+          fullWidth
           variant="outline-light"
           onClick={(e) => {
             setSelectedLogoIndex(index)
@@ -319,7 +347,8 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
             logoAspectRatioArray[e.target.currentSrc] = newAspectRatio
             setLogoAspectRatios(logoAspectRatioArray);
           }} />
-          <IconButton
+        </Button>
+        <IconButton
             className={styles.pickerIconRemove}
             color="primary"
             aria-label="delete logo"
@@ -335,17 +364,18 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
           >
             <Edit />
           </IconButton>
-        </Button>
-      </td>
+          </div>
+      </TableCell>
     ));
   };
 
   const mapColors = () => {
     //console.log("colors: ", colors);
     return colors.map((color, index) => (
-      <td className="ColorContainer">
+      <TableCell alignCenter className={selectedColorIndex === index ? styles.colorPickerImgBtnSelected : styles.colorPickerImgBtnNormal}>
         <Button
-          className={selectedColorIndex === index ? styles.colorPickerImgBtnSelected : ""}
+          className={styles.pickerItemBtn}
+          fullWidth
           variant="outline-light"
           onClick={(e) => {
             setSelectedColorIndex(index)
@@ -382,7 +412,7 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
             <Edit />
           </IconButton>
         </Button>
-      </td>
+      </TableCell>
     ));
   };
 
@@ -443,13 +473,6 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
     }
     setColorPickerDialogOpen(false);
   };
-  const noScroll = () => {
-    setLockScroll(true)
-  }
-
-  const scroll = () => {
-    setLockScroll(false)
-  }
 
   return (
     <>
@@ -465,9 +488,9 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
               </Typography>
             </CardContent>
           </Card>
-          <Table striped bordered className="LogoPicker">
-            <tbody>
-              <tr>
+          <TableContainer striped bordered className="LogoPicker">
+            <Table className="LogoTable">
+              <TableBody className="LogoContainer">
                 {mapLogos()}
                 <EditLogoDialog
                   selectedValue={selectedEditableLogo}
@@ -476,9 +499,9 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
                   ytunnus={response.code}
                   lang={lang}
                 />
-                <td>
-                  <IconButton className="LogoPickerItem" onClick={() => setNewLogoPickerDialogOpen(true)}>
-                    <AddIcon />
+                <TableCell alignRight>
+                  <IconButton onClick={() => setNewLogoPickerDialogOpen(true)}>
+                    <AddCircleOutlineIcon />
                   </IconButton>
                   <NewLogoDialog
                     selectedValue={response.files}
@@ -487,10 +510,10 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
                     ytunnus={response.code}
                     lang={lang}
                   />
-                </td>
-              </tr>
-            </tbody>
-          </Table>
+                </TableCell>
+              </TableBody>
+            </Table>
+          </TableContainer>
         </div>
         <div className="PickerContainer">
           <Card className={styles.infoCard}>
@@ -503,9 +526,10 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
               </Typography>
             </CardContent>
           </Card>
-          <Table striped bordered className={usableColors ? 'ColorPicker' : 'ColorPickerDisabled'}>
-            <tbody>
-              <tr>
+          <TableContainer className={usableColors ? 'ColorPicker' : 'ColorPickerDisabled'}>
+            <Table className="ColorTable">
+              <TableBody className="ColorContainer">
+                <TableRow>
                 {mapColors()}
                 <EditColorDialog
                   selectedValue={selectedEditableColor}
@@ -515,9 +539,9 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
                   ytunnus={response.code}
                   lang={lang}
                 />
-                <td>
-                  <IconButton className="LogoPickerItem" onClick={() => setNewColorPickerDialogOpen(true)}>
-                    <AddIcon />
+                <TableCell alignRight>
+                  <IconButton fullWidth onClick={() => setNewColorPickerDialogOpen(true)}>
+                    <AddCircleOutlineIcon />
                   </IconButton>
                   <NewColorDialog
                     palette={response.palette}
@@ -526,15 +550,16 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
                     ytunnus={response.code}
                     lang={lang}
                   />
-                </td>
-              </tr>
-            </tbody>
+                </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
             {!usableColors &&
             <Typography variant="body2" className={styles.colorPickerDisabledText}>
               {TextValues.colorPickerDisabled(lang)}
             </Typography>
             }
-          </Table>
+          </TableContainer>
         </div>
         <div style={{ width: '95%' }} className="PreviewerWindow" onMouseOver={() => setLockScroll(true)} onMouseLeave={() => setLockScroll(false)}>
           <div style={{ position: 'relative', width: productsWidth }} className="Products">

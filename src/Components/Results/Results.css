@@ -8,17 +8,26 @@
     height: inherit;
 }
 .LogoPicker {
-    table-layout: fixed;
     flex-basis: 60%;
 }
 .LogoPickerLogo {
     height: inherit;
 }
+.LogoItemWrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.LogoContainer {
+    border: 1px solid
+    rgba(224, 224, 224, 1);
+    min-height: 100px;
+}
 .LogoContainer:hover {
     background-color: rgba(128, 128, 128, 0);
 }
-.LogoContainer {
-    position: relative;
+.LogoCell:hover {
+    background-color: rgba(128, 128, 128, 0);
 }
 
 .LogoPickerImgBtn {
@@ -31,9 +40,19 @@
     border-color: transparent;
 
 }
+.LogoPickerAddBtn {
+    align-content: center;
+}
+
+.LogoTable {
+    table-layout: fixed;
+}
+
+.ColorTable {
+    table-layout: fixed;
+}
 
 .ColorPicker {
-    table-layout: fixed;
     flex-basis: 60%;
 }
 .ColorPickerDisabled {
@@ -46,9 +65,11 @@
 .ColorPickerItem {
     height: inherit;
     padding: 12px;
+    filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5));
 }
-.ColorContainer:hover {
-    background-color: gray;
+.ColorContainer {
+    border: 1px solid
+    rgba(224, 224, 224, 1)
 }
 
 .EditItemBtn {
@@ -66,6 +87,8 @@
 }
 .LogoPickerItem {
     display: block;
+    max-height: 120px;
+    filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5));
 }
 
 
