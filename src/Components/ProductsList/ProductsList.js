@@ -32,7 +32,7 @@ const renderProductButtons = (productEntries, selectProduct, style) => {
     ))
 }
 
-const styles = makeStyles({
+const styles = makeStyles(theme => ({
     root: {
         paddingTop: '8px',
         paddingBottom: '8px',
@@ -45,8 +45,14 @@ const styles = makeStyles({
     },
     cardFlex: {
         flexGrow: '1',
-        flexBasis: '33.3%',
-        maxWidth: '33.3%',
+        [theme.breakpoints.down('md')]: {
+            flexBasis: '50%',
+            maxWidth: '50%'
+        },
+        [theme.breakpoints.up('md')]: {
+            flexBasis: '33.3%',
+            maxWidth: '33.3%'
+        },
         borderRadius: '0'
     },
     cardContent: {
@@ -54,7 +60,7 @@ const styles = makeStyles({
         height: '100%',
         padding: '0 !important'
     }
-})
+}));
 
 const onClick = (product, selectProduct) => {
     selectProduct(product[1])

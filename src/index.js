@@ -44,10 +44,10 @@ const App = () => {
             }
 
             //First time adding the item
+            localStorage.setItem("cartItems", JSON.stringify([...prev, { id, name, logoPosition, logoLabel, amount, screenshotFront, screenshotBack, selectedLogo }]))
             return [...prev, { id, name, logoPosition, logoLabel, amount, screenshotFront, screenshotBack, selectedLogo }];
         });
-
-        localStorage.setItem("cartItems", JSON.stringify(cartItems))
+        //localStorage.setItem("cartItems", JSON.stringify(cartItems))
     }
 
     const handleChangeAmount = (id, logoPosition, amount) => {
@@ -68,6 +68,7 @@ const App = () => {
                     ? { ...item, amount: amount } : item
             );
         })
+        console.log("??")
         localStorage.setItem("cartItems", JSON.stringify(cartItems))
     }
 
@@ -75,13 +76,15 @@ const App = () => {
         setCartItems(prev =>
             prev.reduce((ack, item) => {
                 if (item.id === id && item.logoPosition === logoPosition) {
+                    localStorage.setItem("cartItems", JSON.stringify(ack))
                     return ack;
                 } else {
+                    localStorage.setItem("cartItems", JSON.stringify([...ack, item]))
                     return [...ack, item];
                 }
             }, [])
         );
-        localStorage.setItem("cartItems", JSON.stringify(cartItems))
+        //localStorage.setItem("cartItems", JSON.stringify(cartItems))
     };
 
     return (
