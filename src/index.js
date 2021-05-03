@@ -19,6 +19,7 @@ const App = () => {
     let lang = localStorage.getItem("lang")
     const [cartOpen, setCartOpen] = useState(false);
     const [cartItems, setCartItems] = useState([]);
+    const [lockScroll, setLockScroll] = useState(false);
 
     useEffect(() => {
         let items = JSON.parse(localStorage.getItem("cartItems"))
@@ -88,7 +89,7 @@ const App = () => {
     };
 
     return (
-        <div className="App">
+        <div className="App" >
             <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
                 <Cart
                     lang={lang}
@@ -100,7 +101,7 @@ const App = () => {
 
             </Drawer>
             <Header lang={lang} cartItems={cartItems} openCart={() => setCartOpen(true)} />
-            <div className="Content">
+            <div className="Content" style={lockScroll ? {overflow: 'hidden'} : {overflowY: 'scroll'} }>
                 <Switch>
                     <Route exact path="/tietoja">
                         <AboutUs lang={lang} />
@@ -110,7 +111,7 @@ const App = () => {
                     </Route>
                     <Route
                         exact path="/tulokset/:id"
-                        children={<Results lang={lang} handleAddToCart={(id, name, logoPosition, logoLabel, amount, screenshotFront, screenshotBack, selectedLogo) => handleAddToCart(id, name, logoPosition, logoLabel, amount, screenshotFront, screenshotBack, selectedLogo)} />}>
+                        children={<Results lang={lang} setLockScroll={setLockScroll} handleAddToCart={(id, name, logoPosition, logoLabel, amount, screenshotFront, screenshotBack, selectedLogo) => handleAddToCart(id, name, logoPosition, logoLabel, amount, screenshotFront, screenshotBack, selectedLogo)} />}>
                     </Route>
                     <Route>
                         <NotFound lang={lang} />

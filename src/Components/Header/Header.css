@@ -4,6 +4,7 @@
     max-height: 100px;
     width: 100vw;
     z-index: 20;
+    overflow: hidden;
   
     display: grid;
     grid-template-areas: "logo logo logo logo logo logo nav";

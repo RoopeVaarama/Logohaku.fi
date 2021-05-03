@@ -24,7 +24,6 @@ import EditColorDialog from '../PickerDialog/EditColorDialog';
 import NewLogoDialog from '../PickerDialog/NewLogoDialog';
 import NewColorDialog from '../PickerDialog/NewColorDialog';
 import { makeStyles } from "@material-ui/core";
-import ScrollLock from 'react-scrolllock';
 import AddIcon from '@material-ui/icons/Add';
 import useWindowDimensions from '../../Hooks/WindowDimentions'
 import nextId from "react-id-generator";
@@ -97,7 +96,7 @@ const useStyles = makeStyles({
 
 })
 
-const Results = ({ lang, handleAddToCart }) => {
+const Results = ({ lang, handleAddToCart, setLockScroll }) => {
   const { id } = useParams();
   const itemID = nextId('itemID-');
   //const [imageURL, setImageURL] = useState("");
@@ -108,7 +107,6 @@ const Results = ({ lang, handleAddToCart }) => {
   const [newLogoPickerDialogOpen, setNewLogoPickerDialogOpen] = useState(false);
   const [newColorPickerDialogOpen, setNewColorPickerDialogOpen] = useState(false);
   const [model, setModel] = useState(null);
-  const [lockScroll, setLockScroll] = useState(false);
 
   //const [productsList, setProductsList] = useState(true);
   //const [presetsList, setPresetsList] = useState(true);
@@ -454,7 +452,7 @@ const Results = ({ lang, handleAddToCart }) => {
   }
 
   return (
-    <ScrollLock isActive={lockScroll}>
+    <>
       <div>
         <div className="PickerContainer">
           <Card className={styles.infoCard}>
@@ -538,7 +536,7 @@ const Results = ({ lang, handleAddToCart }) => {
             }
           </Table>
         </div>
-        <div /*onMouseOver={noScroll} onMouseLeave={scroll}*/ style={{ width: '95%' }} className="PreviewerWindow">
+        <div style={{ width: '95%' }} className="PreviewerWindow" onMouseOver={() => setLockScroll(true)} onMouseLeave={() => setLockScroll(false)}>
           <div style={{ position: 'relative', width: productsWidth }} className="Products">
             <ProductsList
               productsObjects={productsObjects}
@@ -579,12 +577,12 @@ const Results = ({ lang, handleAddToCart }) => {
             setLogoLabel={setLogoLabel}
             freePick={freePick}
             setFreePick={setFreePick}
+            
           />
         </div>
       </div>
       <div className="PlaceholderDiv"></div>
-
-    </ScrollLock >
+    </>
   );
 };
 

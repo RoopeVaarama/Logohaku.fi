@@ -4,10 +4,10 @@ body, #root, .Router {
   padding: 0;
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 
 .App {
-  position: absolute;
   height: 100%;
   width: 100%;
   top: 0;
@@ -18,5 +18,13 @@ body, #root, .Router {
 .App .Content {
   padding-top: 100px;
   text-align: center;
+}
+
+.Content {
+  position:absolute;
+  top: 70px;
+  left:0;
+  right:0;
+  bottom:0;
 }
 
