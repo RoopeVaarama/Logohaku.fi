@@ -313,7 +313,6 @@ const Results = ({ lang, handleAddToCart }) => {
           }}
         >
           <Image src={item.image} fluid className="LogoPickerItem" onLoad={(e) => {
-            console.log(e.target.width, e.target.height, e.target);
             const newAspectRatio = calculateAspectRatios(e.target.width, e.target.height);
             const newAspectRatioObject = {
               [e.target.currentSrc] : newAspectRatio
@@ -351,7 +350,6 @@ const Results = ({ lang, handleAddToCart }) => {
           className={selectedColorIndex === index ? styles.colorPickerImgBtnSelected : ""}
           variant="outline-light"
           onClick={(e) => {
-            console.log('selected color ', index)
             setSelectedColorIndex(index)
             printC(color, e)
           }}
