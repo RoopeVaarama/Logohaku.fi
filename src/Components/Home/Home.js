@@ -2,8 +2,10 @@ import React, { useRef } from 'react';
 import TextValues from '../../tools/TextValues';
 import { useHistory } from 'react-router-dom';
 import { Button, Grid, CardContent, Input } from '@material-ui/core';
+import { Image } from 'react-bootstrap';
 import { Search } from '@material-ui/icons';
 import { Wrapper, HomeDiv, Title, Title2, Form } from './Home.styles';
+import './Home.css'
 import useWindowDimensions from '../../Hooks/WindowDimentions';
 
 
@@ -35,9 +37,9 @@ const Home = ({ lang }) => {
     return (
         <HomeDiv>
             <Wrapper>
-                <Title>Liikelahjakuvasto</Title>
+                <Title>{TextValues.homeTitle(lang)}</Title>
                 <p>-----------------</p>
-                <p>Räätälöitynä yrityksellesi</p>
+                <p>{TextValues.homeTitleDescription(lang)}</p>
                 <Form style={{ alignItems: 'center' }} onSubmit={submitForm}>
                     <Grid container
                         direction="row"
@@ -56,8 +58,8 @@ const Home = ({ lang }) => {
 
             <Wrapper>
                 <CardContent>
-                    <Title2>Miten homma toimii?</Title2>
-                    <p>Selaa yrityksellenne räätälöityn kuvaston tuotteista sopivimmat vaihtoehdot ja kysy tarkempaa tarjousta! Kuvaston esimerkkihinnat ovat alv 0%, ja tyypillisesti 1-väripainatuksella tai lasermerkkauksella. Suosittelemme logollenne ja tuotteelle parhaita vaihtoehtoja varsinaisen tarjouksen yhteydessä vuosikymmenten kokemuksella..</p>
+                    <Title2>{TextValues.homeDescriptionHowItWorksTitle(lang)}</Title2>
+                    <p>{TextValues.homeDescriptionHowItWorksText(lang)}</p>
                     <Grid
                         container
                         direction={direction}
@@ -69,24 +71,26 @@ const Home = ({ lang }) => {
                             item
                             xs={4}
                         >
-
-                            <Title2>Tarjouspyyntö</Title2>
-                            <p>Valitse kiinnostavat tuotteet sekä niille sopivat logot ja lähetä tarjouspyyntö meille.
-                                Palaamme soveltuvien merkkaustapojen ja tarjouksen kanssa tyypillisesti 2 arkipäivän sisällä.</p>
+                            <Image className="HomeDescriptionImg" src="https://kuvastot.vanno.fi/footer1.jpg" />
+                            <Title2>{TextValues.homeDescriptionOfferTitle(lang)}</Title2>
+                            <p className="HomeDescriptionParag">{TextValues.homeDescriptionOfferText(lang)}</p>
+                            
                         </Grid>
                         <Grid
                             item
                             xs={4}>
-                            <Title2>Vedos</Title2>
-                            <p>Lähetämme tehtaan sähköisen vedoksen hyväksyttäväksi tyypillisesti 2 arkipäivän sisällä.
-                                Kuvastossa esitettyjen tuotteiden ja painatusten värit voivat poiketa todellisesta.</p>
+                                <Image className="HomeDescriptionImg" src="https://kuvastot.vanno.fi/footer2.jpg" />
+                            <Title2>{TextValues.homeDescriptionPrintTitle(lang)}</Title2>
+                            <p className="HomeDescriptionParag">{TextValues.homeDescriptionPrintText(lang)}</p>
+                            
                         </Grid>
                         <Grid
                             item
                             xs={4}>
-                            <Title2>Toimitus</Title2>
-                            <p>Tyypillinen toimitusaika tuotteille on 2-3 viikkoa tuotteesta ja määrästä riippuen.
-                                Jos kaipaat nopeampaa toimitusta niin mainitse asiasta tarjouspyynnössä.</p>
+                            <Image className="HomeDescriptionImg" src="https://kuvastot.vanno.fi/footer3.jpg" />
+                            <Title2>{TextValues.homeDescriptionDeliveryTitle(lang)}</Title2>
+                            <p className="HomeDescriptionParag">{TextValues.homeDescriptionDeliveryText(lang)}</p>
+                            
                         </Grid>
 
                     </Grid>
@@ -95,7 +99,7 @@ const Home = ({ lang }) => {
 
             <Wrapper>
                 <CardContent>
-                    <Title2>Yhteystiedot</Title2>
+                    <Title2>{TextValues.homeContactInformationTitle(lang)}</Title2>
                     <p>Tekstiä...</p>
                 </CardContent>
             </Wrapper>

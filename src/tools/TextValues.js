@@ -8,6 +8,102 @@ const TextValues = {
                 return "Home";
         }
     },
+    homeTitle: function (langcode) {
+        switch(langcode) {
+            case "fi":
+                return "Liikelahjakuvasto";
+            default:
+                return "Branded merchandise catalog";
+        }
+    },
+    homeTitleDescription: function (langcode) {
+        switch(langcode) {
+            case "fi":
+                return "Räätälöitynä yrityksellesi";
+            default:
+                return "Tailored for your company";
+        }
+    },
+    homeDescriptionHowItWorksTitle: function (langcode) {
+        switch(langcode) {
+            case "fi":
+                return "Miten homma toimii?";
+            default:
+                return "How does it work?";
+        }
+    },
+    homeDescriptionHowItWorksText: function (langcode) {
+        switch(langcode) {
+            case "fi":
+                return "Selaa yrityksellenne räätälöityn kuvaston tuotteista sopivimmat vaihtoehdot ja kysy tarkempaa tarjousta! Kuvaston esimerkkihinnat ovat alv 0%, ja tyypillisesti 1-väripainatuksella tai lasermerkkauksella. Suosittelemme logollenne ja tuotteelle parhaita vaihtoehtoja varsinaisen tarjouksen yhteydessä vuosikymmenten kokemuksella..";
+            default:
+                return "Browse the most suitable products from our tailored catalog for your company and ask for a more specific offer! The" +
+                "catalog's example pricing is 0% alv and typically with 1-color printing or laser etching. We recommend the best" +
+                "choices for your logo and product during ordering, all with years of experience!";
+        }
+    },
+    homeDescriptionOfferTitle: function (langcode) {
+        switch(langcode) {
+            case "fi":
+                return "Tarjouspyyntö";
+            default:
+                return "Offer";
+        }
+    },
+    homeDescriptionOfferText: function (langcode) {
+        switch(langcode) {
+            case "fi":
+                return "Valitse kiinnostavat tuotteet sekä niille sopivat logot ja lähetä tarjouspyyntö meille." +
+                "Palaamme soveltuvien merkkaustapojen ja tarjouksen kanssa tyypillisesti 2 arkipäivän sisällä.";
+            default:
+                return "Select the most interesting products with the best logo option and send us an offer! We will get" +
+                "back to you with printing options and an offer typically in 2 days";
+        }
+    },
+    homeDescriptionPrintTitle: function (langcode) {
+        switch(langcode) {
+            case "fi":
+                return "Vedos";
+            default:
+                return "Print";
+        }
+    },
+    homeDescriptionPrintText: function (langcode) {
+        switch(langcode) {
+            case "fi":
+                return "Lähetämme tehtaan sähköisen vedoksen hyväksyttäväksi tyypillisesti 2 arkipäivän sisällä."
+                + "Kuvastossa esitettyjen tuotteiden ja painatusten värit voivat poiketa todellisesta.";
+            default:
+                return "We will send virtual print to the factory for acceptance within 2 working days. The color of" +
+                "the products and prints in the catalog might differ from the end result";
+        }
+    },
+    homeDescriptionDeliveryTitle: function (langcode) {
+        switch(langcode) {
+            case "fi":
+                return "Toimitus";
+            default:
+                return "Delivery";
+        }
+    },
+    homeDescriptionDeliveryText: function (langcode) {
+        switch(langcode) {
+            case "fi":
+                return "Tyypillinen toimitusaika tuotteille on 2-3 viikkoa tuotteesta ja määrästä riippuen." +
+                "Jos kaipaat nopeampaa toimitusta niin mainitse asiasta tarjouspyynnössä.";
+            default:
+                return "Typical delivery time for products is 2-3 working days depending on the amount and the product." +
+                "If you are in need of a faster delivery, mention it in the offer.";
+        }
+    },
+    homeContactInformationTitle: function (langcode) {
+        switch(langcode) {
+            case "fi":
+                return "Yhteystiedot";
+            default:
+                return "Contact";
+        }
+    },
     results: function (langcode) {
         switch (langcode) {
             case "fi":
