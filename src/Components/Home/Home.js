@@ -14,10 +14,13 @@ const Home = ({ lang }) => {
     const { /*height,*/ width } = useWindowDimensions();
     const companyNameRef = useRef();
     let direction = "row"
-    if (width > 850) {
+    let size = 4
+    if (width > 1400) {
         direction = "row";
+        size = 4
     } else {
         direction = "column";
+        size = 12
     }
 
 
@@ -69,7 +72,7 @@ const Home = ({ lang }) => {
 
                         <Grid
                             item
-                            xs={4}
+                            xs={size}
                         >
                             <Image className="HomeDescriptionImg" src="https://kuvastot.vanno.fi/footer1.jpg" />
                             <Title2>{TextValues.homeDescriptionOfferTitle(lang)}</Title2>
@@ -78,7 +81,7 @@ const Home = ({ lang }) => {
                         </Grid>
                         <Grid
                             item
-                            xs={4}>
+                            xs={size}>
                                 <Image className="HomeDescriptionImg" src="https://kuvastot.vanno.fi/footer2.jpg" />
                             <Title2>{TextValues.homeDescriptionPrintTitle(lang)}</Title2>
                             <p className="HomeDescriptionParag">{TextValues.homeDescriptionPrintText(lang)}</p>
@@ -86,7 +89,7 @@ const Home = ({ lang }) => {
                         </Grid>
                         <Grid
                             item
-                            xs={4}>
+                            xs={size}>
                             <Image className="HomeDescriptionImg" src="https://kuvastot.vanno.fi/footer3.jpg" />
                             <Title2>{TextValues.homeDescriptionDeliveryTitle(lang)}</Title2>
                             <p className="HomeDescriptionParag">{TextValues.homeDescriptionDeliveryText(lang)}</p>
