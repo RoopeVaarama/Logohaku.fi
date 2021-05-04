@@ -655,6 +655,62 @@ const TextValues = {
                     info: "Our smart logo searching algorithm also fetches your company's color themes."
                 };
         }
-    }
+    },
+    roopeContactInfo: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "roope.vaarama@metropolia.fi";
+            default:
+                return "roope.vaarama@metropolia.fi";
+        }
+    },
+    topiasContactInfo: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "topias.peiponen@metropolia.fi";
+            default:
+                return "topias.peiponen@metropolia.fi";
+        }
+    },
+    mikkoContactInfo: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "mikko.neuvonen@metropolia.fi";
+            default:
+                return "mikko.neuvonen@metropolia.fi";
+        }
+    },
+    logotechInfo: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "tietoja";
+            default:
+                return "info";
+        }
+    },
+    schoolInfo: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Metropolia Ammattikorkeakoulu";
+            default:
+                return "Metropolia University of Applied Sciences";
+        }
+    },
+    itSchoolInfo: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Tieto- ja Viestintätekniikka";
+            default:
+                return "Information Technology";
+        }
+    },
+    tutaSchoolInfo: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Tuotantotalous";
+            default:
+                return "Industrial Engineering and Management";
+        }
+    },
 }
 export default TextValues;
