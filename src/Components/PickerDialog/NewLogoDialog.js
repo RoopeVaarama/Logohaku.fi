@@ -48,7 +48,7 @@ const NewLogoDialog = (props) => {
       urls.push(fullUrl);
     }
     return urls.map((item, index) => (
-      <Grid key={item + ytunnus} item xs={3} key={item + index}>
+      <Grid key={item + ytunnus} item xs={3} >
         <Paper key={"paper"+item + ytunnus}>
           <Image src={item} onClick={() => handleListItemClick(item, index)} className={styles.basicShadowForImgPaper}/>
         </Paper>

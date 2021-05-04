@@ -313,7 +313,6 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
 
   const handleColorRemove = (index) => {
     const newColors = colors;
-    console.log("colors ", colors);
     // If color to remove is selected color, set selected color state to null
     if (newColors[index] === selectedColor) {
       setSelectedColor(null);
