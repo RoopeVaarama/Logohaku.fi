@@ -11,9 +11,10 @@ import React, {
   //MenuItemuseRef, addEventListener
 } from "react";
 import {
-  FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Switch, Slider, Typography
+  FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Switch, Slider, Typography, Snackbar
   //MenuItem, Menu, Button,
 } from "@material-ui/core";
+import MuiAlert from '@material-ui/lab/Alert';
 //import { InputManager } from "@babylonjs/core/Inputs/scene.inputManager";
 import TextValues from "../tools/TextValues";
 import "./SceneComponent.css";
@@ -44,22 +45,18 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
   const [scene1, setScene1] = useState(null);
   const [decal, setDecal] = useState(null);
   const [currentModel, setCurrentModel] = useState(null);
-  //const [selectedLogo, setSelectedLogo] = useState(null);
-  //const [currentModelJson, setCurrentModelJson] = useState(null);
+  const [positionNotSelecedSnackbarOpen, setPositionNotSelectedSnackbarOpen] = useState(false);
+  const [positionFreePickNotOnSnackbarOpen, setPositionFreePickNotOnSnackbarOpen] = useState(false);
 
   const classes = useStyles();
 
+  // Set model size and position based on props model
   const modelSize = new Vector3(model.SIZE, model.SIZE, model.SIZE);
-  modelSize._isDirty = false;
-
-  //console.log("initial name ", color);
   const modelPosition = new Vector3(
     model.POSITION.X,
     model.POSITION.Y,
     model.POSITION.Z
   );
-  modelPosition._isDirty = false;
-  //console.log("initial pos  ", modelPosition);
 
   useEffect(() => {
     if (model.CUSTOM_COLOR_ON) {
@@ -70,10 +67,8 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
   });
 
   useEffect(() => {
-    //const RGBColor = hexToRGB(color[1]);
     if (currentModel !== null && color !== null && model.CUSTOM_COLOR_ON === true) {
       const meshes = currentModel._scene.meshes;
-      //console.log("current model ", meshes, color);
       for (var i in meshes) {
         if (meshes[i].metadata !== null && model.COLORABLE_MESHES.includes(meshes[i].name)) {
           const newMat = new StandardMaterial("material" + i + i, scene1);
@@ -82,24 +77,16 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
         }
       }
     }
-    /*for (var i in model.meshes) {
-      if (model.meshes[i].metadata !== null) {
-        const newMat = new StandardMaterial("material"+1, scene1);
-        newMat.diffuseColor = new Color3(RGBColor[0], RGBColor[1], RGBColor[2]);
-        model.meshes[i].material = newMat;
-      }
-    }*/
   }, [color]);
 
   useEffect(() => {
-    if (logoPosition !== null && !freePick) {
+    if (logoPosition !== null && !freePick && logo !== null) {
       if (decal !== null) {
         decal.dispose();
       }
+      console.log('Selected logo ', logo)
 
       const objectForm = JSON.parse(logoPosition);
-      //console.log('ObjectForm ', objectForm);
-
       const decalMaterial = new StandardMaterial("decalMat", scene1);
       decalMaterial.diffuseTexture = new Texture(logo, scene1);
 
@@ -116,16 +103,13 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
           actualLogoSize = new Vector3(logoSize, logoSize, 1);
         }
       }
-      //console.log("Decal image is: /", logo);
+
       decalMaterial.diffuseTexture.hasAlpha = true;
       decalMaterial.zOffset = -2;
 
       var mesh;
       for (var i in currentModel._scene.meshes) {
-        //console.log(currentModel._scene.meshes[i])
-        //console.log(logoPosition.NAME)
         if (objectForm.MESH_NAME === currentModel._scene.meshes[i].name) {
-          //console.log("match")
           mesh = currentModel._scene.meshes[i]
           const decalSize = actualLogoSize;
           const decalRotation = logoRotation;
@@ -142,6 +126,8 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
         }
       }
 
+    } else if (logo === null) {
+      handlePositionNotSelectedSnackbarClick()
     }
   }, [logoPosition]);
 
@@ -152,8 +138,6 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
       }
 
       const objectForm = JSON.parse(logoPosition);
-      //console.log('ObjectForm ', objectForm);
-
       const decalMaterial = new StandardMaterial("decalMat", scene1);
       decalMaterial.diffuseTexture = new Texture(logo, scene1);
 
@@ -172,16 +156,12 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
         }
       }
 
-      //console.log("Decal image is: /", logo);
       decalMaterial.diffuseTexture.hasAlpha = true;
       decalMaterial.zOffset = -20;
 
       var mesh;
       for (var i in currentModel._scene.meshes) {
-        //console.log(currentModel._scene.meshes[i])
-        //console.log(logoPosition.NAME)
         if (objectForm.MESH_NAME === currentModel._scene.meshes[i].name && logoSize !== null) {
-          //console.log("match")
           mesh = currentModel._scene.meshes[i]
           const decalSize = actualLogoSize;
           const decalRotation = logoRotation;
@@ -201,20 +181,6 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
     }
   }, [logoRotation, logoSize, logo]);
 
-
-  useEffect(() => {
-    if (currentModel !== null) {
-      //console.log("UseEffect ", currentModel);
-      const modelArray = Object.entries(model);
-      //console.log("Object entries ", model);
-      for (var i in modelArray) {
-        //console.log("Model array ", modelArray[i].NAME);
-        if (modelArray[i].NAME === currentModel.name) {
-          //console.log("Model match");
-        }
-      }
-    }
-  }, [currentModel]);
 
   function onSceneMount(e) {
     const { canvas, scene } = e;
@@ -310,6 +276,10 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
         decal.material = decalMaterial;
         setDecal(decal);
       }
+    } else if (!freePick && logo === null) {
+      handlePositionNotSelectedSnackbarClick();
+    } else if (!freePick && logo !== null) {
+      handlePositionFreePickNotOnSnackbarClick()
     }
   };
 
@@ -348,6 +318,28 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
     setLogoSize(newSize / 100)
   }
 
+  const handlePositionNotSelectedSnackbarClick = () => {
+    setPositionNotSelectedSnackbarOpen(true);
+  }
+
+  const handlePositionNotSelectedSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setPositionNotSelectedSnackbarOpen(false);
+  }
+
+  const handlePositionFreePickNotOnSnackbarClick = () => {
+    setPositionFreePickNotOnSnackbarOpen(true);
+  }
+
+  const handlePositionFreePickNotOnSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setPositionFreePickNotOnSnackbarOpen(false);
+  }
+
   return (
     <div className="Container">
       <FormControl component="fieldset" className="PositionController" classes={{ root: classes.root }}>
@@ -363,6 +355,17 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
           {createPositionsRadioButtons()}
         </RadioGroup>
       </FormControl>
+      <Snackbar open={positionNotSelecedSnackbarOpen} autoHideDuration={2000} onClose={handlePositionNotSelectedSnackbarClose}>
+        <Alert onClose={handlePositionNotSelectedSnackbarClose} severity="warning">
+          {TextValues.positionChangeWarning(lang)}
+        </Alert>
+      </Snackbar>
+      <Snackbar open={positionFreePickNotOnSnackbarOpen} autoHideDuration={2000} onClose={handlePositionFreePickNotOnSnackbarClose}>
+        <Alert onClose={handlePositionFreePickNotOnSnackbarClose} severity="warning">
+          {TextValues.positionFreePickNotOnWarning(lang)}
+        </Alert>
+      </Snackbar>
+      
       <Engine antialias adaptToDeviceRatio canvasId="PreviewCanvas" className="PreviewCanvas">
         <Scene onSceneMount={onSceneMount} onPointerPick={onPointerPick} >
           <arcRotateCamera
@@ -438,5 +441,9 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
     </div>
   );
 };
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 export default SceneComponent;

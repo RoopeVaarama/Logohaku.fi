@@ -10,7 +10,7 @@ import TextValues from '../../tools/TextValues';
 const baseUrl = "https://api.logohaku.fi/logoversion?version="
 
 const EditColorDialog = (props) => {
-  const { onClose, selectedValue, palette, open, ytunnus, lang } = props;
+  const { onClose, selectedValue, palette, open, ytunnus, lang, styles } = props;
   //console.log('SelectedValue ', selectedValue, ytunnus);
 
   /*const response = await fetch(url, {
@@ -54,7 +54,7 @@ const EditColorDialog = (props) => {
     //console.log('EditColorDialog ', selectedValue)
     return palette.map((item, index) => (
       <Grid key={item + ytunnus} item xs={2}>
-        <Box bgcolor={item} p={3} onClick={() => handleListItemClick(item, selectedValue.index)} />
+        <Box bgcolor={item} p={3} onClick={() => handleListItemClick(item, selectedValue.index)} className={styles.basicShadowForFluidImg} />
       </Grid>
     ))
   };
@@ -75,7 +75,7 @@ const EditColorDialog = (props) => {
             <Button variant="contained" onClick={() => onClose(pickerColor, selectedValue.index)}>
               {TextValues.selectColor(lang)}
                 </Button>
-            <Box bgcolor={pickerColor} p={3} />
+            <Box bgcolor={pickerColor} p={3} className={styles.basicShadow}/>
 
           </div>
         </div>

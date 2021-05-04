@@ -10,7 +10,7 @@ import TextValues from '../../tools/TextValues';
 const baseUrl = "https://api.logohaku.fi/logoversion?version="
 
 const NewColorDialog = (props) => {
-  const { onClose, palette, open, ytunnus, lang } = props;
+  const { onClose, palette, open, ytunnus, lang, stylesResults} = props;
 
   const styles = makeStyles({
     colorPicker: {
@@ -58,7 +58,7 @@ const NewColorDialog = (props) => {
   const createGridItems = () => {
     return palette.map((item) => (
       <Grid key={item + ytunnus} item xs={2}>
-        <Box bgcolor={item} p={3} onClick={() => handleListItemClick(item)} />
+        <Box bgcolor={item} p={3} onClick={() => handleListItemClick(item)} className={stylesResults.basicShadow}/>
       </Grid>
     ))
   };
@@ -79,7 +79,7 @@ const NewColorDialog = (props) => {
             <Button variant="contained" onClick={() => onClose(pickerColor)}>
               {TextValues.selectColor(props.lang)}
                 </Button>
-            <Box bgcolor={pickerColor} p={3} />
+            <Box bgcolor={pickerColor} p={3} className={stylesResults.basicShadow}/>
 
           </div>
         </div>

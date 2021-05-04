@@ -11,7 +11,7 @@ import TextValues from '../../tools/TextValues';
 const baseUrl = "https://api.logohaku.fi/logoversion?version="
 
 const NewLogoDialog = (props) => {
-  const { onClose, selectedValue, open, ytunnus, lang } = props;
+  const { onClose, selectedValue, open, ytunnus, lang, styles } = props;
   //console.log('SelectedValue ', selectedValue, ytunnus);
 
   /*const response = await fetch(url, {
@@ -55,7 +55,7 @@ const NewLogoDialog = (props) => {
     return urls.map((item, index) => (
       <Grid key={item + ytunnus} item xs={3}>
         <Paper>
-          <Image src={item} className="img-fluid" onClick={() => handleListItemClick(item, index)} />
+          <Image src={item} className="img-fluid" onClick={() => handleListItemClick(item, index)} className={styles.basicShadowForImgPaper}/>
         </Paper>
       </Grid>
     ))
@@ -63,7 +63,7 @@ const NewLogoDialog = (props) => {
   };
 
   return (
-    <Dialog onClose={handleClose} aria-labelledby={"customized-dialog-title"} open={open} className="Dialog" fullwidth>
+    <Dialog onClose={handleClose} aria-labelledby={"customized-dialog-title"} open={open} className="Dialog" maxWidth={"md"} fullwidth>
       <DialogTitle id="customized-dialog-title" className="DialogTitle" >{TextValues.customizeYourLogo(lang)}</DialogTitle>
       <DialogContent dividers>
         <Grid container className="PickerGrid" spacing={2}>

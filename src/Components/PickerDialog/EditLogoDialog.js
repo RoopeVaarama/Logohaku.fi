@@ -7,7 +7,7 @@ import TextValues from '../../tools/TextValues';
 const baseUrl = "https://api.logohaku.fi/logoversion?version="
 
 const EditLogoDialog = (props) => {
-  const { onClose, selectedValue, open, ytunnus, lang } = props;
+  const { onClose, selectedValue, open, ytunnus, lang, styles} = props;
   //console.log('EditLogoDialog ', selectedValue, ytunnus);
   /*const response = await fetch(url, {
       method: 'POST',
@@ -52,8 +52,8 @@ const EditLogoDialog = (props) => {
       }
       return urls.map((item) => (
         <Grid key={item[0] + ytunnus} item xs={3}>
-          <Paper className={item[0]}>
-            <Image src={item} className="img-fluid" onClick={() => handleListItemClick(item, selectedValue[1])} />
+          <Paper >
+            <Image src={item} className="img-fluid" onClick={() => handleListItemClick(item, selectedValue[1])} className={styles.basicShadowForImgPaper} />
           </Paper>
         </Grid>
       ))
@@ -61,7 +61,7 @@ const EditLogoDialog = (props) => {
   }
 
   return (
-    <Dialog onClose={handleClose} aria-labelledby={"customized-dialog-title"} open={open} className="Dialog" fullwidth>
+    <Dialog onClose={handleClose} aria-labelledby={"customized-dialog-title"} open={open} maxWidth={"md"} fullwidth>
       <DialogTitle id="customized-dialog-title" className="DialogTitle" >{TextValues.customizeYourLogo(lang)}</DialogTitle>
       <DialogContent dividers>
         <Grid container className="PickerGrid" spacing={2}>

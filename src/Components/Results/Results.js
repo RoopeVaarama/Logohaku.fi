@@ -29,6 +29,8 @@ import AddIcon from '@material-ui/icons/Add';
 import useWindowDimensions from '../../Hooks/WindowDimentions'
 import nextId from "react-id-generator";
 import calculateAspectRatios from 'calculate-aspect-ratio';
+import LogoTable from '../LogoTable/LogoTable';
+import ColorTable from '../ColorTable/ColorTable';
 
 /**
  * Contains the Babylon.js code for rendering the 3D preview window on the results page.
@@ -117,8 +119,23 @@ const useStyles = makeStyles({
   colorPickerImgBtnSelected: {
     backgroundColor: "rgba(155, 155, 155, 0.5)",
     padding: '0px'
+  },
+  dialogBrandItems: {
+    maxWidth: '40vw'
+  },
+  basicShadow: {
+    boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)"
+  },
+  basicShadowForImgPaper: {
+    maxWidth: "100%",
+    filter: 'drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5))',
+    boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)"
+  },
+  basicShadowForFluidImg: {
+    maxWidth: "100%",
+    height: "auto",
+    filter: 'drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5))'
   }
-
 })
 
 const Results = ({ lang, handleAddToCart, setLockScroll }) => {
@@ -229,6 +246,9 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
     })*/
   }, []);
 
+  useEffect(() => {
+    console.log('Useeffect logos ', logos)
+  }, [logos])
   
 
   const selectModel = (selectedModel, decal) => {
@@ -266,22 +286,18 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
     }
   };*/
 
-  const print = (img) => {
-    //console.log("Seleted logo here", img);
+  const setLogo = (img) => {
     setSelectedLogo(img);
   };
-  const printC = (color) => {
-    //console.log("SELECTED COLOR ", color);
+  const setColor = (color) => {
     setSelectedColor(color);
   };
 
   const handleLogoEdit = (item, index) => {
-    //console.log("HandleLogoEdit ", item, index);
     setSelectedEditableLogo([item, index]);
     setLogoPickerDialogOpen(true);
   };
   const handleColorEdit = (item, index) => {
-    //console.log('HandleColorEdit ', item);
     setSelectedEditableColor({
       color: item,
       index: index
@@ -291,14 +307,29 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
 
   const handleLogoRemove = (index) => {
     const newLogos = logos;
-    newLogos.splice(index)
-    setLogos(newLogos);
+
+    // If logo to remove is selected logo, set selected logo state to null
+    if (newLogos[index].image === selectedLogo) {
+      setSelectedLogo(null);
+      setSelectedLogoIndex(null);
+    }
+
+    newLogos.splice(index, 1)
+
+    setLogos([...newLogos]);
   };
 
   const handleColorRemove = (index) => {
     const newColors = colors;
-    newColors.splice(index);
-    setColors(newColors);
+    console.log('colors ', colors)
+    // If color to remove is selected color, set selected color state to null
+    if (newColors[index] === selectedColor) {
+      setSelectedColor(null);
+      setSelectedColorIndex(null);
+    }
+
+    newColors.splice(index, 1);
+    setColors([...newColors]);
   };
 
   // Creates screenshots of the current canvas from the front and back (Z-axis)
@@ -321,101 +352,6 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
     productsWidth = "450px"
   }
 
-  const mapLogos = () => {
-    const logoArray = logos
-    //console.log("Logo Arrays ", logoArray);
-    //console.log('Imageurl ', imageURL);
-    return logoArray.map((item, index) => (
-      <TableCell alignCenter className={selectedLogoIndex === index ? styles.logoPickerImgBtnSelected : styles.logoPickerImgBtnNormal}>
-        <div className="LogoItemWrapper">
-        <Button 
-          
-          className={styles.pickerItemBtn}
-          fullWidth
-          variant="outline-light"
-          onClick={(e) => {
-            setSelectedLogoIndex(index)
-            print(item.image, e)
-          }}
-        >
-          <Image src={item.image} fluid className="LogoPickerItem" onLoad={(e) => {
-            const newAspectRatio = calculateAspectRatios(e.target.width, e.target.height);
-            const newAspectRatioObject = {
-              [e.target.currentSrc] : newAspectRatio
-            }
-            const logoAspectRatioArray = logoAspectRatios;
-            logoAspectRatioArray[e.target.currentSrc] = newAspectRatio
-            setLogoAspectRatios(logoAspectRatioArray);
-          }} />
-        </Button>
-        <IconButton
-            className={styles.pickerIconRemove}
-            color="primary"
-            aria-label="delete logo"
-            onClick={(e) => handleLogoRemove(index)}
-          >
-            <HighlightOff />
-          </IconButton>
-          <IconButton
-            className={styles.pickerIconEdit}
-            color="primary"
-            aria-label="edit logo"
-            onClick={(e) => handleLogoEdit(item.image, index)}
-          >
-            <Edit />
-          </IconButton>
-          </div>
-      </TableCell>
-    ));
-  };
-
-  const mapColors = () => {
-    //console.log("colors: ", colors);
-    return colors.map((color, index) => (
-      <TableCell alignCenter className={selectedColorIndex === index ? styles.colorPickerImgBtnSelected : styles.colorPickerImgBtnNormal}>
-        <Button
-          className={styles.pickerItemBtn}
-          fullWidth
-          variant="outline-light"
-          onClick={(e) => {
-            setSelectedColorIndex(index)
-            printC(color, e)
-          }}
-        >
-          <Box bgcolor={color} p={5} className="ColorPickerItem">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-palette"
-              viewBox="0 0 16 16"
-            >
-              <path d="M8 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm4 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM5.5 7a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm.5 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
-              <path d="M16 8c0 3.15-1.866 2.585-3.567 2.07C11.42 9.763 10.465 9.473 10 10c-.603.683-.475 1.819-.351 2.92C9.826 14.495 9.996 16 8 16a8 8 0 1 1 8-8zm-8 7c.611 0 .654-.171.655-.176.078-.146.124-.464.07-1.119-.014-.168-.037-.37-.061-.591-.052-.464-.112-1.005-.118-1.462-.01-.707.083-1.61.704-2.314.369-.417.845-.578 1.272-.618.404-.038.812.026 1.16.104.343.077.702.186 1.025.284l.028.008c.346.105.658.199.953.266.653.148.904.083.991.024C14.717 9.38 15 9.161 15 8a7 7 0 1 0-7 7z" />
-            </svg>
-          </Box>
-          <IconButton
-            className={styles.pickerIconRemove}
-            color="primary"
-            aria-label="delete logo"
-            onClick={(e) => handleColorRemove(index)}
-          >
-            <HighlightOff />
-          </IconButton>
-          <IconButton
-            className={styles.pickerIconEdit}
-            color="primary"
-            aria-label="edit logo"
-            onClick={(e) => handleColorEdit(color, index)}
-          >
-            <Edit />
-          </IconButton>
-        </Button>
-      </TableCell>
-    ));
-  };
-
   const addToCart = () => {
     let product = Object.values(selectedProduct)[0];
     let logoPos = logoPosition;
@@ -427,16 +363,22 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
   };
 
   const handleCloseLogos = (value, index) => {
-    //console.log('Handlecloselogos in results ', value, index)
+    // console.log('Handlecloselogos in results ', value, index)
 
     if (value !== null) {
       const newLogos = logos;
+
+      // If the edited logo was selected logo, update selected logos
+      if (index === selectedLogoIndex) {
+        setSelectedLogo(value);
+      }
+
       newLogos[index] = {
         image: value,
         colors: []
       }
-      //console.log('NEW LOGOS ', newLogos)
-      setLogos(newLogos);
+      // console.log('NEW LOGOS ', newLogos, index)
+      setLogos([...newLogos]);
     }
 
     setLogoPickerDialogOpen(false);
@@ -455,6 +397,22 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
     setNewLogoPickerDialogOpen(false);
   }
 
+  const handleCloseColors = (value, index) => {
+    //console.log('handleclosecolors ', value, index)
+    if (value !== null) {
+      const newColors = colors;
+
+      // If the edited color was selected color, update selected colors
+      if (index === selectedColorIndex) {
+        setSelectedColor(value);
+      }
+
+      newColors[index] = value
+      setColors([...newColors]);
+    }
+    setColorPickerDialogOpen(false);
+  };
+
   const handleCloseNewColor = (value) => {
     if (value !== null) {
       const newColors = colors;
@@ -464,15 +422,6 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
     setNewColorPickerDialogOpen(false);
   }
 
-  const handleCloseColors = (value, index) => {
-    //console.log('handleclosecolors ', value, index)
-    if (value !== null) {
-      const newColors = colors;
-      newColors[index] = value
-      setColors(newColors);
-    }
-    setColorPickerDialogOpen(false);
-  };
 
   return (
     <>
@@ -491,13 +440,26 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
           <TableContainer striped bordered className="LogoPicker">
             <Table className="LogoTable">
               <TableBody className="LogoContainer">
-                {mapLogos()}
+                <LogoTable 
+                lang={lang}
+                logos={logos}
+                selectedLogoIndex={selectedLogoIndex}
+                setSelectedLogoIndex={setSelectedLogoIndex}
+                setLogo={setLogo}
+                calculateAspectRatios={calculateAspectRatios}
+                logoAspectRatios={logoAspectRatios}
+                setLogoAspectRatios={setLogoAspectRatios}
+                handleLogoRemove={handleLogoRemove}
+                handleLogoEdit={handleLogoEdit} 
+                styles={styles}
+                />
                 <EditLogoDialog
                   selectedValue={selectedEditableLogo}
                   open={logoPickerDialogOpen}
                   onClose={handleCloseLogos}
                   ytunnus={response.code}
                   lang={lang}
+                  styles={styles}
                 />
                 <TableCell alignRight>
                   <IconButton onClick={() => setNewLogoPickerDialogOpen(true)}>
@@ -509,6 +471,7 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
                     onClose={handleCloseNewLogo}
                     ytunnus={response.code}
                     lang={lang}
+                    styles={styles}
                   />
                 </TableCell>
               </TableBody>
@@ -530,7 +493,15 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
             <Table className="ColorTable">
               <TableBody className="ColorContainer">
                 <TableRow>
-                {mapColors()}
+                <ColorTable
+                lang={lang}
+                colors={colors}
+                selectedColorIndex={selectedColorIndex}
+                setSelectedColorIndex={setSelectedColorIndex}
+                setColor={setColor}
+                handleColorRemove={handleColorRemove}
+                handleColorEdit={handleColorEdit} 
+                styles={styles}/>
                 <EditColorDialog
                   selectedValue={selectedEditableColor}
                   palette={response.palette}
@@ -538,6 +509,7 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
                   onClose={handleCloseColors}
                   ytunnus={response.code}
                   lang={lang}
+                  styles={styles}
                 />
                 <TableCell alignRight>
                   <IconButton fullWidth onClick={() => setNewColorPickerDialogOpen(true)}>
@@ -549,6 +521,7 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
                     onClose={handleCloseNewColor}
                     ytunnus={response.code}
                     lang={lang}
+                    stylesResults={styles}
                   />
                 </TableCell>
                 </TableRow>

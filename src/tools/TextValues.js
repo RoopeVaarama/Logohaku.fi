@@ -400,6 +400,22 @@ const TextValues = {
                 return "Close"
         }
     },
+    positionChangeWarning: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Et ole valinnut logoa!";
+            default:
+                return "No logo has been picked!";
+        }
+    },
+    positionFreePickNotOnWarning: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Vapaa sijoitus ei ole päällä!";
+            default:
+                return "Free pick is not on!";
+        }
+    },
     /** Logo positions for the product
      */
     freePicking: function (langcode) {
