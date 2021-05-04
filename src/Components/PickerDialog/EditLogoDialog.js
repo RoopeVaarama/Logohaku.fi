@@ -51,9 +51,9 @@ const EditLogoDialog = (props) => {
         urls.push(fullUrl);
       }
       return urls.map((item) => (
-        <Grid key={item[0] + ytunnus} item xs={3}>
-          <Paper >
-            <Image src={item} className="img-fluid" onClick={() => handleListItemClick(item, selectedValue[1])} className={styles.basicShadowForImgPaper} />
+        <Grid key={item + ytunnus} item xs={3}>
+          <Paper key={"paper" + item + ytunnus}>
+            <Image src={item} onClick={() => handleListItemClick(item, selectedValue[1])} className={styles.basicShadowForImgPaper} />
           </Paper>
         </Grid>
       ))
@@ -61,7 +61,7 @@ const EditLogoDialog = (props) => {
   }
 
   return (
-    <Dialog onClose={handleClose} aria-labelledby={"customized-dialog-title"} open={open} maxWidth={"md"} fullwidth>
+    <Dialog onClose={handleClose} aria-labelledby={"customized-dialog-title"} open={open} maxWidth={"md"}>
       <DialogTitle id="customized-dialog-title" className="DialogTitle" >{TextValues.customizeYourLogo(lang)}</DialogTitle>
       <DialogContent dividers>
         <Grid container className="PickerGrid" spacing={2}>

@@ -3,15 +3,13 @@ import { HighlightOff, Edit } from '@material-ui/icons';
 import {  Image } from "react-bootstrap";
 
 const LogoTable = ({lang, logos, selectedLogoIndex, setSelectedLogoIndex, setLogo, calculateAspectRatios, logoAspectRatios, setLogoAspectRatios, handleLogoRemove, handleLogoEdit, styles}) => {
-    console.log("LogoTable ", logos);
+
     return logos.map((item, index) => (
-      <TableCell alignCenter className={selectedLogoIndex === index ? styles.logoPickerImgBtnSelected : styles.logoPickerImgBtnNormal}>
+      <TableCell className={selectedLogoIndex === index ? styles.logoPickerImgBtnSelected : styles.logoPickerImgBtnNormal} key={item + index}>
         <div className="LogoItemWrapper">
-        <Button 
-          
+        <Button
           className={styles.pickerItemBtn}
           fullWidth
-          variant="outline-light"
           onClick={(e) => {
             setSelectedLogoIndex(index)
             setLogo(item.image, e)
@@ -19,9 +17,6 @@ const LogoTable = ({lang, logos, selectedLogoIndex, setSelectedLogoIndex, setLog
         >
           <Image src={item.image} fluid className="LogoPickerItem" onLoad={(e) => {
             const newAspectRatio = calculateAspectRatios(e.target.width, e.target.height);
-            const newAspectRatioObject = {
-              [e.target.currentSrc] : newAspectRatio
-            }
             const logoAspectRatioArray = logoAspectRatios;
             logoAspectRatioArray[e.target.currentSrc] = newAspectRatio
             setLogoAspectRatios(logoAspectRatioArray);

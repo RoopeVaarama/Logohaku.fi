@@ -1,7 +1,7 @@
 import textValues from './TextValues';
 
+// Contains product information
 const ProductsObjects = ({lang}) => {
-    //console.log('productsobjects ' + lang);
     const products = {
         TSHIRT: {
             ID: 1,

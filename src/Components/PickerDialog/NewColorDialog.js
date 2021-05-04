@@ -1,23 +1,13 @@
 import React, { useState } from 'react';
-import { makeStyles, Button, Box, DialogContent, Paper, Grid, Dialog, DialogTitle } from "@material-ui/core";
-import { Person, Add } from '@material-ui/icons';
-import { Image } from 'react-bootstrap';
+import { Button, Box, DialogContent, Grid, Dialog, DialogTitle } from "@material-ui/core";
 import './EditColorDialog.css'
 import './NewColorDialog.css'
 import { SketchPicker } from 'react-color';
 import TextValues from '../../tools/TextValues';
 
-const baseUrl = "https://api.logohaku.fi/logoversion?version="
 
 const NewColorDialog = (props) => {
   const { onClose, palette, open, ytunnus, lang, stylesResults} = props;
-
-  const styles = makeStyles({
-    colorPicker: {
-      width: "60%",
-      marginTop: "16px"
-    }
-  });
 
   /*const response = await fetch(url, {
       method: 'POST',
@@ -42,7 +32,6 @@ const NewColorDialog = (props) => {
   }*/
   const [pickerColor, setPickerColor] = useState("#00000");
   const handleColorChange = (color, event) => {
-    //console.log('HandleColorChange ', color, event)
     setPickerColor(color.hex)
   }
 
@@ -51,7 +40,6 @@ const NewColorDialog = (props) => {
   };
 
   const handleListItemClick = (value) => {
-    //console.log('value ', value)
     onClose(value);
   };
 
@@ -64,7 +52,7 @@ const NewColorDialog = (props) => {
   };
 
   return (
-    <Dialog onClose={handleClose} aria-labelledby={"customized-dialog-title"} open={open} className="Dialog" fullwidth>
+    <Dialog onClose={handleClose} aria-labelledby={"customized-dialog-title"} open={open} className="Dialog" >
       <DialogTitle id="customized-dialog-title" className="DialogTitle" >{TextValues.selectColorCompanyPalette(lang)}</DialogTitle>
 
       <DialogContent dividers>

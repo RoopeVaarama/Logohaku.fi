@@ -138,11 +138,6 @@ export const vannoBaseResponse = {
   url: "vanno.fi",
   original: "vanno",
   files: ["0c.png", "1c.svg", "2c.svg", "3b.jpg", "3c.png", "3d.png", "4d.png"],
-  visible: {
-    "0ct.png": { "#50c8f0": "43", "#c8f0f0": "1", "#78c8f0": "0" },
-    "0ci.png": { "#000000": "44" },
-    "1593084640.png": { "#f0f0f0": "44" },
-  },
   visible: [
     {
       image: "https://api.logohaku.fi/data/2567979-3/0ct.png",

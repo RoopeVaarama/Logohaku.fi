@@ -6,11 +6,7 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './Components/Header/Header';
 import Home from './Components/Home/Home';
-import AboutUs from './Components/AboutUs/AboutUs';
-//import Footer from './Components/Footer/Footer';
-//import Order from './Components/Order/Order';
 import NotFound from './Components/NotFound';
-//import TextValues from './tools/TextValues';
 import Results from './Components/Results/Results';
 import Drawer from '@material-ui/core/Drawer';
 import Cart from './Components/Cart/Cart';
@@ -103,9 +99,6 @@ const App = () => {
             <Header lang={lang} cartItems={cartItems} openCart={() => setCartOpen(true)} />
             <div className="Content" style={lockScroll ? {overflow: 'hidden'} : {overflowY: 'scroll'} }>
                 <Switch>
-                    <Route exact path="/tietoja">
-                        <AboutUs lang={lang} />
-                    </Route>
                     <Route exact path="/">
                         <Home lang={lang} />
                     </Route>

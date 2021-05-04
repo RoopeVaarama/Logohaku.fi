@@ -70,6 +70,7 @@ const onClick = (product, selectProduct) => {
 const ProductsList = ({ productsObjects, selectProduct, lang}) => {
     const productEntries = Object.entries(productsObjects)
     const style = styles();
+    //eslint-disable-next-line no-unused-vars
     const [products, setProducts] = useState(renderProductButtons(productEntries, selectProduct, style));
 
     return (

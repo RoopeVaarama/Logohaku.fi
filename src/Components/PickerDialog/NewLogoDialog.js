@@ -8,12 +8,8 @@ import './PickerDialog.css'
 import { DialogContent } from '@material-ui/core';
 import TextValues from '../../tools/TextValues';
 
-const baseUrl = "https://api.logohaku.fi/logoversion?version="
-
 const NewLogoDialog = (props) => {
   const { onClose, selectedValue, open, ytunnus, lang, styles } = props;
-  //console.log('SelectedValue ', selectedValue, ytunnus);
-
   /*const response = await fetch(url, {
       method: 'POST',
       mode: 'cors',
@@ -41,7 +37,6 @@ const NewLogoDialog = (props) => {
   };
 
   const handleListItemClick = (value, index) => {
-    //console.log('value ', value, index)
     onClose(value, index);
   };
 
@@ -53,9 +48,9 @@ const NewLogoDialog = (props) => {
       urls.push(fullUrl);
     }
     return urls.map((item, index) => (
-      <Grid key={item + ytunnus} item xs={3}>
-        <Paper>
-          <Image src={item} className="img-fluid" onClick={() => handleListItemClick(item, index)} className={styles.basicShadowForImgPaper}/>
+      <Grid key={item + ytunnus} item xs={3} key={item + index}>
+        <Paper key={"paper"+item + ytunnus}>
+          <Image src={item} onClick={() => handleListItemClick(item, index)} className={styles.basicShadowForImgPaper}/>
         </Paper>
       </Grid>
     ))
@@ -63,7 +58,7 @@ const NewLogoDialog = (props) => {
   };
 
   return (
-    <Dialog onClose={handleClose} aria-labelledby={"customized-dialog-title"} open={open} className="Dialog" maxWidth={"md"} fullwidth>
+    <Dialog onClose={handleClose} aria-labelledby={"customized-dialog-title"} open={open} className="Dialog" maxWidth={"md"} >
       <DialogTitle id="customized-dialog-title" className="DialogTitle" >{TextValues.customizeYourLogo(lang)}</DialogTitle>
       <DialogContent dividers>
         <Grid container className="PickerGrid" spacing={2}>

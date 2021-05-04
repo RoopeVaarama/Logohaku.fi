@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
-import { Person, Add } from '@material-ui/icons';
-import { Grid, Paper, Button, DialogContent, Box, Dialog, DialogTitle } from '@material-ui/core';
-import { Image } from 'react-bootstrap';
+import { Grid,Button, DialogContent, Box, Dialog, DialogTitle } from '@material-ui/core';
 import './EditColorDialog.css'
 import './NewColorDialog.css'
 import { SketchPicker } from 'react-color';
 import TextValues from '../../tools/TextValues';
 
-const baseUrl = "https://api.logohaku.fi/logoversion?version="
-
 const EditColorDialog = (props) => {
   const { onClose, selectedValue, palette, open, ytunnus, lang, styles } = props;
-  //console.log('SelectedValue ', selectedValue, ytunnus);
-
   /*const response = await fetch(url, {
       method: 'POST',
       mode: 'cors',
@@ -60,7 +54,7 @@ const EditColorDialog = (props) => {
   };
 
   return (
-    <Dialog onClose={handleClose} aria-labelledby={"customized-dialog-title"} open={open} className="Dialog" fullwidth>
+    <Dialog onClose={handleClose} aria-labelledby={"customized-dialog-title"} open={open} className="Dialog" >
       <DialogTitle id="customized-dialog-title" className="DialogTitle" >{TextValues.selectColorCompanyPalette(lang)}</DialogTitle>
 
       <DialogContent dividers>
