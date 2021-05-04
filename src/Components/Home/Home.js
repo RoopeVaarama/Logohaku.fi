@@ -14,16 +14,29 @@ const Home = ({ lang }) => {
     const { /*height,*/ width } = useWindowDimensions();
     const companyNameRef = useRef();
     let direction = "row"
+    let directionContact = "row";
     let size = 4
     let sizeContact = 3
+    if (width > 1750) {
+        sizeContact = 3
+        directionContact = "row";
+    }
+    if (width < 1750) {
+        sizeContact = 6
+        directionContact = "row";
+    }
+    if ( width < 1000 ) {
+        directionContact = "column";
+        sizeContact = 12
+    }
+
     if (width > 1400) {
         direction = "row";
         size = 4
-        sizeContact = 3
-    } else {
+    }
+    if (width < 1400) {
         direction = "column";
         size = 12
-        sizeContact = 12
     }
 
 
@@ -109,7 +122,7 @@ const Home = ({ lang }) => {
                     <p>??</p>
                     <Grid
                         container
-                        direction={direction}
+                        direction={directionContact}
                         justify="space-between"
                         alignItems="center"
                         spacing={2}>
