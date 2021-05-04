@@ -183,7 +183,8 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
   });
   const [colors, setColors] = useState(() => {
     // Set colors response based on search parameter (in place of API usage)
-    switch (id) {
+    const getBaseResponse = () => {
+      switch (id) {
       case "metropolia":
         return metropoliaBaseResponse.colors;
       case "paisto":
@@ -192,7 +193,11 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
         return vannoBaseResponse.colors;
       default:
         return metropoliaBaseResponse.colors;
-    }
+    }}
+    const baseResponse = getBaseResponse();
+    baseResponse.unshift("#fafafa")
+    baseResponse.unshift("#212121")
+    return baseResponse;
   });
 
   // Create the products object and use default model (T-shirt)
