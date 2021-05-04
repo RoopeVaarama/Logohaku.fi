@@ -15,12 +15,15 @@ const Home = ({ lang }) => {
     const companyNameRef = useRef();
     let direction = "row"
     let size = 4
+    let sizeContact = 3
     if (width > 1400) {
         direction = "row";
         size = 4
+        sizeContact = 3
     } else {
         direction = "column";
         size = 12
+        sizeContact = 12
     }
 
 
@@ -51,8 +54,8 @@ const Home = ({ lang }) => {
                             <Input style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder="Company Name" inputRef={companyNameRef} />
                         </Grid>
                         <Grid item xs={2}>
-                            <Button style={{ width: '100%' }} variant="contained" color="primary" type="submit">{TextValues.search(lang)}  <Search /> 
-                        </Button>
+                            <Button style={{ width: '100%' }} variant="contained" color="primary" type="submit">{TextValues.search(lang)}  <Search />
+                            </Button>
                         </Grid>
 
                     </Grid>
@@ -77,15 +80,15 @@ const Home = ({ lang }) => {
                             <Image className="HomeDescriptionImg" src="https://kuvastot.vanno.fi/footer1.jpg" />
                             <Title2>{TextValues.homeDescriptionOfferTitle(lang)}</Title2>
                             <p className="HomeDescriptionParag">{TextValues.homeDescriptionOfferText(lang)}</p>
-                            
+
                         </Grid>
                         <Grid
                             item
                             xs={size}>
-                                <Image className="HomeDescriptionImg" src="https://kuvastot.vanno.fi/footer2.jpg" />
+                            <Image className="HomeDescriptionImg" src="https://kuvastot.vanno.fi/footer2.jpg" />
                             <Title2>{TextValues.homeDescriptionPrintTitle(lang)}</Title2>
                             <p className="HomeDescriptionParag">{TextValues.homeDescriptionPrintText(lang)}</p>
-                            
+
                         </Grid>
                         <Grid
                             item
@@ -93,7 +96,7 @@ const Home = ({ lang }) => {
                             <Image className="HomeDescriptionImg" src="https://kuvastot.vanno.fi/footer3.jpg" />
                             <Title2>{TextValues.homeDescriptionDeliveryTitle(lang)}</Title2>
                             <p className="HomeDescriptionParag">{TextValues.homeDescriptionDeliveryText(lang)}</p>
-                            
+
                         </Grid>
 
                     </Grid>
@@ -103,7 +106,50 @@ const Home = ({ lang }) => {
             <Wrapper>
                 <CardContent>
                     <Title2>{TextValues.homeContactInformationTitle(lang)}</Title2>
-                    <p>Tekstiä...</p>
+                    <p>??</p>
+                    <Grid
+                        container
+                        direction={direction}
+                        justify="space-between"
+                        alignItems="center"
+                        spacing={2}>
+                        <Grid
+                            item
+                            xs={sizeContact}
+                        >
+                            <Image className="HomeDescriptionImg" src="https://kuvastot.vanno.fi/footer1.jpg" />
+                            <Title2>Logotech</Title2>
+                            <p className="HomeDescriptionParag">{TextValues.logotechInfo(lang)}</p>
+
+                        </Grid>
+
+                        <Grid
+                            item
+                            xs={sizeContact}
+                        >
+                            <Image className="HomeDescriptionImg" src="https://kuvastot.vanno.fi/footer1.jpg" />
+                            <Title2>Roope Vaarama</Title2>
+                            <p className="HomeDescriptionParag">{TextValues.roopeContactInfo(lang)}</p>
+
+                        </Grid>
+                        <Grid
+                            item
+                            xs={sizeContact}>
+                            <Image className="HomeDescriptionImg" src="https://kuvastot.vanno.fi/footer2.jpg" />
+                            <Title2>Topias Peiponen</Title2>
+                            <p className="HomeDescriptionParag">{TextValues.topiasContactInfo(lang)}</p>
+
+                        </Grid>
+                        <Grid
+                            item
+                            xs={sizeContact}>
+                            <Image className="HomeDescriptionImg" src="https://kuvastot.vanno.fi/footer3.jpg" />
+                            <Title2>Mikko Neuvonen</Title2>
+                            <p className="HomeDescriptionParag">{TextValues.mikkoContactInfo(lang)}</p>
+
+                        </Grid>
+
+                    </Grid>
                 </CardContent>
             </Wrapper>
         </HomeDiv >
