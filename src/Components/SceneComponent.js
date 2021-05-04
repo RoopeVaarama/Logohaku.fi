@@ -19,6 +19,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import TextValues from "../tools/TextValues";
 import "./SceneComponent.css";
 import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import calculateAspectRatios from 'calculate-aspect-ratio';
 
 const useStyles = makeStyles({
@@ -365,7 +366,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
           {TextValues.positionFreePickNotOnWarning(lang)}
         </Alert>
       </Snackbar>
-      
+      <Suspense fallback={<CircularProgress></CircularProgress>}>
       <Engine antialias adaptToDeviceRatio canvasId="PreviewCanvas" className="PreviewCanvas">
         <Scene onSceneMount={onSceneMount} onPointerPick={onPointerPick} >
           <arcRotateCamera
@@ -386,7 +387,7 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
             intensity={0.75}
             direction={new Vector3(1, 1, 0)}
           />
-          <Suspense fallback={<box position={new Vector3(0, 0, 0)}></box>}>
+            <Suspense fallback={<torus rotation={new Vector3(0,(Math.PI / 2),(Math.PI / 2))} thickness={0.25}></torus>}>
             <Model
               name={model.NAME}
               key={model.NAME}
@@ -398,9 +399,10 @@ const SceneComponent = ({ lang, logo, color, model, selectModel, setEngine, setA
               onModelLoaded={onModelLoaded}
               onCreated={onModelCreated}
             ></Model>
-          </Suspense>
+            </Suspense>
         </Scene>
       </Engine>
+      </Suspense>
       <div className="SliderContainer">
         <div className="RotationContainer">
           <Typography>
