@@ -688,5 +688,29 @@ const TextValues = {
                 return "info";
         }
     },
+    schoolInfo: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Metropolia Ammattikorkeakoulu";
+            default:
+                return "Metropolia University of Applied Sciences";
+        }
+    },
+    itSchoolInfo: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Tieto- ja Viestintätekniikka";
+            default:
+                return "Information Technology";
+        }
+    },
+    tutaSchoolInfo: function (langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Tuotantotalous";
+            default:
+                return "Industrial Engineering and Management";
+        }
+    },
 }
 export default TextValues;

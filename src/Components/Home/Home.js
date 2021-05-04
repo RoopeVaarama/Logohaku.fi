@@ -143,6 +143,9 @@ const Home = ({ lang }) => {
                             <Image className="HomeDescriptionImg" src="https://kuvastot.vanno.fi/footer1.jpg" />
                             <Title2>Roope Vaarama</Title2>
                             <p className="HomeDescriptionParag">{TextValues.roopeContactInfo(lang)}</p>
+                            <p className="HomeDescriptionParag">{TextValues.schoolInfo(lang)}</p>
+                            <p className="HomeDescriptionParag">{TextValues.itSchoolInfo(lang)}</p>
+                        
 
                         </Grid>
                         <Grid
@@ -151,6 +154,8 @@ const Home = ({ lang }) => {
                             <Image className="HomeDescriptionImg" src="https://kuvastot.vanno.fi/footer2.jpg" />
                             <Title2>Topias Peiponen</Title2>
                             <p className="HomeDescriptionParag">{TextValues.topiasContactInfo(lang)}</p>
+                            <p className="HomeDescriptionParag">{TextValues.schoolInfo(lang)}</p>
+                            <p className="HomeDescriptionParag">{TextValues.itSchoolInfo(lang)}</p>
 
                         </Grid>
                         <Grid
@@ -159,7 +164,8 @@ const Home = ({ lang }) => {
                             <Image className="HomeDescriptionImg" src="https://kuvastot.vanno.fi/footer3.jpg" />
                             <Title2>Mikko Neuvonen</Title2>
                             <p className="HomeDescriptionParag">{TextValues.mikkoContactInfo(lang)}</p>
-
+                            <p className="HomeDescriptionParag">{TextValues.schoolInfo(lang)}</p>
+                            <p className="HomeDescriptionParag">{TextValues.tutaSchoolInfo(lang)}</p>
                         </Grid>
 
                     </Grid>
