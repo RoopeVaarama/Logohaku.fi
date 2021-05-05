@@ -132,7 +132,7 @@ const Home = ({ lang }) => {
                         >
                             <Image className="HomeDescriptionImg" src="https://kuvastot.vanno.fi/footer1.jpg" />
                             <Title2>Logotech</Title2>
-                            <p className="HomeDescriptionParag">{TextValues.logotechInfo(lang)}</p>
+                            <p className="HomeDescriptionParag">{TextValues.logoTechDescription(lang)}</p>
 
                         </Grid>
 

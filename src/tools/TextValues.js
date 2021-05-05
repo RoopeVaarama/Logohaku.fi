@@ -712,5 +712,13 @@ const TextValues = {
                 return "Industrial Engineering and Management";
         }
     },
+    logoTechDescription: function(langcode) {
+        switch (langcode) {
+            case "fi":
+                return "Olemme kolmannen vuoden opiskelijoita Metropolian Ammattikorkeakoulusta. Logohaku oli haasteemme innovoida uusia web-ratkaisuja yhdessä Paisto Oy:n kanssa ja se on jopa 5 kuukauden uurastamisen tulos.";
+            default:
+                return "We are a group of 3rd year students from Metropolia University of Applied Sciences. Logohaku is the result of our 5 month undertaking in innovating new web solutions together with Paisto Oy."
+        }
+    }
 }
 export default TextValues;

@@ -353,13 +353,14 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
 
   const addToCart = () => {
     let product = Object.values(selectedProduct)[0];
+    console.log('prduct ', product)
     let logoPos = logoPosition;
     createScreenshot().then((res) => {
       let screenshotFront = res.screenshotFront;
       let screenshotBack = res.screenshotBack;
       handleAddToCart(
         itemID,
-        product.NAME,
+        selectedProduct.NAME,
         logoPos,
         logoLabel,
         itemAmount,
