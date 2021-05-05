@@ -50,6 +50,7 @@
 
 .ColorTable {
     table-layout: fixed;
+    height: 95%;
 }
 
 .ColorPicker {

@@ -119,7 +119,6 @@ const Home = ({ lang }) => {
             <Wrapper>
                 <CardContent>
                     <Title2>{TextValues.homeContactInformationTitle(lang)}</Title2>
-                    <p>??</p>
                     <Grid
                         container
                         direction={directionContact}
@@ -130,7 +129,6 @@ const Home = ({ lang }) => {
                             item
                             xs={sizeContact}
                         >
-                            <Image className="HomeDescriptionImg" src="https://kuvastot.vanno.fi/footer1.jpg" />
                             <Title2>Logotech</Title2>
                             <p className="HomeDescriptionParag">{TextValues.logoTechDescription(lang)}</p>
 
@@ -140,7 +138,6 @@ const Home = ({ lang }) => {
                             item
                             xs={sizeContact}
                         >
-                            <Image className="HomeDescriptionImg" src="https://kuvastot.vanno.fi/footer1.jpg" />
                             <Title2>Roope Vaarama</Title2>
                             <p className="HomeDescriptionParag">{TextValues.roopeContactInfo(lang)}</p>
                             <p className="HomeDescriptionParag">{TextValues.schoolInfo(lang)}</p>
@@ -151,7 +148,6 @@ const Home = ({ lang }) => {
                         <Grid
                             item
                             xs={sizeContact}>
-                            <Image className="HomeDescriptionImg" src="https://kuvastot.vanno.fi/footer2.jpg" />
                             <Title2>Topias Peiponen</Title2>
                             <p className="HomeDescriptionParag">{TextValues.topiasContactInfo(lang)}</p>
                             <p className="HomeDescriptionParag">{TextValues.schoolInfo(lang)}</p>
@@ -161,7 +157,6 @@ const Home = ({ lang }) => {
                         <Grid
                             item
                             xs={sizeContact}>
-                            <Image className="HomeDescriptionImg" src="https://kuvastot.vanno.fi/footer3.jpg" />
                             <Title2>Mikko Neuvonen</Title2>
                             <p className="HomeDescriptionParag">{TextValues.mikkoContactInfo(lang)}</p>
                             <p className="HomeDescriptionParag">{TextValues.schoolInfo(lang)}</p>

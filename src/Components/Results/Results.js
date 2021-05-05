@@ -352,8 +352,11 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
   }
 
   const addToCart = () => {
+<<<<<<< HEAD
     let product = Object.values(selectedProduct)[0];
     console.log('prduct ', product)
+=======
+>>>>>>> cde49da36958c96849917245ed56a66c949e2445
     let logoPos = logoPosition;
     createScreenshot().then((res) => {
       let screenshotFront = res.screenshotFront;
