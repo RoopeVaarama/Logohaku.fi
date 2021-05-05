@@ -15,8 +15,11 @@
   }
   
   .Logo {
+    margin-left: 16px;
+    margin-bottom: 8px;
     grid-area: logo;
-    height: 70px;
+    height: 80px;
+    width: auto;
   }
   
   .Nav {
@@ -45,8 +48,6 @@
     color: #fff;
     font-weight: 600;
     background-color: rgba(0, 26, 255, 0.5);
-    box-shadow: 0px 5px 0px 0px rgba(0, 26, 255, 0.5);
-    border-radius: 10px;
     cursor: pointer;
     transition: 70ms;
   }

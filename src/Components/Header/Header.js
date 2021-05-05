@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Link } from 'react-router-dom';
 import TextValues from '../../tools/TextValues';
 import "./Header.css";
 import { CSSTransition } from "react-transition-group";
-import logo from "../../assets/paisto.png";
+import logo from "../../assets/logohaku_cropped.png";
 import { Button } from '@material-ui/core';
 import { Menu, AddShoppingCart } from '@material-ui/icons';
 

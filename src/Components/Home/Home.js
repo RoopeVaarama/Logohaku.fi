@@ -67,7 +67,7 @@ const Home = ({ lang }) => {
                             <Input style={{ width: '100%', paddingTop: '10px' }} type="text" placeholder="Company Name" inputRef={companyNameRef} />
                         </Grid>
                         <Grid item xs={2}>
-                            <Button style={{ width: '100%' }} variant="contained" color="primary" type="submit">{TextValues.search(lang)}  <Search />
+                            <Button style={{ width: '95%' }} variant="contained" color="primary" type="submit">{TextValues.search(lang)}  <Search />
                             </Button>
                         </Grid>
 
@@ -164,8 +164,10 @@ const Home = ({ lang }) => {
                         </Grid>
 
                     </Grid>
+                    
                 </CardContent>
             </Wrapper>
+            <div className="PlaceholderDiv"></div>
         </HomeDiv >
 
     )
