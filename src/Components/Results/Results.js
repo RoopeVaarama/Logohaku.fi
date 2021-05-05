@@ -207,8 +207,13 @@ const Results = ({ lang, handleAddToCart, setLockScroll }) => {
       }
     };
     const baseResponse = getBaseResponse();
-    baseResponse.unshift("#fafafa");
-    baseResponse.unshift("#212121");
+
+    // Check if array already contains the basic black and white
+    // This is to prevent the array persisting and always adding new basic colors
+    if (!baseResponse.includes("#fafafa") && !baseResponse.includes("#212121")) {
+      baseResponse.unshift("#fafafa");
+      baseResponse.unshift("#212121");
+    }
     return baseResponse;
   });
 
