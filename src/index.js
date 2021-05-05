@@ -84,6 +84,11 @@ const App = () => {
         //localStorage.setItem("cartItems", JSON.stringify(cartItems))
     };
 
+    const clearCart = () => {
+        setCartItems([])
+        localStorage.removeItem("cartItems")
+    }
+
     return (
         <div className="App" >
             <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
@@ -92,6 +97,7 @@ const App = () => {
                     cartItems={cartItems}
                     removeFromCart={(id, logoPosition) => handleRemoveFromCart(id, logoPosition)}
                     closeCart={() => setCartOpen(false)}
+                    clearCart={() => clearCart()}
                     changeAmount={(id, logoPosition, amount) => handleChangeAmount(id, logoPosition, amount)}
                 />
 

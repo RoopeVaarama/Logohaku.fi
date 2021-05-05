@@ -5,7 +5,7 @@ import CartItem from '../CartItem/CartItem';
 import { Button, Input } from '@material-ui/core';
 import emailjs from 'emailjs-com';
 
-const Cart = ({ lang, cartItems, removeFromCart, closeCart, changeAmount }) => {
+const Cart = ({ lang, cartItems, removeFromCart, closeCart, changeAmount, clearCart }) => {
 
     const [showCart, setShowCart] = useState(true);
     const firstNameRef = useRef();
@@ -56,6 +56,7 @@ const Cart = ({ lang, cartItems, removeFromCart, closeCart, changeAmount }) => {
             .then((result) => {
                 console.log(result.text);
                 setShowCart(false);
+                clearCart();
             }, (error) => {
                 console.log(error.text);
                 alert(error.text);

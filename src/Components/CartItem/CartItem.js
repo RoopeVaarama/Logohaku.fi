@@ -6,7 +6,6 @@ import { DeleteForever } from '@material-ui/icons';
 
 
 const CartItem = ({ lang, item, removeFromCart, changeAmount }) => {
-    console.log(item.id)
     return (
         <Wrapper>
             <div>
